@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+    <title>求和</title>
+</head>
+<body>
+
+</body>
+<script>
+  //函数封装
+   function fn1(){
+   	 statement
+   }
+   fn1();
+   
+   function fn2(){
+   	 statement
+   }
+   fn2();
+   
+//对象的写法
+ var myModule = {
+ 	
+ 	var1:1,
+ 	
+ 	var2:2,
+ 	
+ 	fun1:function(){
+ 		statement
+ 	}
+ 	
+ 	fun2:function(){
+ 		statement
+ 	}
+ 	
+ }
+ 
+ myModule.fn1();
+ 
+ //立即执行函数[    (function(){…} )()和( function (){…} () )   ]
+ 
+    (function(a){
+	    console.log(a);   //firebug输出123
+	})(123);
+	
+	(function(a){
+	    console.log(a);   //firebug输出1234
+	}(1234));
+ 
+ 
+	var myModule = ({
+					 	
+					 	var1:1,
+					 	
+					 	var2:2,
+					 	
+					 	fun1:function(){
+					 		statement
+					 	}
+					 	
+					 	fun2:function(){
+					 		statement
+					 	}
+					 	
+					 	return{
+					 		fn1:fn1,
+					 		fn2:fn2
+					 	};
+					 	
+					 })();
+   
+   var o = { 
+			    message: (function() { 
+			        var who = "me", 
+			        what = "call"; 
+			        return what + " " + who; 
+			    } ()), 
+			    getMsg: function() { 
+			        return this.message; 
+			    } 
+			}; 
+			// usage 
+			o.getMsg(); // "call me" 
+			o.message; // "call me" 
+   
+</script>
+</html>

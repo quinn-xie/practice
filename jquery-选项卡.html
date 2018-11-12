@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>菜鸟教程(runoob.com)</title>
+        <script type="text/javascript" src="js/jquery-1.7.2.min.js" ></script>
+	</head>
+    <style>
+    	.right ul{display:none;}
+    </style>
+	<body>
+		<div class="demo">
+			<div class="left">
+				<dt>我是高调的标题</dt>
+				<dt>我是高调的标题</dt>
+				<dt>我是高调的标题</dt>
+				<dt>我是高调的标题</dt>
+				<dt>我是高调的标题</dt>
+			</div>
+			<div class="right">
+				<ul style="display:block;">1</ul>
+				<ul>2</ul>
+				<ul>3</ul>
+				<ul>4</ul>
+				<ul>5</ul>
+			</div>
+		</div>
+		
+		<!--By daXia-->
+		<script>
+			$(function(){
+				var title = $(".left").find("dt"),
+				    content = $(".right").find("ul");
+				$(title).click(function(){
+					$(this).css("background","#f00")
+					$(content).hide();
+					$(content[$(title).index(this)]).show();
+				});
+			})
+		</script>
+	</body>
+
+</html>

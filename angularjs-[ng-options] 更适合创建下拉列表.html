@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+    <head>
+    	<meta charset="UTF-8"/>
+        <script type="text/javascript" src="js/angular-1.0.1.min.js" ></script>
+       
+    </head>
+    <body> 
+    	  <div ng-app="myApp" ng-controller="myCtrl">
+			<select ng-model="selectedSite" ng-options="z.site for z in sites"></select>
+			<h1>你选择的是: {{selectedSite.site}}</h1>
+			<p>网址为: {{selectedSite.url}}</p>
+		</div>
+		<script>
+			var app = angular.module('myApp',[]);
+			app.controller('myCtrl',function($scope){
+				 //$scope.selected = $scope.sites.site;
+				 $scope.sites = [{site : "Google", url : "http://www.google.com"},
+							     {site : "Runoob", url : "http://www.runoob.com"},
+							     {site : "baidu", url : "http://www.baidu.com"},
+							     {site : "Taobao", url : "http://www.taobao.com"}];	
+			})
+		</script>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>javascript图片轮播</title>
+<meta charset="utf-8">
+
+<style type="text/css">
+*{margin:0;padding:0;font-size:12px;}
+ul,li{list-style:none;}
+.pic{width:626px;height:220px;overflow:hidden;position:relative;margin:10px auto;}
+.pic li{width:626px;height:220px;position:absolute;}
+.pic li img{width:626px;height:220px;}
+#dl{text-align: center;margin:10px auto;}
+#dl ol{width:30px;height:5px;border-radius:5px;background:#E6E6E6;text-align: center; display:inline-block;margin:0 4px;}
+#dl ol:first-child{background:#ADFF2F}
+</style>
+</head>
+ 
+<body>
+
+<ul id="pic" class="pic">
+    <li><img src="img/01.jpg"/></li>
+    <li><img src="img/02.jpg"/></li>
+    <li><img src="img/03.jpg"/></li>
+    <li><img src="img/04.jpg"/></li>
+    <li><img src="img/05.jpg"/></li>
+</ul>
+<dl id="dl"></dl>
+
+<!--By daXia-->
+<script type="text/javascript">
+var picli = document.getElementById("pic").getElementsByTagName("li");
+var picNum = document.getElementById("dl").getElementsByTagName("ol");
+ 
+var str = '';
+for (var i=0;i<picli.length;i++){
+	str= str + "<ol> " + "</ol>";
+}
+document.getElementById("dl").innerHTML=str;
+
+ 
+var a = 0; 
+function auto(){
+ 	a = a + 1;
+ 	var num = picli.index;
+ 	for(var i=0;i<picli.length;i++){
+ 		picli[i].style.opacity = '0';
+ 		picli[i].style.transition = 'all 1s';
+ 		picNum[i].style.background = "#E6E6E6"
+ 	}
+ 	if(a >= picli.length){
+ 		a = 0;
+ 		funA(0);
+ 		return;
+ 	} 	
+ 	if(num = a){
+ 		funA(a);
+ 	}
+}
+
+function funA(n){
+    picli[n].style.opacity = '1';
+	picNum[n].style.background = "#ADFF2F"
+}
+
+setInterval(auto,5000);
+
+</script>
+</body>
+</html>

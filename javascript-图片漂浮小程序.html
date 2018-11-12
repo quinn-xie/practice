@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta charset="utf-8">
+		<title>漂浮的小广告</title>
+		<style>
+			div {
+				position: absolute;background:#008000;
+				width:150px;height:150px;
+			}
+		</style>
+		<!--1、先有一个广告div，就是我们要控制的，它的起始点（0，0）
+			2、设定横向和纵向的速度
+			3、控制广告div移动
+			  1）广告div是否到达边界
+			  2）如果到达以后，我们按照这个速度反向移动-->
+	</head>
+
+	<body>
+		<div id="img"></div>
+		<script>
+			//获取图片所在的div对象
+			var img = document.getElementById("img");
+			//设置div 左上角坐标 起始点坐标0，0
+			var x = 0,
+				y = 0;
+			//设置图片的进行速度
+			var xSpeed = 5,
+				ySpeed = 10;
+			//设置图片的最大浮动的高度和宽度
+			var w = document.documentElement.clientWidth - 150,
+				h = document.documentElement.clientHeight - 150;
+			//var w=screen.availWidth-130,h=screen.availHeight-150;
+			function floatimg() {
+
+				//比较图片是否到达边界  
+				//如果到达边界以后，我控制图片改变方向
+				if(x > w || x < 0) xSpeed = -xSpeed;
+				if(y > h || y < 0) ySpeed = -ySpeed;
+
+				//如果没有到达边界，设置图片的左上角的坐标
+
+				//设置坐标值 起始坐标+速度
+				x += xSpeed;
+				y += ySpeed;
+				img.style.top = y + "px";
+				img.style.left = x + "px";
+
+				setTimeout("floatimg()", 40);
+			}
+			floatimg();
+		</script>
+	</body>
+
+</html>

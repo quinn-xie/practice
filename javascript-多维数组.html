@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>数组</title>
+	</head>
+
+	<body>
+		<h1>数组</h1>
+		<script>
+		
+		 var arr = new Array([1,2,3,4,5,6,7,8,9,10],
+	                         [11,12,13,14,15,16,17,18,19,20],
+	                         [21,22,23,24,25,26,27,28,29,30],
+	                         [31,32,33,34,35,36,37,38,39,40],
+	                         [41,42,43,44,45,46,47,48,49,50]);
+		 
+		 
+
+		 //输出数组		 
+		  for(var i = 0; i < arr.length; i++) {
+		  	var size = arr[i].length;
+		  	for(var j = 0; j < arr[i].length; j++) {
+		  		document.write(arr[i][j] + " ");
+		  	}
+		  	document.write("<br/><br/>");
+		  }//输出数组中的第三行第四个数字
+		 document.write("本数组中的第三行第四个数字为：" + arr[2][3] + "<br><br>")
+		 
+		 
+		 
+		 
+		 
+			
+		</script>
+	</body>
+
+</html>

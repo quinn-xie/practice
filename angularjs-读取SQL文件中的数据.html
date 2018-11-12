@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+    <head>
+    	<meta charset="UTF-8"/>
+        <script type="text/javascript" src="js/angular-1.0.1.min.js" ></script>
+        <style>
+        	td{border:1px solid #ccc;padding:5px 20px}
+        </style>
+    </head>
+    <body>
+    	
+	<table ng-app="myApp" ng-controller="myCtrl" >
+		<tr ng-repeat="a in names">
+			<td>{{$index+1}}</td> 
+			<td>{{a.Name|orderBy:Name|uppercase}}</td> 
+			<td>{{a.City|uppercase}}</td> 
+			<td>{{a.Country|uppercase}}</td> 
+		</tr>
+	</table>
+    
+    <script>
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope, $http) {
+		  $http.get("SQL.aspx")
+		  .success(function (response) {
+		  	$scope.names = response.records;
+		   })
+		  .error(function() {
+		  	alert("请求错误")
+           });
+		});
+	</script>
+	
+    </body>
+</html>

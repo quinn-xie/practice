@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.pass-box {
+				width: 300px;
+				margin: 30px auto;
+				position: relative;
+			}
+			
+			.pass-box input {
+				border: #cccccc 1px solid;
+				background-color: #fff;
+				color: #666;
+				padding: 10px;
+				width: 100%;
+				box-sizing: border-box;
+			}
+			
+			.pass-box i {
+				display: inline-block;
+				width: 20px;
+				height: 20px;
+				position: absolute;
+				right: 5px;
+				top: 8px;
+				background: url(img/eye.png) no-repeat;
+				background-size: contain;
+				background-position: center;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+		<div class="pass-box">
+			<input type="password" name="pass" />
+			<i state="off"></i>
+		</div>
+		
+		<script type="text/javascript">
+			var ele_pass_box = document.getElementsByTagName("div")[0];
+			var ele_pass = ele_pass_box.getElementsByTagName("input")[0];
+			var ele_eye = ele_pass_box.getElementsByTagName("i")[0];
+			ele_eye.onclick = function() {
+				var state = this.getAttribute("state");
+				if(state === "off") {
+					ele_pass.setAttribute("type", "text");
+					ele_eye.setAttribute("state", "on");
+					ele_eye.style.opacity = 0.2;
+				} else {
+					ele_pass.setAttribute("type", "password");
+					ele_eye.setAttribute("state", "off");
+					ele_eye.style.opacity = 1;
+				}
+			}
+		</script>
+	</body>
+
+</html>

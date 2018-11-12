@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CSS3+JQUERY+图片=圆形进度条</title>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js" ></script>
+<style type="text/css">
+.circleBar { text-align: center; line-height:44px; width: 44px;margin: 10px 0;display: block; background: url(img/progressbar.png);  height: 44px; font-size: 14px; font-family: "微软雅黑"; font-size: 11px;}
+.circleBar i{display: none;}
+.circleBar-1 {background-position: 0px 0px;}
+.circleBar-2 {background-position: -54px 0px;}
+.circleBar-3 {background-position: -108px 0px;}
+.circleBar-4 {background-position: -162px 0px;}
+.circleBar-5 {background-position: -216px 0px;}
+.circleBar-6 {background-position: -270px 0px;}
+.circleBar-7 {background-position: -324px 0px;}
+.circleBar-8 {background-position: -378px 0px;}
+.circleBar-9 {background-position: -432px 0px;}
+.circleBar-10 {background-position: -486px 0px;}
+.circleBar-11 {background-position: -540px 0px;}
+.circleBar-12 {background-position: -594px 0px;}
+.circleBar-13 {background-position: -648px 0px;}
+.circleBar-14 {background-position: -702px 0px;}
+.circleBar-15 {background-position: -756px 0px;}
+.circleBar-16 {background-position: -810px 0px;}
+.circleBar-17 {background-position: -864px 0px;}
+.circleBar-18 {background-position: -918px 0px;}
+.circleBar-19 {background-position: -972px 0px;}
+.circleBar-20 {background-position: -1026px 0px;}
+.circleBar-21 {background-position: -1080px 0px;}
+.circleBar-22 {background-position: -1134px 0px;}
+.circleBar-23 {background-position: -1188px 0px;}
+.circleBar-24 {background-position: -1242px 0px;}
+.circleBar-25 {background-position: -1296px 0px;}
+.circleBar-26 {background-position: -1350px 0px;}
+.circleBar-27 {background-position: -1404px 0px;}
+.circleBar-28 {background-position: -1458px 0px;}
+.circleBar-29 {background-position: -1512px 0px;}
+.circleBar-30 {background-position: -1566px 0px;}
+.circleBar-31 {background-position: -1620px 0px;}
+.circleBar-32 {background-position: -1674px 0px;}
+.circleBar-33 {background-position: -1728px 0px;}
+.circleBar-34 {background-position: -1782px 0px;}
+.circleBar-35 {background-position: -1836px 0px;}
+.circleBar-36 {background-position: -1890px 0px;}
+.circleBar-37 {background-position: -1944px 0px;}
+.circleBar-38 {background-position: -1998px 0px;}
+.circleBar-39 {background-position: -2052px 0px;}
+.circleBar-40 {background-position: -2106px 0px;}
+.circleBar-41 {background-position: -2160px 0px;}
+.circleBar-42 {background-position: -2214px 0px;}
+.circleBar-43 {background-position: -2268px 0px;}
+.circleBar-44 {background-position: -2322px 0px;}
+.circleBar-45 {background-position: -2376px 0px;}
+.circleBar-46 {background-position: -2430px 0px;}
+.circleBar-47 {background-position: -2484px 0px;}
+.circleBar-48 {background-position: -2538px 0px;}
+.circleBar-49 {background-position: -2592px 0px;}
+.circleBar-50 {background-position: -2700px 0px;}
+.circleBar-51 {background-position: -2754px 0px;}
+.circleBar-52 {background-position: -2808px 0px;}
+.circleBar-53 {background-position: -2862px 0px;}
+.circleBar-54 {background-position: -2916px 0px;}
+.circleBar-55 {background-position: -2970px 0px;}
+.circleBar-56 {background-position: -3024px 0px;}
+.circleBar-57 {background-position: -3078px 0px;}
+.circleBar-58 {background-position: -3132px 0px;}
+.circleBar-59 {background-position: -3186px 0px;}
+.circleBar-60 {background-position: -3240px 0px;}
+.circleBar-61 {background-position: -3294px 0px;}
+.circleBar-62 {background-position: -3348px 0px;}
+.circleBar-63 {background-position: -3402px 0px;}
+.circleBar-64 {background-position: -3456px 0px;}
+.circleBar-65 {background-position: -3510px 0px;}
+.circleBar-66 {background-position: -3564px 0px;}
+.circleBar-67 {background-position: -3618px 0px;}
+.circleBar-68 {background-position: -3672px 0px;}
+.circleBar-69 {background-position: -3726px 0px;}
+.circleBar-70 {background-position: -3780px 0px;}
+.circleBar-71 {background-position: -3834px 0px;}
+.circleBar-72 {background-position: -3888px 0px;}
+.circleBar-73 {background-position: -3942px 0px;}
+.circleBar-74 {background-position: -3996px 0px;}
+.circleBar-75 {background-position: -4050px 0px;}
+.circleBar-76 {background-position: -4104px 0px;}
+.circleBar-77 {background-position: -4158px 0px;}
+.circleBar-78 {background-position: -4212px 0px;}
+.circleBar-79 {background-position: -4266px 0px;}
+.circleBar-80 {background-position: -4320px 0px;}
+.circleBar-81 {background-position: -4376px 0px;}
+.circleBar-82 {background-position: -4428px 0px;}
+.circleBar-83 {background-position: -4482px 0px;}
+.circleBar-84 {background-position: -4536px 0px;}
+.circleBar-85 {background-position: -4590px 0px;}
+.circleBar-86 {background-position: -4644px 0px;}
+.circleBar-87 {background-position: -4698px 0px;}
+.circleBar-88 {background-position: -4752px 0px;}
+.circleBar-89 {background-position: -4806px 0px;}
+.circleBar-90 {background-position: -4860px 0px;}
+.circleBar-91 {background-position: -4914px 0px;}
+.circleBar-92 {background-position: -4968px 0px;}
+.circleBar-93 {background-position: -5022px 0px;}
+.circleBar-94 {background-position: -5076px 0px;}
+.circleBar-95 {background-position: -5130px 0px;}
+.circleBar-96 {background-position: -5184px 0px;}
+.circleBar-97 {background-position: -5238px 0px;}
+.circleBar-98 {background-position: -5292px 0px;}
+.circleBar-99 {background-position: -5346px 0px;}
+.circleBar-100 {background-position: -5400px 0px;}
+/*线条形进度条*/
+.lineBar{width:100%;right:40px;height:6px;background:#e1e1e0;position:relative; border-radius:5px;border:none;margin: 10px 0;}
+.lineBar i{display:none;}
+.lineBar span{position:absolute;left:0;height:6px;border-radius:3px; background:#002d5c}
+.lineBar b{position:absolute; width:40px;height:20px;top:-6px; right:-40px; background:none; text-align:right; font-size:12px;font-weight:normal;}
+</style>
+ 
+</head>
+<body>
+<!--线条形进度条-->
+<div style="width:200px;margin: 0 auto;">
+	<div class="lineBar"><span></span><i>50</i><b></b></div>
+	<div class="lineBar"><span></span><i>80</i><b></b></div>
+	<div class="lineBar"><span></span><i>100</i><b></b></div>
+	<div class="lineBar"><span></span><i>60</i><b></b></div>
+	<div class="lineBar"><span></span><i>20</i><b></b></div>
+</div>
+
+
+<div style="margin: 100px 0;width: 100%;"></div>
+
+
+
+<!--圆形进度条-->
+<div style="width:200px;margin: 0 auto;">
+	<div class="circleBar"><span></span><i>10</i></div>
+	<div class="circleBar"><span></span><i>20</i></div>
+	<div class="circleBar"><span></span><i>30</i></div>
+	<div class="circleBar"><span></span><i>40</i></div>
+	<div class="circleBar"><span></span><i>50</i></div>
+	<div class="circleBar"><span></span><i>60</i></div>
+	<div class="circleBar"><span></span><i>70</i></div>
+	<div class="circleBar"><span></span><i>80</i></div>
+	<div class="circleBar"><span></span><i>90</i></div>
+	<div class="circleBar"><span></span><i>100</i></div>
+</div>
+<script>
+	
+	$(function() {
+		//圆形进度条
+		$('.circleBar').each(function(index, el) {
+			var n = 0;
+			var num = $(this).find('i').text();
+			var progress = $(this).find('span');
+			var _this = $(this);
+			setInterval(function() {
+				n = n + 1;
+				if(n > num) {
+					return false;
+				}
+				$(progress).html(n+'%');
+				$(_this).removeClass('circleBar-' + (n -1));
+				$(_this).addClass('circleBar-' + n);
+			}, 10)
+		});
+		//线条形进度条
+		$('.lineBar').each(function(index, el) {
+			var n = 0;
+			var num = $(this).find('i').text();
+			var progress = $(this).find('b');
+			var _this = $(this).find('span');
+			setInterval(function() {
+				n = n + 1;
+				if(n > num) {
+					return false;
+				}
+				$(progress).html(n+'%');
+				$(_this).css("width",n+'%');
+			}, 10)
+		});
+	});
+</script>
+</body>
+</html>

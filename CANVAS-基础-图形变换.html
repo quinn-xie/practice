@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 基础</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;margin:0 auto;"></canvas>
+    <!--
+    	*重要知识点
+    	* context.translate(x,y); - 位移
+    	* context.rotate(xdeg);旋转一个角度
+    	* context.scale(x,y); 缩放
+    	* context.save() / context.restore() 成对绘制图形
+    -->
+    <script type="text/javascript">
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		
+    		canvas.width = 800;
+    		canvas.height = 600;
+    		
+			var context = canvas.getContext('2d');
+
+			context.beginPath();
+			context.fillStyle = "red";
+			
+			
+			context.save();
+			context.translate(10,10);       //位移到100,100位置
+			context.fillRect(0,0,300,100);    //图形从原点绘制
+			context.restore();
+			
+			context.save();
+			context.scale(1.5,1.0);              //放大1.1倍
+			context.fillRect(210,10,300,100);    //图形从原点绘制
+			context.restore();
+			
+			context.save();
+			context.translate(300,300);       //位移到100,100位置
+			context.rotate(45);                   //旋转45度
+			context.fillRect(0,0,300,100);    //图形从原点绘制
+			context.restore();
+			
+			context.fill()
+					
+    		
+    	}
+    </script>
+</body>
+</html>

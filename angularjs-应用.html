@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+    	<meta charset="UTF-8"/>
+        <script type="text/javascript" src="js/angular-1.0.1.min.js" ></script>
+        <script>
+        	var app = angular.module('test',[]);
+        	app.controller('myCtrl',function($scope){
+        		$scope.firstName = "Share";
+        		$scope.lastName = "Xie";
+        	})        	
+        </script>
+    </head>
+    <body>
+        -------------------------------------基本angular------------------------------------------
+		<div ng-app="test" ng-controller="myCtrl">
+	        	<span><input type="text" ng-model = "firstName"></span>
+	        	<span><input type="text" ng-model = "lastName"></span>
+				<span>我的第一个表达式： {{ firstName + '.' + lastName }}</span>
+	   </div>
+    </body>
+</html>

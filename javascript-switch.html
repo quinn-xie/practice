@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Switch</title>
+	</head>
+
+	<body>
+		<h1>Switch</h1>
+		<input type="text" placeholder="请输入数字1-7，显示星期几" id="inputa"/>
+		<input type="button" value="替换" id="btn"/>
+		<script>
+			var btn = document.getElementById('btn');
+			    btn.onclick = function myFun() {
+                        var n = parseInt(document.getElementById('inputa').value);
+						switch(n) {
+							case 1:
+								document.write("今天星期一");
+								break;
+							case 2:
+								document.write("今天星期二");
+								break;
+							case 3:
+								document.write("今天星期三");
+								break;
+							case 4:
+								document.write("今天星期四");
+								break;
+							case 5:
+								document.write("今天星期五");
+								break;
+							case 6:
+								document.write("今天星期六");
+								break;
+							case 7:
+								document.write("今天星期日");
+								break;
+						}
+				}
+		</script>
+	</body>
+
+</html>

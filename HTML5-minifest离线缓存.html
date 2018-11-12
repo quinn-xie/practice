@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>locakStrage</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//localStorage 无过期时间限制，可手动清除
+			//sessionStorgae 重新打开或是关闭浏览器就清除了
+			localStorage.clear();//清除
+			localStorage.setItem("test1","test11111"); //存入 [key | value]
+			alert(localStorage.getItem("test1"))  //取出
+		</script>
+	</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<script src="js/vue.js"></script>
+		<script src="js/vue-resources.1.2.0.js"></script>
+		<style>
+			body{background:#f5f5f5;width:600px;margin:100px auto;font-family: "微软雅黑";}
+			h1{width:100%;text-align: center;color:#f90;}
+			#toDo{width:100%;background:#ffffff; text-align:center;padding: 50px;box-sizing:border-box;}
+			.isFinished{color:#bbbbbb}
+			input{width:350px;padding:15px;border:3px solid #f2f2f2;box-sizing: border-box;margin-bottom:30px;font-family:"微软雅黑"; font-size:16px;}
+			input[type="submit"]{font-size:22px;letter-spacing:5px;background:#008000;border:none;color: #ffffff;border-radius:5px;}
+			li{font-size:20px;padding:10px;padding-top:20px;border-bottom: 2px solid #f7f7f7;width:100%;box-sizing: border-box;text-align: left;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="toDo">
+			<h1 v-text="title"></h1>
+			<input v-model="newItem" type="text" value="" placeholder="请输入一个事项" v-on:keyup.enter="add"/>
+			<input type="submit" value="SUBMIT" v-on:click="add"/>
+			<li v-for = "(item,index) in items" v-text = "item.name" v-bind:class="{isFinished:item.isFinished}" v-on:click="taggleFinished(item)"></li>
+		</div>
+		<script>
+			var vm = new Vue({
+					  el: '#toDo',
+					  data: {
+					  	title:'',
+					    items : [ ],
+					    newItem :''
+					  },
+					  //生命周期
+					  mounted:function(){
+							//页面加载执行
+							this.$nextTick(function(){//避免使用vm而不用this时出错
+								this.titleBind();
+							})	
+					  },
+					  methods:{
+					  	titleBind : function(){
+							this.title = 'VUE.JS TO DO LIST';
+						},
+					  	add : function(){
+					  		this.items.push({
+					  			name : this.newItem,
+					  			isFinished : false
+					  		})
+					  		this.newItem = '' //每次输入完成后清空INPUT
+					  	},
+					  	
+					  	taggleFinished : function(item){
+					  		item.isFinished = !item.isFinished
+					  	}
+					  }
+			})
+			
+			vm.items=[
+				{name:'This is my first item',isFinished : false},
+				{name:'This is my first item',isFinished : false},
+				{name:'This is my first item',isFinished : false},
+				{name:'This is my first item',isFinished : false},
+				{name:'This is my first item',isFinished : false},
+			]
+		</script>
+	</body>
+</html>

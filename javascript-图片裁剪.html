@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>图片剪裁</title>
+    <style>
+    	body{background-color: #333333;}
+    	#box{position:absolute;top:100px;left: 200px;width:500px;height: 500px;}
+    	#box #img1{opacity:0.5;position:absolute;top:0px;left:0px;}
+    	#box #img2{position:absolute;top:0px;left:0px;clip: rect(0,200px,200px,0);}
+    	#main{position:absolute;border:2px solid #fff;width:198px;height:198px;}
+    	.mainDiv{position: absolute;width:8px;height:8px;background:#fff;}
+    	.left-up{left:-4px;top:-4px;cursor:nw-resize}
+    	.up{left:50%;margin-top:-4px;margin-left:-4px;cursor:n-resize;}
+    	.right-up{right:-4px;top:-4px;cursor:ne-resize;}
+    	.right{right:-4px;top:50%;margin-top:-4px;cursor:e-resize;}
+    	.right-down{right:-4px;bottom:-4px;cursor:se-resize;}
+    	.down{left:50%;margin-left:-4px;bottom:-4px;cursor:s-resize;}
+    	.left-down{left:-4px;bottom:-4px;cursor:sw-resize;}
+    	.left{left:-4px;top:50%;margin-top:-4px;cursor:w-resize;}
+    	#preview{position:absolute;left:720px;top:100px}
+    	#preview img{position:absolute;}
+    </style>
+    <script>
+	window.onload = function(){
+		document.onselectstart = new Function('event.returnValue = false;');//禁止图片被选中
+		var mainDiv = document.getElementById("main");
+		var rightDiv = document.getElementById("right");
+		var upDiv = document.getElementById("up");
+		var leftDiv = document.getElementById("left");
+		var downDiv = document.getElementById("down");
+		var leftUpDiv = document.getElementById("leftUp");
+		var rightUpDiv = document.getElementById("rightUp");
+		var leftDownDiv = document.getElementById("leftDown");
+		var rightDownDiv = document.getElementById("rightDown");
+		var ifKeyDown = false;//鼠标按下事
+		var contact = ""//表示被按下的触点
+		
+		//鼠标按下事件
+		rightDiv.onmousedown = function(){
+			ifKeyDown = true;
+			contact = "right"
+		}
+		upDiv.onmousedown = function(){
+			ifKeyDown = true;
+			contact = "up"
+		}
+		leftDiv.onmousedown = function(){
+			ifKeyDown = true;
+			contact = "left"
+		}
+		downDiv.onmousedown = function(){
+			ifKeyDown = true;
+			contact = "down"
+		}
+		leftUpDiv.onmousedown = function(){
+			ifKeyDown = true;
+			contact = "leftUp"
+		}
+		rightUpDiv.onmousedown = function(){
+			ifKeyDown = true;
+			contact = "rightUp"
+		}
+		leftDownDiv.onmousedown = function(){
+			ifKeyDown = true;
+			contact = "leftDown"
+		}
+		rightDownDiv.onmousedown = function(){
+			ifKeyDown = true;
+			contact = "rightDown"
+		}
+		
+		
+		//鼠标离开事件
+		window.onmouseup = function(){
+			ifKeyDown = false
+		}
+		
+		
+		//鼠标移动事件
+		window.onmousemove = function(e){
+			if(ifKeyDown == true){
+				switch (contact){
+					case "right" : rightMove(e);break;
+					case "up" : upMove(e);break;
+					case "left" : leftMove(e);break;
+					case "down" : downMove(e);break;
+					case "leftUp" : leftMove(e);upMove(e);break;
+					case "rightUp" : rightMove(e);upMove(e);break;
+					case "leftDown" : leftMove(e);downMove(e);break;
+					case "rightDown" : rightMove(e);downMove(e);break;
+				}
+			}
+			setChoose();
+			setPreview();
+		}
+		
+
+		//右边移动
+		function rightMove(e){
+			var x = e.clientX;//鼠标X坐标
+			var addWidth = '';//鼠标移动后选取框增加的宽度
+			var widthBefore = mainDiv.offsetWidth - 4; //选取框变化前的宽度
+			addWidth = x - getPosition(mainDiv).left - widthBefore; // 鼠标移动后增加的宽度
+			mainDiv.style.width = addWidth + widthBefore + "px"; //选取框变化后
+		}
+		//上边移动
+		function upMove(e){
+			var y = e.clientY;//鼠标Y坐标
+			var mainY = getPosition(mainDiv).top;
+			var addHeight = mainY - y;
+			var heightBefore = mainDiv.offsetHeight - 4;
+			mainDiv.style.height = heightBefore + addHeight  + "px";
+			mainDiv.style.top = mainDiv.offsetTop - addHeight  + "px";
+		}
+		//左边移动 
+		function leftMove(e){
+			var x = e.clientX;//鼠标X坐标
+			var mainX = getPosition(mainDiv).left;//选取框变化前距离左边的距离
+			var addWidth = mainX - x;//增加的宽度
+			var widthBefore = mainDiv.offsetWidth - 4;
+			mainDiv.style.width = widthBefore + addWidth  + "px";
+			mainDiv.style.left = mainDiv.offsetLeft - addWidth  + "px";
+		}
+		//下边移动 
+		function downMove(e){
+			var y = e.clientY;//鼠标Y坐标
+			var mainY = getPosition(mainDiv).top;
+			var heightBefore = mainDiv.offsetHeight - 4;
+			var addHeight = y - mainY - heightBefore;
+			mainDiv.style.height = heightBefore + addHeight  + "px";
+		}
+		//获取元素相对屏幕左边的距离，利用offsetLeft
+		function getPosition(node){
+			var left = node.offsetLeft;
+			var top = node.offsetTop;
+			var parent  = node.offsetParent;
+			while(parent != null){
+				left += parent.offsetLeft;
+				top += parent.offsetTop;
+				parent = parent.offsetParent;
+			};
+			return {"left":left,"top":top};
+		}
+		
+		//设置选取区域高亮可见
+		function setChoose(){
+			var top = mainDiv.offsetTop;
+			var right = mainDiv.offsetLeft + mainDiv.offsetWidth;
+			var down = mainDiv.offsetTop + mainDiv.offsetHeight;
+			var left = mainDiv.offsetLeft;
+			var img2 = document.getElementById("img2");
+			img2.style.clip = "rect("+top+"px,"+right+"px," + down+"px,"+left+"px)"
+		}
+		
+		//设置预览图片
+		function setPreview(){
+			var top = mainDiv.offsetTop;
+			var right = mainDiv.offsetLeft + mainDiv.offsetWidth;
+			var down = mainDiv.offsetTop + mainDiv.offsetHeight;
+			var left = mainDiv.offsetLeft;
+			var img3 = document.getElementById("img3");
+			img3.style.left = -left+'px';
+			img3.style.top = -top+'px';
+			img3.style.clip = "rect("+top+"px,"+right+"px," + down+"px,"+left+"px)"
+		}
+	}
+	
+	
+</script>
+</head>
+<body>
+	<div id="box">
+		<img src="img/05.jpg" width="500" height="500" id="img1"/>
+		<img src="img/05.jpg" width="500" height="500" id="img2"/>
+		<div id="main">
+			<div class="mainDiv left-up" id="leftUp"></div>
+			<div class="mainDiv up" id="up"></div>
+			<div class="mainDiv right-up" id="rightUp"></div>
+			<div class="mainDiv right" id="right"></div>
+			<div class="mainDiv right-down" id="rightDown"></div>
+			<div class="mainDiv down" id="down"></div>
+			<div class="mainDiv left-down" id="leftDown"></div>
+			<div class="mainDiv left" id="left"></div>
+		</div>
+	</div>
+	<div id="preview">
+		<img src="img/05.jpg" width="500" height="500" id="img3"/>
+	</div>
+</body>
+
+</html>

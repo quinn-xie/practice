@@ -1,0 +1,185 @@
+@charset "utf-8";  
+body{  
+    margin: 0px;  
+    padding: 0px;  
+    background-color: #DFDFDF;  
+}  
+div{margin: 5px;}  
+.clear{ clear: both;}  
+/*一、注释 
+ *注释有2中 
+ */  
+/*第一种注释，会显示在编译后的CSS文件中*/  
+//第二种注释，不会显示在编译后的CSS文件中  
+  
+/*二、变量 
+ *先定义后使用，格式为 @name:value 
+ *注意name应遵循基本的变量名规则，value要带上单位 
+ */  
+//定义  
+@width_200:200px;  
+@height_300:100px;  
+//使用  
+.div1{  
+    width: @width_200;  
+    height: @height_300;  
+    background-color: #53616D;  
+}  
+  
+/*三、混合 
+ *1.直接引用某个类的所有属性 
+ *2.引用带参数无默认值的类属性 
+ *3.引用带参数有默认值的类属性 
+ */  
+ //混合 1  
+.box{ width: 200px;height: 50px; float: left;}  
+.border{  
+    border: solid 5px #3ECAAF;  
+}  
+.box1{  
+    .border;//直接类名即可  
+    .box;  
+}  
+//混合 2 带参数无默认值  
+.border2(@border_width){  
+    border: solid @border_width #3ECAAF;  
+}  
+.box2{  
+    .box;  
+    .border2(10px);//因为无默认值，调用时必须带()且传入参数  
+}  
+//混合 3 带参数有默认值  
+.border3(@border_width:7px,@bstyle:solid){  
+    border: @bstyle @border_width #3ECAAF;  
+}  
+.box3_1{  
+    .box;  
+    .border3();//有默认值，可不传参数  
+}  
+.box3_2{  
+    .box;  
+    .border3(9px,dotted);//有默认值，传参可以覆盖默认值  
+}  
+//Demo 圆角  
+.border_radius(@radius:5px){  
+    -wekit-border-radius: @radius;  
+    -max-border-radius: @radius;  
+    border-radius: @radius;  
+}  
+.radius_test1{  
+    .box;  
+    .border();  
+    .border_radius();  
+}  
+.radius_test2{  
+    .box;  
+    .border();  
+    .border_radius(20px);  
+}  
+  
+/*四、匹配模式 */  
+//应用背景：三角  
+.sanjiao_demo{  
+    width: 0px;  
+    height: 0px;  
+    overflow: hidden;  
+    border-width: 10px;  
+    border-color: transparent transparent red transparent;  
+    border-style: dashed dashed solid dashed; //解决IE6黑边问题  
+}
+//4.1 匹配模式下写三角  
+.sanjiao(top,@w:5px,@c:#f00){  
+    border-width: @w;  
+    border-color: transparent transparent @c transparent;  
+    border-style: dashed dashed solid dashed;  
+}  
+.sanjiao(bottom,@w:5px,@c:#f00){  
+    border-width: @w;  
+    border-color: @c transparent transparent transparent;  
+    border-style: solid dashed dashed dashed;  
+}  
+.sanjiao(@_,@w:5px,@c:#f00){  
+    width: 0px;  
+    height: 0px;  
+    overflow: hidden;  
+}  
+.sanjiao_t1{  
+    .sanjiao(top,20px);  
+}  
+.sanjiao_t2{  
+    .sanjiao(bottom,15px,blue);  
+}  
+  
+//4.2 匹配模式 - 定位  
+.pos(r){position: relative;}  
+.pos(a){position: absolute;}  
+.pos(f){position: fixed;}  
+.pipei{  
+    .box;  
+    background-color: green;  
+    .pos(r);  
+}  
+/* 
+五、运算 
+！！！【加减】运算符与前一个变量之间有空格，否则出错 
+*/  
+@abase:300px;  
+.box4{  
+    width: (@abase - 20)*2;//变量和运算符之间有空格  
+    height: @abase + 3;  
+    height: @abase/2;  
+    color: #000+100;  
+    .border;  
+}  
+/*六、嵌套规则*/  
+/*一般的写ul li a 的方式 
+.list{} 
+.list li {} 
+.list a {} 
+.list a:hover {} 
+.list span{} 
+*/  
+.list{  
+    width: 800px;  
+    margin: 30px auto;  
+    padding: 0;  
+    list-style: none;  
+    li{  
+        height: 30px;  
+        line-height: 30px;  
+        background-color: pink;  
+        margin-bottom: 5px;  
+    }  
+    a{  
+        display: block;  
+        float: left;  
+        //&符号代表上一层选择器  
+        &:hover{  
+            color: red;  
+        }  
+    }  
+    span{  
+        display: block;  
+        float: right;  
+    }  
+}  
+/*七、@arguments变量 
+    @arguments代表形参中的所有参数 
+*/  
+.border_arg(@w:30px,@c:red,@sty:solid){  
+    border:@arguments;//等价于border:@w @c @sty;  
+}  
+/*八、避免编译和important 
+在使用Less中，可能用到一些非正规或者不需要计算的内容时，前面加~符号 
+*/  
+//8.1 避免编译  
+.test_no1{  
+    width: ~'calc(300px - 30px)';//特殊方法，需要浏览器去计算  
+}  
+.test_no2{  
+    width: calc(300px - 30px);//对比上面的  
+}  
+//8.2 important,为所有引用的属性加上important  
+.test_important{  
+    .border!important;  
+}  

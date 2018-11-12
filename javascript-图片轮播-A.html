@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>javascript图片轮播</title>
+<meta charset="utf-8">
+
+<style type="text/css">
+*{margin:0;padding:0;font-size:12px;font-family: arial;}
+ul,li{list-style:none;}
+.pic{width:626px;height:220px;overflow:hidden;position:relative;margin:10px auto;}
+.pic li{width:626px;height:220px;position:absolute; display:none;}
+.pic li img{width:626px;height:220px;}
+#dl{text-align: center;margin:10px auto;}
+#dl ol{width:30px;height:30px;line-height:30px;font-size:16px;border-radius:5px;background:#E6E6E6;text-align: center; display:inline-block;margin:0 4px;}
+#dl .active{background:#ADFF2F;color:#ffffff;}
+</style>
+</head>
+ 
+<body>
+
+<ul id="pic" class="pic">
+    <li style="display: block;"><img src="img/01.jpg"/></li>
+    <li><img src="img/02.jpg"/></li>
+    <li><img src="img/03.jpg"/></li>
+    <li><img src="img/04.jpg"/></li>
+    <li><img src="img/05.jpg"/></li>
+</ul>
+<dl id="dl"></dl>
+
+<!--By daXia-->
+<script type="text/javascript">
+
+	var picli = document.getElementById("pic").getElementsByTagName("li");
+	var picNum = document.getElementById("dl").getElementsByTagName("ol");
+    var index = 0;
+        
+    //遍历图片根据图片数量生成ol编号
+	var str = '';
+	for(var i = 1; i <= picli.length; i++) {
+		str = str + "<ol> " + i + "</ol>";
+	}
+	document.getElementById("dl").innerHTML = str;
+	picNum[0].className = 'active';//第一个ol显示为当前高亮
+
+    //MOUSEOVER ol显示相应的图片
+    for(var j = 0; j < picli.length; j++){
+    	picNum[j].id = j;
+    	//鼠标经过显示相应图片
+    	picNum[j].onmouseover = function(){
+    		option(this.id);
+    		clearInterval(timer);//清除自动播放
+    	}   
+    	//鼠标离开开始播放
+    	picNum[j].onmouseout = function(){
+    		timer = setInterval(autoPlay,1000);
+    	}
+    }
+    
+    timer = setInterval(autoPlay,1000);
+    
+    //封装自动播放
+    function autoPlay(){
+    	if(index >= picli.length){
+    		index = 0;
+    	}
+    	option(index);
+    	index++;
+    }
+    
+    //封装高亮显示
+    function option(pointIndex){
+    	for(var a = 0; a<picli.length; a++){
+    	   	  picli[a].style.display = 'none';
+    	   	  picNum[a].className = '';
+    	   }
+    	   //设置当前的高亮显示相对应图片
+    	   picli[pointIndex].style.display = 'block';
+    	   picNum[pointIndex].className = 'active';
+    	   index = pointIndex;
+    }
+	
+</script>
+</body>
+</html>

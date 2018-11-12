@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>CANVAS红包照片效果</title>
+		<script src="js/jquery-2.2.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			#blur-image{margin: 0 auto;display: block;width: 800px;height:500px;filter:blur(5px);position: absolute;left: 0;top:0;z-index:0;}
+			.blur{position: relative;margin: 0 auto;display: block;width: 800px;height:500px;}
+			#canvas{margin: 0 auto;display: block;position: absolute;left: 0;top:0;z-index:100;}
+			input[type="button"]{position:relative;z-index:101;padding:5px 10px;font-size:16px;}
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="blur">
+			<img id="blur-image" src="img/06.jpg" width="800" height="500"/>
+			<canvas id="canvas" width="800" height="500"></canvas>
+			<input type="button" value="reset" id="reset" />
+			<input type="button" value="show" id="show"/>
+		</div>
+		<script type="text/javascript">
+			 var canvasWidth = 800;
+			 var canvasHeight = 500;
+			 
+			 window.onload = function(){
+	    		var canvas = document.getElementById('canvas');
+	    		canvas.width = canvasWidth;
+			    canvas.height = canvasHeight;
+	    		var cxt = canvas.getContext("2d");
+	    		
+	    		//导入图片到画布
+				var img = new Image();  
+				img.src = "img/06.jpg";
+		        img.onload = function(){  
+		        	draw(cxt,img);
+		        	reset.onclick = function(){
+		        		draw(cxt,img,80);
+		        	}
+		        	show.onclick = function(){
+		        		draw(cxt,img,1000);
+		        	}
+		        }
+	    		
+	    	}
+			
+			//Clip 效果
+			function draw(cxt,imgs,r){
+				cxt.clearRect(0,0,canvasWidth,canvasHeight); //清除画布
+		    	cxt.save();
+		    	cxt.beginPath();
+		    	cxt.arc(Math.random()*canvasWidth-100,Math.random()*canvasHeight,r,0,2*Math.PI);
+		    	cxt.clip();
+		    	cxt.drawImage(imgs,0,0,canvasWidth,canvasHeight); 
+		    	cxt.restore();
+		    };
+		    
+		    
+			 
+			 
+			
+		</script>
+</body>
+</html>

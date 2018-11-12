@@ -1,0 +1,8 @@
+CACHE MANIFEST
+#version 1.1
+CACHE:
+	 ../img/01.jpg
+	 ../img/02.jpg
+	 ../css/less-1.0.33.min.js
+NETWORK:
+     *

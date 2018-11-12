@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>JQUERY倒计时</title>
+        <script type="text/javascript" src="js/jquery-1.7.2.min.js" ></script>
+	</head>
+	<body>
+		<div class="remainingTime">
+			<input type="text" name="" id="" value="1000" />
+			<span></span>
+		</div>
+		<div class="remainingTime">
+			<input type="text" name="" id="" value="1000" />
+			<span></span>
+		</div>
+		<div class="remainingTime">
+			<input type="text" name="" id="" value="80000" />
+			<span></span>
+		</div>
+		<div class="remainingTime">
+			<input type="text" name="" id="" value="1000" />
+			<span></span>
+		</div>
+		<div class="remainingTime">
+			<input type="text" name="" id="" value="88000" />
+			<span></span>
+		</div>
+		<div class="remainingTime">
+			<input type="text" name="" id="" value="1000" />
+			<span></span>
+		</div>
+		<div class="remainingTime">
+			<input type="text" name="" id="" value="1000" />
+			<span></span>
+		</div>
+		<!--By daXia-->
+		<script>
+	       $(function(){
+					$(".remainingTime").each(function(){
+						function add0(m){return m<10?'0'+m:m }
+						var thiz = $(this);
+						var starttime  = $(this).find("input").val();
+						var interv = setInterval(function(){
+								starttime-=1000;
+							    var hour = parseInt(starttime / 1000 / 60 / 60);
+							    var minute = parseInt(starttime / 1000 / 60 % 60);
+							    var seconds = parseInt(starttime / 1000 % 60);
+							    $(thiz).find("span").html(add0(hour) + ":" + add0(minute) + ":" + add0(seconds));
+							    $(thiz).find("input").val(starttime)
+								if(starttime < 1){ 
+									$(thiz).find("input").val('0')
+									clearInterval(interv);
+									console.log("Afeawef")
+								}
+						},1000);
+					})
+				})
+		</script>
+	</body>
+
+</html>

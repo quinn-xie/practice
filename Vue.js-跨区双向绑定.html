@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<script src="js/vue.js"></script>
+		<script src="js/vue-resources.1.2.0.js"></script>
+		<style>
+			body{background:#f5f5f5;width:500px;margin:0 auto;font-family: "微软雅黑";}
+			input{width:350px;padding:15px;border:3px solid #f2f2f2;box-sizing: border-box;margin-bottom:30px;font-family:"微软雅黑"; font-size:16px;}
+		</style>
+	</head>
+
+	<body>
+		<div id="test">
+			<input type="text" v-model="test" name="" id="" value="" />
+		</div>
+
+		<div id="test1">
+			<input type="text" v-model="test1" name="" id="" value="" />
+		</div>
+		
+		<script>
+			var test = new Vue({
+				el: '#test',
+				data: {
+					test: ''
+				},
+				watch: {
+					test: function() {
+						test1.test1 = this.test
+					}
+				}
+			});
+			var test1 = new Vue({
+				el: '#test1',
+				data: {
+					test1: ''
+				},
+				watch: {
+					test1: function() {
+						test.test = this.test1
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

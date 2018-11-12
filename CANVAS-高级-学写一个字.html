@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>CANVAS学写一个字</title>
+		<style type="text/css">
+			#ctrl{width: 600px;margin: 0 auto;border:1px solid #A75C1A;padding: 10px;box-sizing: border-box;}
+			#ctrl li{float:left;width:50px;height: 25px;list-style: none;margin-right:10px;}
+			#red{background-color:red;}
+			#blue{background-color: blue;}
+			#black{background-color: black;}
+			#green{background-color:green;}
+			#gray{background-color: gray;}
+			#yellow{background-color: yellow;}
+			#clear{float:right;}
+		</style>
+	</head>
+
+	<body>
+		<canvas id="canvas" width="600" height="600" style="display: block;margin: 0 auto;border:0px solid #AAAAAA;"></canvas>
+		<div id="ctrl">
+			<li id="red"></li>
+			<li id="blue"></li>
+			<li id="black"></li>
+			<li id="green"></li>
+			<li id="gray"></li>
+			<li id="yellow"></li>
+			<button id="clear">清除画布</button>
+			<div style="clear: both;"></div>
+		</div>
+		<script type="text/javascript">
+			var clear = document.getElementById("clear");
+			var red = document.getElementById("red");
+			var blue = document.getElementById("blue");
+			var black = document.getElementById("black");
+			var green = document.getElementById("green");
+			var gray = document.getElementById("gray");
+			var yellow = document.getElementById("yellow");
+			var strokeColor = "black";
+			
+			var canvas = document.getElementById("canvas");
+			var cxt = canvas.getContext("2d");
+			var width = cxt.canvas.width;
+			var height = cxt.canvas.height;
+			var isMouseDown = false;
+			var lastloc ={x:0,y:0}
+			drawGrid();
+			
+			//清除画布
+			clear.addEventListener("mouseup",function(){
+				cxt.clearRect(0,0,width,height);
+				drawGrid();
+			});
+			
+			//红色画笔
+			red.addEventListener("mouseup",function(){
+				strokeColor = "red"
+			});
+			
+			//蓝色画笔
+			blue.addEventListener("mouseup",function(){
+				strokeColor = "blue"
+			});
+			//黑色画笔
+			black.addEventListener("mouseup",function(){
+				strokeColor = "black"
+			});
+			//绿色画笔
+			green.addEventListener("mouseup",function(){
+				strokeColor = "green"
+			});
+			//灰色画笔
+			gray.addEventListener("mouseup",function(){
+				strokeColor = "gray"
+			});
+			//黄色画笔
+			yellow.addEventListener("mouseup",function(){
+				strokeColor = "yellow"
+			});
+			
+			//定义鼠标事件
+			canvas.onmousedown = function(e){
+				e.preventDefault();
+				isMouseDown = true;
+				lastloc = windowToCanvas(e.clientX,e.clientY);
+				
+			}
+			canvas.onmouseup = function(e){
+				e.preventDefault();
+				isMouseDown = false;
+			}
+			canvas.onmouseout = function(e){
+				e.preventDefault();
+				isMouseDown = false;
+			}
+			canvas.onmousemove = function(e){
+				e.preventDefault();
+				if(isMouseDown){
+					var curloc = windowToCanvas(e.clientX,e.clientY);
+					
+					//绘制
+					cxt.beginPath();
+					
+					cxt.moveTo(lastloc.x, lastloc.y)
+					cxt.lineTo(curloc.x, curloc.y)
+					
+					cxt.lineWidth = 25;
+					cxt.lineCap = "round";//填补大号笔
+					cxt.lineJoin = "round";
+					cxt.strokeStyle = strokeColor;
+					cxt.stroke()
+					
+					lastloc = curloc;
+					//console.log(lastloc)
+				}
+			}
+			
+			//转换坐标系到CANVAS
+			function windowToCanvas(x,y){
+				var zb = canvas.getBoundingClientRect();
+				return{x : Math.round(x - zb.left), y : Math.round(y - zb.top)}
+			}
+			
+			//绘制米字格
+			function drawGrid(){
+				cxt.save();
+				cxt.beginPath();
+				cxt.strokeStyle = "#A75C1A";
+				cxt.moveTo(3,3);
+				cxt.lineTo(width-3,3)
+				cxt.lineTo(width-3,height-3)
+				cxt.lineTo(3,height-3)			
+				cxt.closePath();
+				cxt.lineWidth = "6";
+				cxt.stroke();
+				
+				cxt.beginPath();
+				cxt.moveTo(3,3);
+				cxt.lineTo(width-3,height-3);
+				
+				cxt.moveTo(width-3,3);
+				cxt.lineTo(3,height-3);
+				
+				cxt.moveTo(width/2,3);
+				cxt.lineTo(width/2,height-3);
+				
+				cxt.moveTo(3,height/2);
+				cxt.lineTo(width,height/2);
+				
+				cxt.lineWidth = "1";
+				cxt.stroke();
+				cxt.restore();
+			}
+			
+		</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+    <title>倒数小程序</title>
+    <script>
+    	window.onload = function(){
+    		//插入文字
+    		document.getElementById('num').innerHTML = "两秒钟我将变身";
+    		//2秒后将文字变成红色
+    		setTimeout(function(){
+    			document.getElementById('num').style.fontSize = "100px"
+    		},2000)
+    	}
+    </script>
+</head>
+<body>
+	<div id="num"></div>
+</body>
+</html>

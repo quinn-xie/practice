@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<script src="js/vue.js"></script>
+	</head>
+
+	<body>
+		<div id="myVue">
+				<item-list v-for="(item,index) in list" :key='index' :content="item.listName" :index="index"></item-list>
+		</div>
+		<script>
+			Vue.component('item-list',{
+				props : ['content','index'], //通过属性形式传递值
+				template : '<li @click="handleClick">{{content}} {{index}}</li>',
+				methods:{
+					handleClick : function(){
+						alert(this.index)
+					}
+				}
+			})
+			
+			new Vue({
+				el : '#myVue',
+				data : {
+					list : [{listName:'afwejawlafaweffejewklfjaw'},{listName:'afwejawlfejewawfeklfjaw'},{listName:'afwejawlfejeawfewklfjaw'}]
+				}
+			})
+			
+		</script>
+	</body>
+
+</html>

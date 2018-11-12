@@ -1,0 +1,26 @@
+{"freetrial":[{"id": "01","imgurl": "img/01.jpg","status": "0"},
+			  {"id": "03","imgurl": "img/02.jpg","status": "1"},
+				{"id": "02","imgurl": "img/03.jpg","status": "2"},
+				{"id": "04","imgurl": "img/04.jpg","status": "3"},
+				{"id": "08","imgurl": "img/05.jpg","status": "4"},
+				{"id": "06","imgurl": "img/01.jpg","status": "5"},
+				{"id": "07","imgurl": "img/02.jpg","status": "6"},
+				{"id": "05","imgurl": "img/03.jpg","status": "7"},
+				{"id": "09","imgurl": "img/04.jpg","status": "8"},
+				{"id": "10","imgurl": "img/05.jpg","status": "9"},
+				{"id": "11","imgurl": "img/04.jpg","status": "1"}],
+	
+  "sites":[{"Name": "菜鸟教程","Url": "www.runoob.com", "Country": "CN"},
+	       {"Name": "Google","Url": "www.google.com","Country": "USA"},
+	       {"Name": "Facebook","Url": "www.facebook.com","Country": "USA"},
+	       {"Name": "微博","Url": "www.weibo.com","Country": "CN"}],
+	        
+  "list":[{"password":"1230","username":"coolcooldool"},
+          {"password":"thisis2","username":"okokok"}],
+          
+  "array":[{"password":"1230","username":"coolcooldool"},
+           {"password":"thisis2","username":"okokok"}]
+
+}
+
+

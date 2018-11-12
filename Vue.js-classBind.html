@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<script src="js/vue.js"></script>
+		<script src="js/vue-resources.1.2.0.js"></script>
+		<style>
+			body{background:#f5f5f5;width:1000px;margin:0 auto;font-family: "微软雅黑";}
+			#toDo{width:100%;background:#ffffff; text-align:center;padding: 100px;box-sizing: border-box;margin-top: 100px;}
+		    .static{font-weight: bold;}
+		    .class-a{font-size:100px}
+		    .class-b{color:#008000}
+		</style>
+	</head>
+	<body>
+		<!--
+			v-bind:  操作属性
+			v-bind:class="[classA,classB]"   >  class="classA classB"
+			v-bind:class="{red:isRed}"       >  如果isRed为true则添加class red
+			v-bind:class="[classA,{classB:isB,classC:isC}]"
+		-->
+		
+		<div id="toDo">
+			<!--對象語法-->
+			<div class="static" v-bind:class="{ 'class-a': isA, 'class-b': isB }">错过</div>
+			<div v-bind:class="classObject">我以为你不会走</div>
+			<!--數組語法-->
+			<div v-bind:class="[classA, classB]">你以为我会留</div>
+			<input type="text" v-model="inputValue"/>
+		</div>
+		<script>
+			var vm = new Vue({
+					  el: '#toDo',
+					  data: {
+					  			//對象語法【直接绑定数据里的一个对象】
+					        	isA: true,
+					        	age:"18",
+								isB: false,
+								inputValue : "你要改变我看看吗",
+								classObject: {
+													 'class-a': true,
+													 'class-b': false
+													},
+								//數組語法 [把一個數組傳給v-bind:class]
+								classA: 'class-a',
+								classB: 'class-b'
+					  		  },
+					   methods:{
+						  	//FUNCTION			  
+					  },
+					  watch : {
+					  	inputValue : function(){
+					  		alert("你为什么要改变我？")
+					  	}
+					  }
+				})
+		</script>
+	</body>
+</html>

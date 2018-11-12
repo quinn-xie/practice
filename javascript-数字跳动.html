@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>类似余额宝页面打开或刷新后页面后数字跳动累加到一定数值的效果</title>
+	</head>
+
+	<body>
+		<span id="oSpan" style="color:red;font-size: 50px; font-family: 'arial black';"></span>
+		<script>
+			- function move() {
+				var oSpan = document.getElementById("oSpan");
+				var d = 46479858463148; //结束的位置
+				var s = parseInt(oSpan.innerHTML); //起始位置
+				var time = 1000; //所用时间 1000毫秒（ 在1秒内 数值增加到d）;
+				var outTime = 0; //所消耗的时间
+				var interTime = 30;
+				var timer = setInterval(function() {
+					outTime += interTime;
+					if(outTime < time) {
+						oSpan.innerHTML = parseInt(d / time * outTime);
+					} else {
+						oSpan.innerHTML = d;
+					}
+				}, interTime);
+			}()
+		</script>
+	</body>
+
+</html>

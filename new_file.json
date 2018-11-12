@@ -1,0 +1,219 @@
+{
+  "data": {
+    "router": [
+      {
+        "name": "redirect",
+        "path": "/redirect",
+      
+
+  "component": "redirect/redirect",
+        "hidden": true
+      },
+      {
+        "name": 
+
+"login",
+        "path": "/login",
+        "component": "login/login"
+      },
+      {
+        
+
+"path": "",
+        "component": "mainframe",
+        "redirect": "home",
+        "children": [
+   
+
+       {
+            "name": "home",
+            "path": "home",
+            "component": 
+
+"home/index",
+            "meta": {
+              "title": "首页",
+              "noCache": true
+  
+
+          }
+          }
+        ]
+      },
+      {
+        "path": "",
+        "component": 
+
+"mainframe",
+        "redirect": "noredirect",
+        "hidden": true,
+        "children": [
+      
+
+    {
+            "name": "iframe",
+            "path": "/iframe/:id",
+            "component": 
+
+"components/iframe",
+            "hidden": true,
+            "meta": {
+              "title": "嵌
+
+套网页",
+              "noCache": true
+            }
+          }
+        ]
+      },
+      {
+        
+
+"name": "",
+        "path": "/todoTasksList",
+        "component": "mainframe",
+        
+
+"redirect": "noredirect",
+        "meta": {
+          "title": "待办事项"
+        },
+        
+
+"children": [
+          {
+            "name": "todoTasksList",
+            "path": "",
+            
+
+"component": "tasks/todoTasksList",
+            "meta": {
+              "title": "待办事项"
+      
+
+      }
+          }
+        ]
+      },
+      {
+        "name": "",
+        "path": 
+
+"/haveDoneTasksList",
+        "component": "mainframe",
+        "redirect": "noredirect",
+        
+
+"meta": {
+          "title": "已办事项"
+        },
+        "children": [
+          {
+            
+
+"name": "haveDoneTasksList",
+            "path": "",
+            "component": 
+
+"tasks/haveDoneTasksList",
+            "meta": {
+              "title": "已办事项"
+            }
+  
+
+        }
+        ]
+      },
+      {
+        "name": "",
+        "path": "/haveDoneAppliedList",
+    
+
+    "component": "mainframe",
+        "redirect": "noredirect",
+        "meta": {
+          
+
+"title": "已申请事项"
+        },
+        "children": [
+          {
+            "name": 
+
+"haveDoneAppliedList",
+            "path": "",
+            "component": 
+
+"tasks/haveDoneAppliedList",
+            "meta": {
+              "title": "已申请事项"
+           
+
+ }
+          }
+        ]
+      },
+      {
+        "name": "",
+        "path": "/conLog",
+        
+
+"component": "mainframe",
+        "redirect": "noredirect",
+        "meta": {
+          "title": 
+
+"登录日志"
+        },
+        "children": [
+          {
+            "name": "conLog",
+            
+
+"path": "",
+            "component": "tasks/conLog",
+            "meta": {
+              "title": 
+
+"登录日志"
+            }
+          }
+        ]
+      },
+      {
+        "path": "/tasksDetail",
+      
+
+  "component": "mainframe",
+        "redirect": "noredirect",
+        "hidden": true,
+        
+
+"children": [
+          {
+            "name": "tasksDetail",
+            "path": "/tasksDetail/:id",
+            "component": "tasks/tasksDetail",
+            "hidden": true,
+    
+
+        "meta": {
+              "title": "审批详情",
+              "noCache": true
+            }
+  
+
+        }
+        ]
+      },
+      {
+        "path": "*",
+        "component": "errorPage/404",
+     
+
+   "hidden": true
+      }
+    ]
+  },
+  "type": "string"
+}

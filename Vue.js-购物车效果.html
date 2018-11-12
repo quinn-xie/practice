@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<script src="js/vue.js"></script>
+		<script src="js/vue-resources.1.2.0.js"></script>
+		<style>
+			body{background:#f5f5f5;width:1000px;margin: 0 auto;font-family: "微软雅黑";}
+			h1{width:100%;text-align: center;color:#f90;}
+			table{background:#ffffff;width:100%;border: 1px solid #eaeaea;}
+			table input[type='checkbox']{width:20px;height:20px;font-family: "微软雅黑"; font-size: 12px;}
+			table input[type='text']{width:30px;height:15px;text-align: center;margin:0 10px;color:#333;border:1px solid #ccc;}
+			table th{text-align: center;padding:20px 10px;box-sizing:border-box;border-bottom:4px solid #3a3a3a;font-size: 14px;}
+			table td{text-align: center;padding:10px;box-sizing: border-box;font-size: 12px;color:#555555;border-bottom:1px solid #eaeaea;}
+			.info{text-align: left;}
+			.info .cartImg{width: 50px;height: 50px;display: inline-block;vertical-align: top;border-radius:50px;}
+			.info dl{display: inline-block;vertical-align: top;margin:5px;padding:0;}
+			.info dl dt,.info dl dd{margin:0;padding:0; }
+			.info dl dt{font-weight:600;}
+			.pointer{cursor: pointer;}
+			.pointer:hover{color:#f90;}
+			/* VUE 数据还未加载完时是会有闪烁的情况出现 */
+			[v-cloak]{display:none}
+		</style>
+	</head>
+
+	<body>
+        
+		<div id="app" v-cloak=''>
+			<h1 v-text="title"></h1>
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<th width="20"></th>
+					<th width="50">编号</th>
+					<th style="text-align: left;">商品信息</th>
+					<th>商品金额</th>
+					<th>商品数量</th>
+					<th>商品总价</th>
+					<th>编辑</th>
+				</tr>
+				<tr v-for="(item,index) in items">
+					<td style="text-align: left;"><input type="checkbox" v-model="item.checked" v-on:click="check(item)"/></td>
+					<td v-text="index + 1"></td>
+					<td class="info">
+						<img v-bind:src="item.productImage" class="cartImg"/>
+						<dl>
+							<dt>
+								{{item.productName}}
+							</dt>
+							<dd>
+								赠品：<span v-for="part in item.parts">{{part.pastsName}} </span>
+							</dd>
+						</dl>
+					</td>
+					<td>{{item.productPrice | formatMoney}}</td>
+					<td>
+						<span v-on:click="changeMoney(item,-1)" class="pointer">- </span> 
+						<input type="text" value="1" v-model="item.productQuentity" />
+						<span v-on:click="changeMoney(item,1)" class="pointer"> +</span> <br /><span>有货哦</span>
+					</td>
+					<td style="color: #f00;">{{item.productPrice * item.productQuentity | money('元')}}</td>
+					<td><span class="pointer" v-on:click="deleteItem(index)">删除</span></td>
+				</tr>
+				<tr>
+					<td colspan="3" style="text-align:left;"><span style="color:#008000" v-on:click="checkAll()" class="pointer">全选</span>  <span style="color:#555555" v-on:click="invertCheckAll()" class="pointer">取消</span></td>
+					<td colspan="4" style="text-align:right; font-size:18px;padding-right:20px;color:#f90;">总计 : {{totalMoney | money('元')}}</td>
+				</tr>
+			</table>
+		</div>
+
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data:{
+					title:'',
+					items:[],
+					totalMoney:0
+				},
+				//局部过滤器   /*全局过滤器  vue filter*/
+				filters:{
+					formatMoney:function(value){
+						return "￥ " + value.toFixed(2) //防止精度丢失，一般前端不格式化金额
+					}
+				},
+				//生命周期
+				mounted:function(){
+					//页面加载执行
+					this.$nextTick(function(){//避免使用vm而不用this时出错
+						this.titleBind();
+					})	
+					
+				},
+				//事件绑定
+				methods: {
+					titleBind : function(){
+						var _this = this;
+						this.title = 'VUE.JS 购物车实现';
+						this.$http.get("data/proJson.json").then(function(res){
+							_this.items = res.body.result.list;
+							//_this.totalMoney = res.body.result.totalMoney;
+						})
+					},
+					deleteItem : function(index){
+						this.items.splice(index,1);//删除当前行
+					},
+					//商品加减
+					changeMoney : function(item,way){
+						if(way > 0){
+							item.productQuentity++;
+						}else{
+							item.productQuentity--;
+							if(item.productQuentity < 1){
+								item.productQuentity = 1
+							}
+						};
+						this.calcTotalMoney();
+					},
+					//单选
+					check : function(item){
+						this.checked = !this.checked;
+						this.calcTotalMoney();
+					},
+					//全选
+					checkAll : function(){
+						this.items.forEach(function(item,index){
+							item.checked = true
+						});
+						this.calcTotalMoney();
+					},
+					//反全选
+					invertCheckAll : function(){
+						this.items.forEach(function(item,index){
+							item.checked = false
+						});
+						this.calcTotalMoney();
+					},
+					//计算总金额
+					calcTotalMoney : function(){
+						var _this = this;
+						this.totalMoney = 0;
+						this.items.forEach(function(item,index){
+							if(item.checked){
+								_this.totalMoney += item.productPrice * item.productQuentity;
+							}
+							
+						})
+					}
+				}
+			});
+			
+			//全局过滤器[总金额使用全局过滤器]
+			Vue.filter("money",function(value,type){
+				return "￥ " + value.toFixed(2) + type;
+			})
+			
+			
+	    	String.prototype.getAns = function() {
+			  var pattern = /(?=((?!\b)\d{3})+$)/g;
+			  return this.replace(pattern, ',');
+			}
+			 
+			var s = '1234567465767689';
+			console.log(s.getAns()+".00");  // 123,456,789
+		</script>
+	</body>
+
+</html>

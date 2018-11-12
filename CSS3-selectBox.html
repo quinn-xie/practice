@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>统一下拉列表样式并实现select样式高度自定义的jQuery插件@Mr.Think</title>
+<link rel="stylesheet" href="js/base.css" />
+<script src="js/jquery-1.7.2.min.js"></script>
+<style>
+
+/*style for iSimulateSelect*/
+.i_selectbox{margin-top:20px;height:32px;position:relative;font-size:14px} 
+.i_selectbox .i_currentselected{width:220px;height:32px;background:#fff url(http://mrthink.net/demo/images/bg-select.gif) right top no-repeat;border:1px solid #555;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;text-indent:10px;line-height:32px;cursor:pointer}
+.i_selectbox .i_selectoption{overflow-x:hidden;overflow-y:auto;position:absolute;left:-5px;top:-2px;padding:5px;background-color:#fff;background:rgba(255,255,255,.9);-webkit-box-shadow:-2px 3px 5px rgba(0,0,0,.3);-moz-box-shadow:-2px 3px 5px rgba(0,0,0,.3);box-shadow:-2px 3px 5px rgba(0,0,0,.3);border-radius:5px;border-right:1px solid #eee} 
+.i_selectbox .i_selectoption dt{height:24px;background-color:#eee;text-indent:5px;font-style:italic;color:#555;line-height:24px;} 
+.i_selectbox .i_selectoption dd{height:30px;border-bottom:1px dashed #ccc;cursor:pointer;text-indent:10px;line-height:30px} 
+.i_selectbox .i_selectoption dd:hover{background-color:#888;color:#fff}
+.i_selectbox .i_selectoption dd.selected{background-color:#555;color:#fff}
+</style>
+</head>
+<body>
+<!--DEMO start-->
+<div id="demo">
+	<p>
+    <select class="iselect">
+            <option value="0">请选择你喜欢的人</option>
+            <option value="1">墨子</option>
+            <option value="2">老子</option>
+            <option value="3">庄子</option>
+            <option value="4">荀子</option>
+            <option value="5">蒙恬</option>
+            <option value="6">王贲</option>
+            <option value="7">王翦</option>
+            <option value="8">白起</option>
+            <option value="9">司马错</option>
+            <option value="10">蒙毅</option>
+            <option value="11">李斯</option>
+            <option value="12">张仪</option>
+            <option value="13">卫鞅</option>
+    </select>
+    </p>
+    
+    <p>
+    <select class="iselect">
+        <option value="1">秦孝公(前361—前338年)</option>
+        <option value="2">秦惠文王(前337—前311年)</option>
+        <option value="4">秦昭襄王(前306—前251年)</option>
+        <option value="5">秦孝文王(前250年)</option>
+        <option value="6">秦庄襄王(前250—前247年)</option>
+        <option value="7" selected="selected">秦始皇帝(前246—前210年)</option>
+        <option value="8">秦二世(前209—前207年)</option>
+        <option value="9">秦王子婴(前206年)</option>
+    </select>
+    </p>
+    
+    <select style="float:right">
+        <option value="0">我是个没穿衣服的select囧囧囧</option>
+        <option value="1">我是个没穿衣服的select囧囧囧</option>
+        <option value="2">我是个没穿衣服的select囧囧囧</option>
+        <option value="3">我是个没穿衣服的select囧囧囧</option>
+        <option value="4">我是个没穿衣服的select囧囧囧</option>
+    </select>
+	
+</div> 
+<script>
+;(function($){
+    /*
+     * 统一select样式并实现样式高度自定义的jQuery插件@Mr.Think(http://mrthink.net/)
+     */
+    $.fn.iSimulateSelect=function(iSet){
+        iSet=$.extend({
+            selectBoxCls:'i_selectbox', //string类型,外围class名
+            curSCls:'i_currentselected',//string类型,默认显示class名
+            optionCls:'i_selectoption',//string类型,下拉列表class名
+            selectedCls:'selected',//string类型,当前选中class名
+            width:222,//number类型，模拟select的宽度
+            height:100,//number类型，模拟select的最大高度
+            zindex:20//层级顺序
+        },iSet||{});
+        this.hide();
+        return this.each(function(){
+           var self=this; 
+           var thisCurVal,thisSelect,cIndex=0;
+           //计算模拟select宽度
+           if(iSet.width==0){
+              iSet.width=$(self).width();
+           }
+           var html='<div class="'+iSet.selectBoxCls+'" style="z-index:'+iSet.zindex+'"><div class="'+iSet.curSCls+'" style="width:'+iSet.width+'px">'+$(self).find('option:selected').text()+'</div><dl class="'+iSet.optionCls+'" style="display:none;width:'+iSet.width+'px">';
+           //判断select中是否有optgroup
+           //用dt替代optgroup，用dd替代option
+           if($(self).find('optgroup').size()>0){
+               $(this).find('optgroup').each(function(){
+                   html+='<dt>'+$(this).attr('label')+'</dt>';
+                   $(this).find('option').each(function(){
+                        if($(this).is(':selected')){
+                          html+='<dd class="'+iSet.selectedCls+'">'+$(this).text()+'</dd>'; 
+                       }else{
+                          html+='<dd>'+$(this).text()+'</dd>';
+                       }                    
+                   });
+               });
+           }else{
+               $(this).find('option').each(function(){
+                   if($(this).is(':selected')){
+                      html+='<dd class="'+iSet.selectedCls+'">'+$(this).text()+'</dd>'; 
+                   }else{
+                      html+='<dd>'+$(this).text()+'</dd>';
+                   }
+               });
+           }
+           //将模拟dl插入到select后面
+           $(self).after(html);
+           //当前模拟select外围box元素    
+           thisBox=$(self).next('.'+iSet.selectBoxCls);
+           //当前模拟select初始值元素    
+           thisCurVal=thisBox.find('.'+iSet.curSCls);
+           //当前模拟select列表
+           thisSelect=thisBox.find('.'+iSet.optionCls);
+           /*
+           若同页面还有其他原生select,请前往https://github.com/brandonaaron/bgiframe下载bgiframe，同时在此处调用thisSelect.bgiframe()
+            */ 
+           //thisSelect.bgiframe();
+           
+           //弹出模拟下拉列表
+           thisCurVal.click(function(){
+              $('.'+iSet.optionCls).hide();
+              $('.'+iSet.selectBoxCls).css('zIndex',iSet.zindex); 
+              $(self).next('.'+iSet.selectBoxCls).css('zIndex',iSet.zindex+1);
+              thisSelect.show();
+           });
+           //若模拟select高度超出限定高度，则自动overflow-y:auto
+           if(thisSelect.height()>iSet.height){
+               thisSelect.height(iSet.height);
+           }
+           //模拟列表点击事件-赋值-改变y坐标位置-...
+           thisSelect.find('dd').click(function(){
+               $(this).addClass(iSet.selectedCls).siblings().removeClass(iSet.selectedCls);
+               cIndex=thisSelect.find('dd').index(this);
+               thisCurVal.text($(this).text());
+               $(self).find('option').eq(cIndex).attr('selected','selected');
+               $('.'+iSet.selectBoxCls).css('zIndex',iSet.zindex);
+               thisSelect.hide(); 
+           });
+           //非模拟列表处点击隐藏模拟列表
+		   //$(document)点击事件不兼容部分移动设备
+           $('html,body').click(function(e){
+              if(e.target.className.indexOf(iSet.curSCls)==-1){
+                  thisSelect.hide();
+                  $('.'+iSet.selectBoxCls).css('zIndex',iSet.zindex); 
+              } 
+           });
+           //取消模块列表处取消默认事件
+           thisSelect.click(function(e){
+              e.stopPropagation();
+           });
+        });
+    }
+})(jQuery);
+
+$(function(){
+	//插件调用
+	$('.iselect').iSimulateSelect();
+})
+
+</script>
+
+</body>
+</html>

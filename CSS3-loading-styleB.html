@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>CSS3 LOADING</title>
+		<style>
+			.loading{width:80px;height: 80px;position: relative;margin: 200px auto;}
+		    .rotate{width:80px;height: 80px;background:none;border-radius:50%;box-shadow:0 3px 1px rgba(0,0,0,.2);animation:rotates 1s linear infinite;position: absolute;}
+		    .process{width:80px;height:80px;line-height:80px;text-align:center;color:rgba(0,0,0,.2);display: block;font-size:22px;position: absolute;}
+			
+			/*转动动画*/
+			@keyframes rotates{
+				 0%{transform: rotate(0deg);}
+				 100%{transform: rotate(360deg);}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="loading">
+			<div class="rotate"></div>
+			<span class="process">0%</span>
+		</div>
+	</body>
+</html>

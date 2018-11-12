@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 圆点数字电子表</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;margin:0 auto;background:#fffffff;">
+    Your browser does not support the canvas element.
+    </canvas>
+    <!--
+    	格子圆心坐标计算方法
+    	  x+j*2*(r+1)+(r+1) 
+    	  y+i*2*(r+1)+(r+1) 
+    -->
+	<script src="js/digit.js"></script>
+    <script type="text/javascript">
+    	var W_WIDTH = 1200;
+		var W_HEIGHT = 400;
+		var RADIUS = 10;
+		var TOP = 60;
+		var LEFT = 30;
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		canvas.width = W_WIDTH;
+    		canvas.height = W_HEIGHT;
+    		var context = canvas.getContext('2d');
+    		setInterval(function(){
+    			context.clearRect(0,0,W_WIDTH,W_HEIGHT); //清除画布
+    			drawClock(context);
+    		},1000)
+      }
+    	
+    //绘制静态时分秒
+    function drawClock(cxt){
+    	var myDate = new Date(); //时间初始化
+    	var h = myDate.getHours();//获取小时
+    	var m = myDate.getMinutes();//获取分钟
+    	var s = myDate.getSeconds();//获取秒钟
+    	drawNum(LEFT,TOP,parseInt(h/10),cxt);
+    	drawNum(LEFT+160,TOP,parseInt(h%10),cxt);
+    	drawNum(LEFT+320,TOP,10,cxt);
+    	drawNum(LEFT+400,TOP,parseInt(m/10),cxt);
+    	drawNum(LEFT+560,TOP,parseInt(m%10),cxt);
+    	drawNum(LEFT+720,TOP,10,cxt);
+    	drawNum(LEFT+800,TOP,parseInt(s/10),cxt);
+    	drawNum(LEFT+960,TOP,parseInt(s%10),cxt);
+    };
+   
+     //绘图方法
+    function drawNum(x , y , num , cxt){
+    			cxt.fillStyle = "#0ec7ef"; // 填充颜色
+    			for(var i = 0; i < numbers[num].length; i++){
+	    			for(var j = 0; j < numbers[num][i].length; j++){
+	    				if( numbers[num][i][j] == 1 ){
+			                cxt.beginPath();
+			                //显示圆点
+			                cxt.arc( x+j*2*(RADIUS+1)+(RADIUS+1) , y+i*2*(RADIUS+1)+(RADIUS+1) , RADIUS , 0 , 2*Math.PI )
+			                //显示正方形
+			                //cxt.fillRect(x+j*2*(RADIUS+1)+(RADIUS+1),y+i*2*(RADIUS+1)+(RADIUS+1),RADIUS,RADIUS);
+			                cxt.closePath();
+			                cxt.fill();
+			          }
+				}
+			}
+	   };
+    </script>
+</body>
+</html>

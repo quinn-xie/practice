@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>鼠标的距离</title>
+		<script type="text/javascript">
+			var mouseX;
+			var mouseY;
+
+			function show(event) {
+				var infoDiv = document.getElementById('infoDiv');
+				mouseOver(event);
+				infoDiv.style.left = mouseX  + "px";
+				infoDiv.style.top = mouseY  + "px";
+				infoDiv.onmouseover = function(){
+					return false;
+				}
+			}
+
+			function mouseOver(obj) {
+				e = obj || window.event;
+				// 此处记录鼠标停留在组建上的时候的位置, 可以自己通过加减常量来控制离鼠标的距离.
+				mouseX = e.layerX/50 || e.offsetX;
+				mouseY = e.layerY/50 || e.offsetY;
+			}
+		</script>
+		<style>
+		    body{margin:0;padding:0;}
+		    .obj{width: 100%;height:1000px; background:#fd0;}
+		    .event{position:relative;width:800px;height:500px;margin:0 auto;background: #555555;}
+			#infoDiv{position:absolute;font-size:25px;color:#ffffff;}
+		</style>
+	</head>
+
+	<body>
+		<div class="obj" onmousemove="show(event);">
+		<div class="event">
+			<div id="infoDiv">我是一个慢慢的DIV</div>
+		</div></div>
+	</body>
+
+</html>

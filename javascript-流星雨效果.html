@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>太空马TOUCH版本</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+	<!-- uc强制竖屏 -->
+	<meta name="screen-orientation" content="portrait">
+	<!-- QQ强制竖屏 -->
+	<meta name="x5-orientation" content="portrait">
+	<!--指定的iphone中safari顶端的状态条的样式-->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<!--删除默认的苹果工具栏和菜单栏-->
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<!-- windows phone 点击无高光 -->
+	<meta name="msapplication-tap-highlight" content="no">
+	<!-- 忽略将数字变为电话号码 -->
+	<meta content="telephone=no" name="format-detection">
+	<title>安全保障</title>
+	<link rel="stylesheet" href="parallax/parallax.css">
+	<link rel="stylesheet" href="parallax/parallax-animation.css">
+	<style>
+		body{overflow:hidden;width: 100%;height: 100%;background-color:#052687;}
+		section{position:relative;}
+		.pages{z-index:3;transition: all 1s;}
+		.shadow{background:#e119ff;box-shadow:0px 300px 200px #e119ff;width:200px;height: 200px;border-radius:100%;position:absolute; transform: rotateY(180deg);}
+		/*流星雨*/
+		#stars{margin:0 auto;position:fixed; top:0; left:0; right:0; bottom:0; z-index:2;}
+		.star { 
+			display: block;width:7px;height:7px;border-radius:50%;background:#fb8ac2;position:relative; opacity: 0;
+		    animation: star-fall 3s linear infinite;
+		    -webkit-animation: star-fall 3s linear infinite;
+		    -moz-animation: star-fall 3s linear infinite;
+		    box-shadow: 0 0 3px 3px rgba(235, 82, 224, .3);
+		}
+		.star:after {
+		    content: ''; display:block; border:1px solid #eb52e0;border-width:0px 100px 5px 100px;
+		    border-color: transparent transparent transparent rgba(235, 82, 224,.5);
+		    transform: rotate(-45deg) translate3d(1px, 4px, 0);
+		    -webkit-transform: rotate(-45deg) translate3d(1px, 4px, 0);
+		    -moz-transform: rotate(-45deg) translate3d(1px, 4px, 0);
+		    transform-origin: 0% 100%;
+		    -webkit-transform-origin: 0% 100%;
+		    -moz-transform-origin: 0% 100%;
+		}
+		@keyframes star-fall {
+		    0% {
+		        opacity: 0;
+		        transform: scale(0.5) translate3d(0, 0, 0);
+		        -webkit-transform: scale(0.5) translate3d(0, 0, 0);
+		        -moz-transform: scale(0.5) translate3d(0, 0, 0);
+		    }
+		    50% {
+		        opacity: 1;
+		        transform: translate3d(-200px, 200px, 0);
+		        -webkit-transform: translate3d(-200px, 200px, 0);
+		        -moz-transform: translate3d(-200px, 200px, 0);
+		    }
+		    100% {
+		        opacity: 0;
+		        transform: scale(1.3) translate3d(-300px, 300px, 0);
+		        -webkit-transform: scale(1.3) translate3d(-300px, 300px, 0);
+		        -moz-transform: scale(1.3) translate3d(-300px, 300px, 0);
+		    }
+		}
+	</style>
+</head>
+<body>
+
+<div id="stars"></div>
+
+<script type="text/javascript">
+		/**************************流星雨***************************/
+		var stars = document.getElementById('stars');
+		var star = document.getElementsByClassName('star');
+		// js随机生成流星
+		for (var j = 0; j < 30; j++) {
+		    var newStar = document.createElement("div");
+		    newStar.className = "star";
+		    newStar.style.top = randomDistance(30, -30) + 'px';
+		    newStar.style.left = randomDistance(150, 20) + 'px';
+		    stars.appendChild(newStar)
+		};
+		// 封装随机数方法
+		function randomDistance(max, min) {
+		    var distance = Math.floor(Math.random() * (max - min + 1) * 10 + min);
+		    return distance
+		};
+		// 给流星添加动画延时
+		for (var i = 0, len = star.length; i < len; i++) {
+		    if (i % 6 == 0) {
+		        star[i].style.animationDelay = '0s';
+		    } else {
+		        star[i].style.animationDelay = i * 0.8 + 's';
+		    }
+		}
+</script>
+</body>
+</html>

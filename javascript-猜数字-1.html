@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>猜数字游戏</title>
+	</head>
+
+	<body>
+		<h1>需求文档</h1>
+		<p>-- 随机产生一个 100-200 的数字</p>
+		<p>-- 如果猜的数字大于随机产生的数字，就输出 - 大了</p>
+		<p>-- 如果猜的数字小于随机产生的数字，就输出 - 小了</p>
+		<p>-- 如果猜的数字等于随机产生的数字，就输出 - 恭喜，答对了</p>
+		<p>-- 猜满3次，输出-机会已用完并退出</p>
+
+		<script>
+			//随机产生一个 400-800 的数字
+			var num = parseInt(Math.random() * 100 + 100);
+			console.log(num);
+			//输入数字猜
+			for(n = 1; n <= 3; n++) {
+				var input_num = prompt("请输入一个数字");
+				if(input_num > num) {
+					alert("大了");
+				};
+				if(input_num < num) {
+					alert("小了");
+				};
+				if(input_num == num) {
+					alert("恭喜，答对了");
+					break;
+				};
+			}
+		</script>
+	</body>
+
+</html>

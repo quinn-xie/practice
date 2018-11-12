@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 基础线条</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;margin:0 auto;"></canvas>
+    <!--
+    	**重要知识点
+    	* context.arc(圆心X坐标，圆心Y坐标，半径，开始弧度值，结束弧度值，可选顺时针[默认false顺时针])
+    	
+    -->
+    <script type="text/javascript">
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		
+    		//重置画布大小
+    		canvas.width = 1200;
+    		canvas.height = 850;
+    		
+			var context = canvas.getContext('2d');
+			
+			// 画线条半圆 - 顺时针
+			context.beginPath();
+			context.arc(170,120,100,0,1.5*Math.PI);
+			context.strokeStyle = "#00BFFF";
+			context.stroke();
+			context.closePath();
+			
+			// 画线条半圆 - 逆时针
+			context.beginPath();
+			context.arc(400,120,100,0,1*Math.PI,true);
+			context.strokeStyle = "#00BFFF";
+			context.stroke();
+			
+			//画一个闭合路径的圆
+			context.beginPath();
+			context.arc(630,120,100,0,1.5*Math.PI)
+			context.strokeStyle = "#00BFFF";
+			context.stroke();
+			
+			//画一个实心的圆
+			context.beginPath();
+			context.arc(870,120,100,0,2*Math.PI)
+			context.lineWidth = "5";
+			context.strokeStyle = "#00BFFF";
+			context.stroke();
+			context.fillStyle = "#00C7E9";
+			context.fill();
+			
+			context.lineWidth = '5';
+			context.strokeStyle = "#00BFFF";
+			
+			//循环出10个闭合路径圆
+			for( var i=0; i<10; i++){
+				context.beginPath();
+				context.arc(i*125,300,50,0,1*Math.PI*(i+1)/5);
+				context.closePath();
+			    context.stroke();
+			}
+			
+			//循环出10个圆
+			for( var i=0; i<10; i++){
+				context.beginPath();
+				context.arc(i*125,450,50,0,1*Math.PI*(i+1)/5);
+			    context.stroke();
+			}
+			
+			//循环出10个实心圆
+			for( var i=0; i<10; i++){
+				context.beginPath();
+				context.arc(i*125,600,50,0,1*Math.PI*(i+1)/5);
+				
+				context.fillStyle = "#ADFF2F";
+			    context.fill();
+			    
+			    context.stroke();
+			}
+			
+			//循环出10个闭合路径实心圆
+			for( var i=0; i<10; i++){
+				context.beginPath();
+				context.arc(i*125,750,50,0,1*Math.PI*(i+1)/5);
+				
+				context.fillStyle = "#ADFF2F";
+			    context.fill();
+			    
+			    context.closePath();
+				context.stroke();
+			}
+		
+    	}
+    </script>
+</body>
+</html>

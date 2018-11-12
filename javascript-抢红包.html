@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0 ,maximum-scale=1.0, user-scalable=no">
+		<title>author-Joy Sang</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0
+			}
+			
+			div,
+			a,
+			img {
+				-webkit-tap-highlight-color: transparent;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				user-select: none
+			}
+			
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				background: url('http://owl4tkj9p.bkt.clouddn.com/img/bg.png') no-repeat;
+				background-size: cover;
+				overflow: hidden
+			}
+			
+			.progressNum {
+				width: 200px;
+				height: 18px;
+				position: absolute;
+				top: 44%;
+				left: 50%;
+				margin: -101px;
+				margin-top: -10px;
+				text-align: center;
+				font-size: 16px;
+				color: #fff
+			}
+			
+			.progress {
+				width: 200px;
+				height: 18px;
+				box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.5);
+				border-radius: 10px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin: -101px;
+				margin-top: -10px
+			}
+			
+			.progress span {
+				display: inline-block;
+				width: 10%;
+				height: 18px;
+				background: deepskyblue;
+				border-radius: 10px
+			}
+			
+			.header {
+				width: 100%;
+				height: 24px;
+				position: fixed;
+				top: 12px;
+				left: 0;
+				right: 0;
+				font-size: 12px;
+				color: #faee00;
+				z-index: 100
+			}
+			
+			.header .leftBar {
+				width: 50%;
+				float: left
+			}
+			
+			.header .leftBar .topIcon1 {
+				display: inline-block;
+				width: 24px;
+				height: 24px;
+				background: url("http://owl4tkj9p.bkt.clouddn.com/img/topIcon.png") no-repeat;
+				background-size: cover;
+				margin-left: 22px;
+				margin-right: 12px;
+				vertical-align: middle
+			}
+			
+			.header .rightBar {
+				width: 50%;
+				float: left
+			}
+			
+			.header .rightBar .topIcon2 {
+				display: inline-block;
+				width: 24px;
+				height: 24px;
+				background: url("http://owl4tkj9p.bkt.clouddn.com/img/topIcon.png") no-repeat 0 -24px;
+				background-size: cover;
+				margin-right: 12px;
+				margin-left: 60px;
+				vertical-align: middle
+			}
+			
+			.header img {
+				display: inline-block;
+				width: 24px;
+				height: 24px;
+				vertical-align: middle
+			}
+			
+			#box {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				position: relative
+			}
+			
+			.redpack {
+				position: absolute;
+				display: block;
+				width: 54px;
+				height: 77px;
+				background: url('http://owl4tkj9p.bkt.clouddn.com/img/catImg.png') no-repeat 0 -77px;
+				background-size: cover
+			}
+			
+			.redpacked {
+				background: url('http://owl4tkj9p.bkt.clouddn.com/img/catImg.png') no-repeat 0 0;
+				background-size: cover
+			}
+			
+			#mask {
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.4);
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 101;
+				display: none
+			}
+			
+			#pop {
+				width: 240px;
+				height: 371px;
+				background: url('http://owl4tkj9p.bkt.clouddn.com/img/popBg.png') no-repeat;
+				background-size: cover;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -120px;
+				margin-top: -185.5px;
+				color: #fff;
+				display: none;
+				z-index: 102
+			}
+			
+			#pop .popFont1 {
+				width: 70px;
+				font-size: 16px;
+				position: relative;
+				top: 80px;
+				left: 88px
+			}
+			
+			#pop .popFont2 {
+				width: 100%;
+				font-size: 32px;
+				position: relative;
+				top: 80px;
+				left: 0;
+				text-align: center
+			}
+			
+			#pop .popFont2 .yuan {
+				font-size: 16px
+			}
+			
+			#pop .popFont3 {
+				width: 100%;
+				font-size: 12px;
+				position: relative;
+				top: 76px;
+				left: 0;
+				text-align: center
+			}
+			
+			#shareBtn {
+				width: 187px;
+				height: 64px;
+				background: url('http://owl4tkj9p.bkt.clouddn.com/img/shareBtn.png') no-repeat;
+				background-size: cover;
+				position: relative;
+				top: 42%;
+				left: 50%;
+				margin-left: -103.5px;
+				color: #a75c1a;
+				font-size: 16px;
+				text-align: center;
+				line-height: 60px;
+				padding-left: 20px
+			}
+			
+			#closeBtn {
+				width: 32px;
+				height: 32px;
+				background: transparent;
+				position: relative;
+				top: 53%;
+				left: 43%;
+				border-radius: 50%
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<div class="leftBar"><span class="topIcon1"></span>剩余时间:<span id="countDown">5</span> 秒</div>
+			<div class="rightBar"><span class="topIcon2"></span>已获得:<span id="redCount">0</span> 个</div>
+		</div>
+		<div id="box"></div>
+		<div id="mask"></div>
+		<div id="pop">
+			<p class="popFont1">总金额共</p>
+			<p class="popFont2"><span id="allAmount"></span><span class="yuan">元</span></p>
+			<p class="popFont3">您抢到了<span id="redCount1"></span>个红包</p>
+			<div id="closeBtn"></div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/rain.min.js"></script>
+	<script>
+		window.onload = function() {
+			var j = function(g) {
+				return document.getElementById(g)
+			};
+			var d = j("box"),
+				e = 0,
+				b = [],
+				m = [],
+				l = 0;
+			var a = new redPack({
+				el: d,
+				speed: 50,
+				density: 500,
+				callback: function(g) {
+					b.push(g.getAttribute("redId"));
+					m.push(g.getAttribute("redAmount"));
+					console.log(m);
+					console.log(b);
+					e++;
+					j("redCount").innerText = e;
+				}
+			});
+			a.ajax({
+				method: "GET",
+				url: "data/hb.json",
+				success: function(g) {
+					var n = JSON.parse(g);
+					a.start(n)
+				}
+			});
+			var k = 5,
+				  c = setInterval(f, 1000);
+
+			function f() {
+				j("countDown").innerText = k;
+				k--;
+				if(k < 0) {
+					clearInterval(c);
+					a.stop();
+					a.clear();
+					h()
+				}
+			}
+
+			function h() {
+				j("mask").style.display = "block";
+				j("pop").style.display = "block";
+				j("redCount1").innerText = e;
+
+				function g(n) {
+					if(n.length == 0) {
+						return 0
+					} else {
+						if(n.length == 1) {
+							return n[0]
+						} else {
+							for(var o = 0; o < n.length; o++) {
+								l += Number(n[o])
+							}
+							return l
+						}
+					}
+				}
+				g(m);
+				j("allAmount").innerText = (l).toFixed(2)
+			}
+			j("closeBtn").addEventListener("click", function() {
+				i()
+			});
+
+			function i() {
+				j("mask").style.display = "none";
+				j("pop").style.display = "none";
+				alert("awfeawe")
+			}
+		};
+	</script>
+
+</html>

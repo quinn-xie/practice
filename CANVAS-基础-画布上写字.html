@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 基础线条</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;margin:0px auto;">
+    Your browser does not support the canvas element.
+    </canvas>
+    <!--
+    	*重要知识点
+    	*context.fillText("文字内容","横坐标","纵坐标");
+    	*context.strokeText("文字内容","横坐标","纵坐标");
+    -->
+    <script type="text/javascript">
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		
+    		canvas.width = 600;
+    		canvas.height = 600;
+    		
+			var context = canvas.getContext('2d');
+			// 画一条直线
+			context.fillStyle = "#008000"; //文字颜色
+			context.font="30px Arial"; //字体大小与字体
+			context.fillText("静夜思",150,50); //文字内容及坐标
+			
+			context.fillStyle = "#A75C1A"; //文字颜色
+			context.font="16px Arial"; //字体大小与字体
+			context.fillText("-- 李白",300,100); //文字内容及坐标
+			
+			context.fillStyle = "#008000"; //文字颜色
+			context.font="30px Arial"; //字体大小与字体
+    		context.fillText("床前明月光，疑是地上霜。",20,150); //文字内容及坐标
+    		context.fillText("举头望明月，低头思故乡。",20,200); //文字内容及坐标
+    		
+    		context.font="140px Arial";  //字体大小与字体
+    		context.strokeStyle = "#00BFFF"; //边框描线
+    		context.strokeText("CANVAS",20,400); //文字内容及坐标
+    		
+    		
+    	}
+    </script>
+</body>
+</html>

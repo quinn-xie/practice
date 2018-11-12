@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+    <head>
+    	<meta charset="UTF-8"/>
+        <script type="text/javascript" src="js/angular-1.0.1.min.js" ></script>
+       
+    </head>
+    <body> 
+    	<p>AngularJs默认只加载一个ng-app，并且是第一个</p>
+	    <div ng-app="">
+			<input ng-model="name" type="text" placeholder="请输入姓名">
+			<p>我的姓名： {{name}}</p>
+	
+			<input ng-model="age" type="number" placeholder="请输入年龄">
+			<p>我的年龄: {{age}}</p>
+		</div>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE  HTML>
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>函数</title>
+
+<script type="text/javascript">
+//定义函数
+function myFun(a,b){
+    var d;
+    var c = a - b;
+    if(c > 0){
+       document.write(a +'与'+ b +'最大值为：'+ a +"<br>");
+    }else if(c < 0){
+       document.write(a +'与'+ b +'最大值为：'+ b +"<br>");
+    }else{
+       document.write('两个数字一样大');
+    }
+    return c;
+} 
+myFun(55,5);
+myFun(6,3);
+myFun(3,3);
+
+</script>
+</head>
+<body>
+</body>
+</html>

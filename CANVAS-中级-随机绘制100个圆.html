@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 绘制100个不同颜色的圆球</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;background:#fffffff;margin:0 auto;">
+    Your browser does not support the canvas element.
+    </canvas>
+
+    <script type="text/javascript">
+    	var cw = document.documentElement.clientWidth-50;
+    	var ch = document.documentElement.clientHeight-50;
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		canvas.width = cw;
+    		canvas.height = ch;
+    		var context = canvas.getContext('2d');
+    		context.globalAlpha = 0.5;   //设置所有圆透明度为0.5
+    		draw(context);
+    	}
+    //绘图100个随机圆
+    function draw(cxt){
+    	for(var i = 0; i < 100; i++){
+    			var R = Math.floor(Math.random()*255);
+		    	var G = Math.floor(Math.random()*255);
+		    	var B = Math.floor(Math.random()*255);
+		    	cxt.fillStyle = "rgb("+R+","+G+","+B+")";
+		    	cxt.beginPath();
+		    	cxt.arc(Math.random()*canvas.width,Math.random()*canvas.height,Math.random()*50,0,2*Math.PI)
+		    	cxt.fill();
+    	}
+	};
+ </script>
+</body>
+</html>

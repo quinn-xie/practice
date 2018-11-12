@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" " http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns=" http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+    <title>按时分秒</title>
+    <script src="http://www.lanrenzhijia.com/ajaxjs/jquery.min.js"></script>
+    <style type="text/css">
+        *{padding:0;margin:0;}
+        body{font-size:16px;}
+        .timeBox{color:#6dbec5;margin:10px auto;}
+        .time{border: 1px solid #6dbec5;width: 40px;height: 20px;text-align: center; line-height: 20px;display: inline-block;}
+    </style>
+</head>
+<body>
+    <div class="timeBox" id="times1">
+        距结束
+        <span class="time date">00</span> 天 <span class="time hour">00</span> : <span class="time minutes">00</span> : <span class="time seconds">00</span>
+    </div>
+    <div class="timeBox" id="times2">
+        距结束
+        <span class="time date">00</span> 天 <span class="time hour">00</span> : <span class="time minutes">00</span> : <span class="time seconds">00</span>
+    </div>
+    <div class="timeBox" id="times3">
+        距结束
+        <span class="time date">00</span> 天 <span class="time hour">00</span> : <span class="time minutes">00</span> : <span class="time seconds">00</span>
+    </div>
+</body>
+<script type="text/javascript">
+    function FreshTime(id,times){
+        var endtime=new Date(times);
+        var nowtime = new Date();//当前时间
+        var lefttime=parseInt((endtime.getTime()-nowtime.getTime())/1000); 
+        d=parseInt(lefttime/3600/24);
+        h=parseInt((lefttime/3600)%24);
+        m=parseInt((lefttime/60)%60);
+        s=parseInt(lefttime%60);
+
+        if(d < 10){
+         d = "0" + d;
+        }
+        if(h < 10){
+         h = "0" + h;
+        }
+        if(m < 10){
+         m = "0" + m;
+        }
+        if(s < 10){
+         s = "0" + s;
+        }
+
+        $(id).find(".date").text(d);
+        $(id).find(".hour").text(h);
+        $(id).find(".minutes").text(m);
+        $(id).find(".seconds").text(s);
+
+        if(lefttime<=0){
+            $(id).find(".date").text("00");
+            $(id).find(".hour").text("00");
+            $(id).find(".minutes").text("00");
+            $(id).find(".seconds").text("00");
+            clearInterval(sh);
+        }
+    }
+    var sh;
+    // 传id，日期时间
+    sh=setInterval(function(){
+        FreshTime("#times1","2019/06/30,20:00:00");
+        FreshTime("#times2","2019/06/18,23:59:59");
+        FreshTime("#times3","2019/06/16,23:59:10");
+    },1000);
+</script>
+</html>

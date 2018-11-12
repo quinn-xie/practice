@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+
+		<style>
+			.main {
+				width: 100%;
+			}
+			
+			.title {
+				width: 100%;
+				height: 40px;
+				line-height: 40px;
+				background: #4c4c4c;
+				color: #ffffff;
+			}
+			
+			.title input {
+				width: 20px;
+				height: 20px;
+				background: #ffffff;
+				margin-left: 20px;
+				appearance: checkbox;
+				-webkit-appearance: checkbox;
+			}
+			
+			.list_item input {
+				width: 20px;
+				height: 20px;
+				appearance: checkbox;
+				-webkit-appearance: checkbox;
+			}
+			
+			ul {
+				width: 100%;
+			}
+			
+			li.list_item {
+				width: 100%;
+				height: 100px;
+				border-bottom: 4px solid blue;
+				padding: 4px;
+			}
+			
+			li.list_item .L {
+				width: 20%;
+				height: 100%;
+			}
+			
+			li.list_item .L img {
+				width: 100%;
+				height: 100%;
+			}
+			
+			li.list_item .R {
+				width: 80%;
+				height: 100%;
+			}
+			
+			.jian,
+			.jia {
+				display: inline-block;
+				width: 40px;
+				height: 40px;
+				line-height: 40px;
+				text-align: center;
+				background: black;
+				color: #ffffff;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+<div class="main">
+    <div class="title">
+        <input type="checkbox" name="vehicle1" value="Bike" @click="quan" v-model="quanTodo">全选/不全选
+        <span class="fr" @click="deleteTodo">批量删除</span>
+    </div>
+    <ul class="list">
+        <li class="list_item" v-for="(item,index) in list">
+            <div class="L fl">
+                <img src="../img/timg1.jpg">
+            </div>
+  <div class="R fl">
+                <h1>{{item.title}}</h1>
+                <div class="compute">
+                    <span class="price"></span>
+                    <div class="compute_R">
+                        <span class="jian" @click="jian(item)">-</span>
+                        <span class="num">{{item.num}}</span>
+                        <span class="jia" @click="add(item)">+</span>
+</div>
+                    <input type="checkbox" name="vehicle" :checked="item.checkbox" v-model="item.checkbox">
+                </div>
+            </div>
+        </li>
+    </ul>
+    共计{{reversedMessage}}元
+</div>
+		<script src="js/vue.js"></script>
+		<script src="js/vue-resources.1.2.0.js"></script>
+
+<script type="text/javascript">
+let arr = [{
+		title: ‘商品1‘,
+		num: 1,
+		price: 10,
+		checkbox: true
+	},
+	{
+		title: ‘商品2‘,
+		num: 1,
+		price: 20,
+		checkbox: true
+	},
+	{
+		title: ‘商品3‘,
+		num: 1,
+		price: 30,
+		checkbox: true
+	},
+	{
+		title: ‘商品4‘,
+		num: 1,
+		price: 40,
+		checkbox: true
+	}
+];
+var vm = new Vue({
+	el: ".main",
+	data: {
+		list: arr,
+		quanTodo: true
+	},
+	computed: {
+		reversedMessage: function() {
+			var price = 0;
+			for(var i = 0; i < this.list.length; i++) {
+				if(this.list[i].checkbox) {
+					price += this.list[i].num * this.list[i].price;
+				}
+			}
+			return price;
+		}
+	},
+	methods: {
+		a(item) {
+			console.log(item);
+		},
+		jian(item) {
+			if(item.num > 0) {
+				item.num--;
+			}
+
+		},
+		add(item) {
+			item.num++;
+		},
+		quan() {
+			console.log(this.quanTodo);
+			if(this.quanTodo == true) {
+				for(var i = 0; i < this.list.length; i++) {
+					this.list[i].checkbox = false;
+				}
+				console.log(‘不选中‘ + this.quanTodo);
+			} else {
+				console.log(‘选中‘ + this.quanTodo);
+				console.log(this.list);
+				for(var j = 0; j < this.list.length; j++) {
+					this.list[j].checkbox = true;
+					console.log(this.list[j].checkbox);
+				}
+			}
+		},
+		deleteTodo() {
+			for(var i = this.list.length - 1; i >= 0; i--) {
+				if(this.list[i].checkbox) {
+					var index = this.list.indexOf(this.list[i]);
+					this.list.splice(index, 1);
+				}
+			}
+		}
+	}
+});
+</script>
+
+	</body>
+
+</html>

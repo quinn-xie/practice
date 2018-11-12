@@ -1,0 +1,39 @@
+<!DOCTYPE  HTML>
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>转数组，求平均值，输出日期星期</title>
+
+<script type="text/javascript">
+
+  //通过javascript的日期对象来得到当前的日期，并输出。
+  var myDate = new Date();
+  var today = myDate.getFullYear() + '年' + myDate.getMonth()+ '月' +myDate.getDate()+ '日';
+  //document.write(today);
+  
+  var day = myDate.getDay();
+  var arrayWeek = new Array('星期日','星期一','星期二','星期三','星期四','星期五','星期六')
+  //document.write(arrayWeek[day]);
+
+  //以“;”为界限将上面字符串分割成数组
+  var scoreStr = "小明:87;小花:81;小红:97;小天:76;小张:74;小小:94;小西:90;小伍:76;小迪:64;小曼:76";
+  var arr=scoreStr.split(';');  
+  
+  //document.write(arr.length);
+
+
+  //从数组中将成绩撮出来，然后求和取整，并输出。
+  var sum = 0;
+  for(var i=0; i<arr.length;i++){
+     var newarr = parseInt(arr[i].substring(3,5));
+     sum += newarr;
+  }
+  var sour = Math.floor(sum/arr.length)//向下取整
+  
+  //输出向下取整结果
+  document.write(today + arrayWeek[day]+ '<br>' + '班级总分为:' + sum + '<br>'+ '班级平均分为:' +　sour )
+</script>
+</head>
+<body>
+</body>
+</html>

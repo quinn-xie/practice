@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 基础线条</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;margin:0 auto;"></canvas>
+    <!--
+    	*重要知识点
+    	* context.createLinearGradient(x0,y0,x1,y1); - 创建线条渐变
+    	    --  x0	渐变开始点的 x 坐标
+			--  y0	渐变开始点的 y 坐标
+			--  x1	渐变结束点的 x 坐标
+			--  y1	渐变结束点的 y 坐标
+		* context.createRadialGradient(x,y,r,x1,y1,r1) - 创建一个径向/圆渐变
+		   -- x0	渐变的开始圆的中心的x坐标	
+		   -- y0	渐变的开始圆的中心的y坐标
+		   -- r0	渐变的开始圆的半径
+		   -- x1	渐变的结束圆的中心的x坐标
+		   -- y1	渐变的结束圆的中心的y坐标
+		   --  r1	渐变的结束圆的半径
+    	* context.fillRect(横坐标,纵坐标,长,宽);     //画一个矩形   
+    	* context.addColorStop(0,"red");     指定颜色停止，参数使用坐标来描述，可以是0至1.
+    -->
+    <script type="text/javascript">
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		
+    		canvas.width = 800;
+    		canvas.height = 600;
+    		
+			var context = canvas.getContext('2d');
+
+			context.beginPath();
+			context.fillStyle = "yellow";
+			context.fillRect(10,10,300,100);
+			context.fill()
+			context.closePath();
+			
+			// 创建线性渐变
+			var grd = context.createLinearGradient(350,10,650,10);
+			grd.addColorStop(0,"red");
+			grd.addColorStop(1,"yellow");	
+			context.fillStyle = grd;
+			context.fillRect(350,10,300,100);
+			
+			// 创建径向/圆渐变
+			var grda = context.createRadialGradient(390,360,0,390,360,150);
+			grda.addColorStop(0,"red");
+			grda.addColorStop(.5,"yellow");
+			grda.addColorStop(1,"blue");
+			context.fillStyle = grda;
+			context.arc(390,360,150,0,2*Math.PI)
+			context.fill()
+    	}
+    </script>
+</body>
+</html>

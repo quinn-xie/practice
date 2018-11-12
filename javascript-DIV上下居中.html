@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>DIV上下居中</title>
+	</head>
+	<style>
+	  body{padding:0;margin:0;}
+	  #myDiv{width:587px;height:123px;position:absolute;padding:30px;background: #008000;color:#ffffff}
+	</style>
+	<body>
+		<div id="myDiv">我就是一个DIV，<br/>不管你怎么变换我的大小，<br/>我始终在浏览器的正中显示</div>
+		<script>
+		    var myDiv = document.getElementById("myDiv");
+			var divHeight = document.getElementById("myDiv").offsetHeight;
+			var divWidth = document.getElementById("myDiv").offsetWidth;
+			var marginLeft = -(divWidth / 2);
+			var marginTop = -(divHeight / 2);
+			myDiv.style.left = "50%";
+			myDiv.style.marginLeft = marginLeft + "px";
+			myDiv.style.top = "50%";
+			myDiv.style.marginTop = marginTop + "px";
+		</script>
+	</body>
+
+</html>

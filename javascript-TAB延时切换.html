@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>TAB切换</title>
+		<style>
+			* {margin: 0;padding: 0;list-style: none; font-family: arial; font-size: 12px;}
+			
+			.notice{width:298px;height:98px;margin:10px;border:1px solid #f5f5f5}
+			.notice-tit{height: 27px;position:relative;background: #f7f7f7;}
+			.notice-tit ul{position: absolute;width:301px;left:-1px;}
+			.notice-tit ul .select{background:#ffffff;border-bottom-color:#fff;border-left:1px solid #eeeeee;border-right:1px solid #eeeeee;font-weight: bold;}
+			.notice-tit ul li{float:left;width:58px;height:26px;line-height: 26px;text-align: center;overflow:hidden;border-bottom: 1px solid #eee;}
+		    .notice-tit ul li a:link,.notice-tit ul li a:visited{text-decoration: none;color:#555555}
+		    .notice-tit ul li a:hover{color:#f90}
+		    
+		    .notice-con .mod{margin:10px;}
+		    .notice-con .mod ul li{width:45%;list-style-type:disc;display:inline-block; line-height:25px;}
+		    
+		    
+		</style>
+	</head>
+
+	<body>
+		<div id="notice" class="notice">
+			<div id="notice-tit" class="notice-tit">
+				<ul>
+					<li class="select"><a href="#">公告</a></li>
+					<li><a href="#">规则</a></li>
+					<li><a href="#">论坛</a></li>
+					<li><a href="#">安全</a></li>
+					<li><a href="#">公益</a></li>
+				</ul>
+			</div>
+			<div class="notice-con" id="notice-con">
+				<div class="mod" style="display: block;">
+					<ul>
+						<li>公告公告公告公告</li>
+						<li>公告公告公告公告</li>
+						<li>公告公告公告公告</li>
+						<li>公告公告公告公告</li>
+					</ul>
+				</div>
+				<div class="mod" style="display: none;">
+					<ul>
+						<li>规则规则规则规则</li>
+						<li>规则规则规则规则</li>
+						<li>规则规则规则规则</li>
+						<li>规则规则规则规则</li>
+					</ul>
+				</div>
+				<div class="mod" style="display: none;">
+					<ul>
+						<li>论坛论坛论坛论坛</li>
+						<li>论坛论坛论坛论坛</li>
+						<li>论坛论坛论坛论坛</li>
+						<li>论坛论坛论坛论坛</li>
+					</ul>
+				</div>
+				<div class="mod" style="display: none;">
+					<ul>
+						<li>安全安全安全安全</li>
+						<li>安全安全安全安全</li>
+						<li>安全安全安全安全</li>
+						<li>安全安全安全安全</li>
+					</ul>
+				</div>
+				<div class="mod" style="display: none;">
+					<ul>
+						<li>公益公益公益公益</li>
+						<li>公益公益公益公益</li>
+						<li>公益公益公益公益</li>
+						<li>公益公益公益公益</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script>
+			window.onload = function(){
+				var titles = document.getElementById("notice-tit").getElementsByTagName('li'),
+				    cons = document.getElementById("notice-con").getElementsByTagName('div');
+				//遍历TITLE下所有LI
+			  	for(var i=0; i<titles.length;i++){
+			  	   
+			  	   titles[i].id = i;
+			  	   titles[i].onmouseover = function(){
+				  	 var aa = this;//用aa来引用当前滑过的li
+				  	 setTimeout(function(){
+				  	 	for(var j=0;j<titles.length;j++){
+				  	   		titles[j].className = ' ';
+				  	   		cons[j].style.display = "none"
+				  	    }
+				  	 	aa.className = 'select';
+			  	        cons[aa.id].style.display = "block";
+				  	 },500);
+			  	   }
+			   }
+			}
+		</script>
+	</body>
+
+</html>

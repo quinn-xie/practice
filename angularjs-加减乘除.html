@@ -1,0 +1,51 @@
+<!doctype html>
+<html ng-app="myApp">
+    <head>
+    	<meta charset="UTF-8"/>
+        <script type="text/javascript" src="js/angular-1.0.1.min.js" ></script>
+        <script>
+        	var app = angular.module('myApp',[]);
+        	app.controller('myCtrl',function($scope){
+        		$scope.parseInt = parseInt;
+        		$scope.gg = "10";
+        		$scope.hh = "10";
+        		$scope.aa = "10";
+        		$scope.bb = "10";
+        		$scope.cc = "20";
+        		$scope.dd = "10";
+        		$scope.ee = "15646";
+        		$scope.ff = "452665";
+        	})
+        </script>
+    </head>
+    <body>
+    	
+	    <p>---------基本angular---------</p>
+		<div ng-app="myApp" ng-controller="myCtrl">
+			    <br /><br />----------------乘法---------------<br /><br />
+	        	<p><input type="tel" ng-model = "gg"></p>
+	        	<p><input type="tel" ng-model = "hh"></p>
+				<p>我的第一个表达式： {{ gg * hh }}</p>
+				
+				<br /><br />----------------加法特殊，需解析字符串为整数---------------<br /><br />
+				<p><input type="tel" ng-model = "aa"></p>
+	        	<p><input type="tel" ng-model = "bb"></p>
+				<p>我的第二个表达式： {{ parseInt(aa) + parseInt(bb)}}</p>
+				
+				<br /><br />----------------除法---------------<br /><br />
+				
+				<p><input type="tel" ng-model = "cc"></p>
+	        	<p><input type="tel" ng-model = "dd"></p>
+				<p>我的第二个表达式： {{ cc / dd}}</p>
+				
+				<br /><br />----------------减法---------------<br /><br />
+				
+				<p><input type="tel" ng-model = "ee"></p>
+	        	<p><input type="tel" ng-model = "ff"></p>
+				<p>我的第二个表达式： {{ee - ff}}</p>
+				
+				
+	    </div>
+
+    </body>
+</html>

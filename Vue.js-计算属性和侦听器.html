@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<script src="js/vue.js"></script>
+	</head>
+
+	<body>
+		<div id="myVue">
+			姓：<input v-model="firstName"/>
+			名：<input v-model="lastName"/>
+			<div>{{fullName}}</div>
+			<div>{{count}}</div>
+		</div>
+		<script>
+				new Vue({
+					el : "#myVue",  // 挂载点
+					data : {            // 数据内容
+						firstName :'',
+						lastName:'',
+						count : 0
+					},
+				    computed : {   // 计算属性
+				    	fullName : function(){
+				    		return this.firstName + this.lastName 
+				    	}
+				    },
+				    watch : {        // 侦听器
+				    	fullName : function(){   //fullName变化
+				    		return this.count++;
+				    	} 
+				    }
+				})
+		</script>
+	</body>
+
+</html>

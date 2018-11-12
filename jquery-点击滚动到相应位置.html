@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>点击滚动到相应位置</title>
+        <script type="text/javascript" src="js/jquery-2.2.4.min.js" ></script>
+        <link rel="stylesheet" type="text/css" href="http://www.sucaihuo.com/jquery/css/common.css" />
+        <style type="text/css">
+            .nav{width:160px; position:fixed; margin-left:-170px; top:20%; z-index:1999; background:#f0f0f0; border: 1px solid #ccc;
+                 -webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;
+                 -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);}
+            .nav li{height:36px; line-height:36px; border-bottom:1px solid #d3d3d3; text-align:center; cursor:pointer}
+            .nav li:last-child{border-bottom:none}
+            .nav li a{display:block; width:98%; height:34px;font-size:16px;}
+            .nav li a:hover{background:#f9f9f9; text-decoration:none}
+            .nav li a.cur{color:#002d5c;font-weight:bold}
+            .box{height:800px; margin: 0 10px}
+            .box h3{height:32px; line-height:32px; padding-left:20px; font-size:14px}
+            .box p{line-height:30px; margin:20px; text-align:center; font-size:28px}
+            .box p span{margin:10px}
+            #pro,#ser{background:url(img/bg.jpg)}
+            #news,#con{background:url(img/bg2.gif)}
+        </style>
+	</head>
+    
+	<body>
+		<div class="head">
+            <div class="head_inner">
+                <a class="logo" href="http://www.sucaihuo.com">
+                    <img alt="素材火logo" src="http://www.sucaihuo.com/Public/images/logo.jpg"/>
+                </a>
+            </div>
+        </div>
+        <div class="container" id="main">
+            <h2 class="title"><a href="http://www.sucaihuo.com/js/21.html" target="_blank">jQuery仿天猫左侧导航滚动效果</a></h2>
+            <div class="demo">
+                <ul class="nav">
+                    <li><a class="pro">网站模板</a></li>
+                    <li><a class="news">网页特效</a></li>
+                    <li><a class="ser">字体下载</a></li>
+                    <li><a class="con">网页源码</a></li>
+                    <li><a class="job">图标下载</a></li>
+                </ul>
+                <div id="pro" class="box">
+                    <h3>网站模板</h3>
+                </div>
+                <div id="news" class="box">
+                    <h3>网页特效</h3>
+                </div>
+                <div id="ser" class="box">
+                    <h3>字体下载</h3>
+                </div>
+                <div id="con" class="box">
+                    <h3>网页源码</h3>
+                </div>
+                <div id="job" class="box" style="height:880px">
+                    <h3>图标下载</h3>
+                </div>
+            </div>  
+        </div>
+        <div class="foot">
+            Powered by sucaihuo.com  本站皆为作者原创，转载请注明原文链接：<a href="http://www.sucaihuo.com" target="_blank">www.sucaihuo.com</a>
+        </div>
+        <script type="text/javascript">
+            $(function() {
+                var pro_top = $("#pro").offset().top;//距页顶偏移量 
+                var news_top = $("#news").offset().top;
+                var ser_top = $("#ser").offset().top;
+                var con_top = $("#con").offset().top;
+                var job_top = $("#job").offset().top;
+                $(window).scroll(function() { //滚动时候触发
+                    var scroH = $(this).scrollTop();//滚动条滚动距离+滚动条高度
+                    if (scroH >= job_top) {
+                        set_cur(".job");////设置状态 
+                    } else if (scroH >= con_top) {
+                        set_cur(".con");
+                    } else if (scroH >= ser_top) {
+                        set_cur(".ser");
+                    } else if (scroH >= news_top) {
+                        set_cur(".news");
+                    } else if (scroH >= pro_top) {
+                        set_cur(".pro");
+                    }
+                });
+
+                $(".nav li a").click(function() {
+                    var el = $(this).attr('class');
+                    $('html, body').animate({
+                        scrollTop: $("#" + el).offset().top
+                    }, 300);
+                    $(this).addClass("cur").parent().siblings().find("a").removeClass("cur");
+                });
+
+            });
+            function set_cur(n) {
+                if ($(".nav a").hasClass("cur")) {
+                    $(".nav a").removeClass("cur");
+                }
+                $(".nav a" + n).addClass("cur");
+            }
+        </script>
+	</body>
+
+</html>

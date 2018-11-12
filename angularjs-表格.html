@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+    <head>
+    	<meta charset="UTF-8"/>
+        <script type="text/javascript" src="js/angular-1.0.1.min.js" ></script>
+        <style>
+        	td{border:1px solid #ccc;padding:5px 20px}
+        </style>
+    </head>
+    <body>
+    
+ 
+    <table ng-app="myApp" ng-controller="myCtrl">
+    	
+    	<tr ng-repeat="x in website|orderBy:'Name'"> <!--过滤 ： 按名字排序 -->
+    		<td ng-if="$odd" style="background-color:#f1f1f1">{{ $index + 1 }}</td>
+    		<td ng-if="$even">{{x.Name}}</td>
+    		<td ng-if="$odd" style="background-color:#f1f1f1">{{x.Country}}</td>
+    		<td ng-if="$even">{{x.Url | uppercase}}</td>  <!--过滤 ： 转大写字母 -->
+    	</tr>
+    	<tr ng-repeat="y in tebles|orderBy:'id'"> <!--过滤 ： 按ID排序 -->
+    		<td ng-if="$odd" style="background-color:#f1f1f1">{{ $index + 5}}</td>
+    		<td ng-if="#even">{{y.id}}</td>
+    		<td ng-if="$odd" style="background-color:#f1f1f1"><img src="{{y.imgurl}}" width="150" height="50"/></td>
+    		<td ng-if="#even">{{y.status}}</td>
+    	</tr>
+    			    	
+    </table>
+    
+
+    <script>
+    	var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope, $http) {
+		  $http.get("json.json")
+		  .success(function (response) {
+		  	$scope.website = response.sites;
+		  	$scope.tebles = response.freetrial;
+		   })
+		  .error(function() {
+		  	alert("请求错误")
+           });
+		});
+	</script>
+    
+
+	
+	
+    </body>
+</html>

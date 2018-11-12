@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>CANVAS 绘制100个不同颜色的圆球</title>
+		<style type="text/css">
+			.control{position:absolute;left:20px;top:20px;background:rgba(0,156,255,.5);border-radius: 10px;padding:20px;box-sizing:border-box;width:300px;height:150px;}
+			.control h1{padding:0;margin:10px 0;color:#000000;}
+			.control button{min-width:60px;min-height:25px;display: inline-block; vertical-align: top;border:none}
+			.control .black{background:#000000;color:#ffffff}
+			.control .blue{background:#013d64;color:#ffffff}
+		</style>
+	</head>
+
+	<body>
+		<canvas id="canvas" style="border:1px solid #00BFFF;background:#fffffff;margin:0 auto;">
+	    Your browser does not support the canvas element.
+	    </canvas>
+	    <div class="control">
+	    	<h1>控制面版</h1>
+	    	<button id="stop">控制动画</button>
+	    	<!--<button class="black" id="black">黑色背景</button>
+	    	<button class="blue" id="blue">蓝色背景</button>-->
+	    </div>
+
+		<script type="text/javascript">
+			var ball = [];
+			var stopAnimate = false;
+			var cw = document.documentElement.clientWidth - 50;
+			var ch = document.documentElement.clientHeight - 50;
+			window.onload = function() {
+				var canvas = document.getElementById('canvas');
+				canvas.width = cw;
+				canvas.height = ch;
+				var context = canvas.getContext('2d');
+
+				for(var i = 0; i < 100; i++) {
+					var R = Math.floor(Math.random() * 255);
+					var G = Math.floor(Math.random() * 255);
+					var B = Math.floor(Math.random() * 255);
+					balls = {
+						x: Math.random() * canvas.width,
+						y: Math.random() * canvas.height,
+						r: Math.random() * 50,
+						vx: Math.random() * 10,
+						vy: -Math.random() * 10,
+						color: "rgb(" + R + "," + G + "," + B + ")"
+					};
+					ball[i] = balls;
+				}
+
+				context.globalAlpha = 0.5; //设置所有圆透明度为0.5
+				
+				//停止动画
+				var stop = document.getElementById('stop');
+				stop.addEventListener("mouseup",function(){
+					stopAnimate = !stopAnimate;
+				})
+				
+				
+				setInterval(function() {
+					draw(context);
+					if(!stopAnimate){
+					    update();
+					}
+				}, 50)
+
+				//绘图100个随机圆
+				function draw(cxt) {
+					cxt.clearRect(0, 0, cw, ch);
+					for(var i = 0; i < ball.length; i++) {
+						cxt.beginPath();
+						cxt.fillStyle = ball[i].color;
+						cxt.arc(ball[i].x, ball[i].y, ball[i].r, 0, 2 * Math.PI)
+						cxt.fill();
+					}
+				};
+
+				//update
+				function update() {
+					for(var i = 0; i < ball.length; i++) {
+						ball[i].x += ball[i].vx;
+						ball[i].y += ball[i].vy;
+						//下边沿
+						if(ball[i].y >= ch - ball[i].r) {
+							ball[i].vy = -ball[i].vy;
+						}
+						//左边沿
+						if(ball[i].x <= ball[i].r) {
+							ball[i].vx = -ball[i].vx;
+						}
+						//右边沿
+						if(ball[i].x + ball[i].r >= cw) {
+							ball[i].vx = -ball[i].vx;
+						}
+						//上边沿
+						if(ball[i].y - ball[i].r <= 0) {
+							ball[i].vy = -ball[i].vy;
+						}
+					}
+				}
+
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 绘制圆点数字</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;margin:0px auto;background:#fffffff;">
+    Your browser does not support the canvas element.
+    </canvas>
+    <!--
+    	格子圆心坐标计算方法
+    	  x+j*2*(r+1)+(r+1) 
+    	  y+i*2*(r+1)+(r+1) 
+    -->
+	<script src="js/digit.js"></script>
+    <script type="text/javascript">
+    	var W_WIDTH = 1100;
+		var W_HEIGHT = 600;
+		var RADIUS = 10;
+		var MARGIN_TOP = 60;
+		var MARGIN_LEFT = 30;
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		canvas.width = W_WIDTH;
+    		canvas.height = W_HEIGHT;
+    		var context = canvas.getContext('2d');
+    		drawNum( 60 , 30 , 1 , context );
+    		drawNum( 260 , 30 , 2 , context );
+    		drawNum( 460 , 30 , 3 , context );
+    		drawNum( 660 , 30 , 4 , context );
+    		drawNum( 860 , 30 , 5 , context );
+    		drawNum( 60 , 300 , 6 , context );
+    		drawNum( 260 , 300 , 7 , context );
+    		drawNum( 460 , 300 , 8 , context );
+    		drawNum( 660 , 300 , 9 , context );
+    		
+    	}
+    //绘图方法
+    function drawNum(x , y , num , cxt){
+    			cxt.fillStyle = "#00BFFF"; // 填充颜色
+    			cxt.strokeStyle = "#333333";
+    			for(var i = 0; i < numbers[num].length; i++){
+	    			for(var j = 0; j < numbers[num][i].length; j++){
+	    				if( numbers[num][i][j] == 1 ){
+			                cxt.beginPath();
+			                //显示圆点
+			                cxt.arc( x+j*2*(RADIUS+1)+(RADIUS+1) , y+i*2*(RADIUS+1)+(RADIUS+1) , RADIUS , 0 , 2*Math.PI )
+			                //显示方块
+			                //cxt.fillRect(x+j*2*(RADIUS+1)+(RADIUS+1),y+i*2*(RADIUS+1)+(RADIUS+1),RADIUS,RADIUS);
+			                cxt.lineWidth = 2;
+			                cxt.closePath();
+			                cxt.stroke();
+			                cxt.fill();
+			                
+			          }
+				}
+			}
+	   };
+    </script>
+</body>
+</html>

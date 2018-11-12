@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>点击累加移动</title>
+    <style>
+    	.square{background:#008000;width:50px;height:50px;margin-bottom: 10px;}
+    </style>
+</head>
+<body>
+<div class="square" id="square"></div>
+<input type="button" value="点击我呀" id="button"/>
+</body>
+<script>
+  var sq = document.getElementById("square"),
+      bt = document.getElementById("button"),
+      step = 0;
+    /*  bt.onclick = function(){
+      	step = step + 100;
+      	sq.style.scrollLeft = step + 'px';
+      	bt.value = "点击了"　+　step　+　"次,向右移动了"　+　step　+　"像素";
+      } */
+     bt.onclick = function(){
+	      	for(var i=0; i<50; i++){
+	      	step ++;
+	      	sq.style.marginLeft = step + 'px';
+	      	bt.value = "移动了" + step + "像素";
+	      	console.log(step);
+	        }
+     }
+     
+</script>
+</html>

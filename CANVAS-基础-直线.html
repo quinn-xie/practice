@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 基础线条</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;margin:0 auto;"></canvas>
+    <!--
+    	*重要知识点
+    	* context.moveTo()
+    	* context.lineTo()
+    	* context.stroke()
+    -->
+    <script type="text/javascript">
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		
+    		canvas.width = 1024;
+    		canvas.height = 768;
+    		
+			var context = canvas.getContext('2d');
+			// 画一条直线
+			context.moveTo(100,100);  // 起点
+			context.lineTo(1000,600);   // 终点
+			context.lineTo(1000,400);   // 终点
+			context.lineTo(100,600);   // 终点
+			context.lineCap = "round"  //两端圆角   “squer”方形
+			context.lineJoin = "round"; //连接处圆角  
+			
+			
+			context.lineWidth = 8;
+			context.strokeStyle = "#00BFFF"
+			context.stroke();   //执行
+    		
+    		
+    	}
+    </script>
+</body>
+</html>

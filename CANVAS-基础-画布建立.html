@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 基础</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;margin:0 auto;"></canvas>
+    <!--
+    	*重要知识点
+    	* canvas.getContext('2d')
+    	* canvas.width
+    	* canvas.height
+    	*
+    -->
+    <script type="text/javascript">
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		canvas.width = 1024;
+    		canvas.height = 768;
+    		if(canvas.getContext('2d')){
+    			var context = canvas.getContext('2d');
+    			
+    		}else{
+    			alert('抱歉,当前浏览器不支持CANVAS,请更新浏览器')
+    		}
+    		
+    		
+    	}
+    </script>
+</body>
+</html>

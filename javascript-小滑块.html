@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>鼠标拖动小方块</title>
+		<style type="text/css">
+			.lineDiv{position:absolute;height:5px;font-size:0;line-height:0;background:#999;width:500px;top:100px;left:50%;margin-left:-250px}
+			.lineDiv .minDiv{position:absolute;top:-3px;left:0;width:10px;height:10px;background:#000;cursor:pointer}
+		</style>
+	</head>
+	<body>
+		<center><h3>用鼠标拖动小方块</h3></center>
+		<div id="lineDiv" class="lineDiv">
+			<div id="minDiv" class="minDiv"></div>
+		</div>
+		<div id="text"></div>
+		<script>
+		    window.onload=function(){
+		    	document.onselectstart = new Function('event.returnValue = false;');//禁止图片被选中
+			    var minDiv=document.getElementById("minDiv");//获取滑块
+			    var lineDiv=document.getElementById("lineDiv");//获取背景基线
+			    var isMove=false;
+			    //鼠标在滑块上被按下
+			    minDiv.onmousedown=function(){
+			        isMove=true;
+			    }
+			    //鼠标在任意地方释放
+			    window.onmouseup=function(e){
+			        isMove=false;
+			    }
+			    //鼠标移动
+			    window.onmousemove=function(e){
+			        var x=e.clientX;  //鼠标X坐标
+			        var minDivLeft = minDiv.offsetLeft;//滑块移动前距左边的位置
+			        var minDivX =  x - minDivLeft - 5; // 滑块移动的长度
+			        if(isMove == true){
+			            minDiv.style.left=minDivX +"px";
+			            if(minDiv.offsetLeft > lineDiv.offsetWidth - minDiv.offsetWidth){
+			                minDiv.style.left="490px";
+			            } // 滑块移动最大宽度
+			            if(minDiv.offsetLeft < 0){
+			                minDiv.style.left="0";
+			            } // 滑块移动最左边
+			        }
+			        
+			    }
+			}
+		</script>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<p style="position:absolute;top:500px">
+			效果说明：拖动滑块在一定的范围内变化<br/><br/>
+
+一．实现步骤建议：<br/>
+
+1、页面布局：添加长线条的div表示滑块的拖动范围；添加小滑块使用绝对定位控制其位置。<br/>
+
+2、给小滑块添加鼠标按下事件表示鼠标在小滑块上面被按下了。<br/>
+
+3、添加鼠标移动事件，即拖动小滑块。<br/>
+
+4、释放鼠标不再拖动。<br/><br/>
+
+二．注意：<br/>
+小滑块用绝对定位比较好控制其相对于父元素的left值，小滑块的left值应该是鼠标的横坐标减去长线条（父元素）的横坐标，并且还要减去小滑块宽度的一半，这里小滑块宽度是10px，所以要减去5px，才能使其中心跟着鼠标被拖动。
+		</p>
+	</body>
+</html>

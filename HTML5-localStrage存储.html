@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html manifest="js/manifest.appcache">
+	<head>
+		<meta charset="UTF-8">
+		<title>APP CACHE DEMO</title>
+		<link rel="stylesheet" type="text/css" href="css/less-1.0.33.min.js"/>
+	</head>
+	<body>
+		<h1>APP CACHE DEMO</h1>
+		<ul>
+			<li><img src="img/01.jpg"/></li>
+			<li><img src="img/02.jpg"/></li>
+			<li><img src="img/03.jpg"/></li>
+		</ul>
+		<script type="text/javascript">
+			window.addEventListener("load",function(e){
+				window.applicationCache.addEventListener('updateready',function(e){
+					console.log(window.applicationCache.status);
+					if(window.applicationCache.status == window.applicationCache.UPDATEREADY){
+						window.applicationCache.swapCache();
+						if(confirm("文件有更新，是否重新加载")){
+						  window.location.reload();	
+						}						
+					}else{
+						console.log('MANIFEST.APPCACHE没有更改');
+					}
+				})
+			})
+		</script>
+	</body>
+</html>

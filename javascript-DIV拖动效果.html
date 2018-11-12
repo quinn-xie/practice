@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>DIV 拖动效果</title>
+		<style type="text/css">
+			body{padding:0;margin: 0;font-size: 20px;font-family: "微软雅黑";}
+			.ui-dailog{width:200px;padding:50px;margin:0 auto;text-align:center;background:#00BFFF;color: #ffffff;display: block;position: absolute;cursor: move;z-index: 2;}
+			.ui-mask{background-color: rgba(0,0,0,.2);position: fixed;z-index: 1;}
+		</style>
+	</head>
+
+	<body>
+		<div class="ui-dailog" id="dailog">我是一个可以在可视区<br/>域随意拖动的DIV<br/>试试看吧！</div>
+		<div class="ui-mask" id="mask" onselectstart="return false"></div>
+		<script type="text/javascript">
+		//禁止选择：onselectstart="return false"；
+		//禁止拖放：ondragstart="return false"；
+		//禁止拷贝：oncopy=document.selection.empty() 。
+		//禁止复制：oncopy = "return false"；
+		//禁止保存：<noscript><iframe src="*.htm"></iframe></noscript>，放在head里面。
+		//禁止粘贴：<input type=text onpaste="return false">
+		//禁止剪贴：oncut = "return false"；
+		//关闭输入法：<input style="ime-mode:disabled">
+		
+		//获取元素对象通用函数         *g("dailog")*
+		function g(id){return document.getElementById(id);}
+		
+		//自动居中函数 (el = document)          *autoCenter(g("dailog"))*
+		function autoCenter( el ){
+			var badyH = document.documentElement.clientHeight;
+			var badyW = document.documentElement.clientWidth;
+			
+			var elH = el.offsetHeight;//元素实际高度
+			var elW = el.offsetWidth;//元素实际宽度
+			
+			el.style.left=(badyW - elW) / 2 + 'px';
+			el.style.top=(badyH - elH) / 2 + 'px';
+		}
+		
+		//自动全屏函数 (el = document)          *fillToBody(g("mask"))*
+		function fullScreen( el ){
+			el.style.height = document.documentElement.clientHeight + 'px';
+			el.style.width = document.documentElement.clientWidth + 'px';
+		}
+		
+		//页面加载就触发以下函数
+		window.onload = function(){
+			autoCenter(g("dailog")); //浮层居中
+			fullScreen(g("mask")); //全屏遮罩层
+		}
+		
+		//当窗口大小改变的时候
+		window.onresize = function(){
+			autoCenter(g("dailog")); //浮层居中
+			fullScreen(g("mask")); //全屏遮罩层
+		}
+		
+		//默认值
+		var mouseOffsetX = 0;
+		var mouseOffsetY = 0;
+		var isDraging = false; // 标记是否可拖动
+		
+		//鼠标事件1  - 在拖动区域按下(要计算鼠标相对拖动元素的左上角的坐标，并且标记元素为可拖动)
+		g("dailog").addEventListener("mousedown",function(e){
+			var e = e || document.event; //兼容IE
+			mouseOffsetX = e.pageX - g("dailog").offsetLeft;
+			mouseOffsetY = e.pageY - g("dailog").offsetTop;
+			isDraging = true;
+		})
+        
+		//鼠标事件2  - 鼠标移动时(要检测元素是否为可拖动，如果是，则更新元素的位置，到当前鼠标的位置【PS：要减去第一步中获得的偏移】)
+		document.onmousemove =  function(e){
+			var e = e || document.event; //兼容IE
+			var mouseX = e.pageX; //鼠标当前的位置
+			var mouseY = e.pageY;
+		    var moveX = 0;
+		    var moveY = 0;
+
+			if(isDraging === true){
+		    	moveX = mouseX - mouseOffsetX;
+		    	moveY = mouseY - mouseOffsetY;
+		    	
+		    	//范围区域的限制   moveX > 0并且moveX < ( 页面最大宽度-浮层的宽度 )
+		    	//						 moveY > 0并且moveY < ( 页面最大高度-浮层的高度 )
+		    	var pageWidth = document.documentElement.clientWidth;
+		    	var pageHeight = document.documentElement.clientHeight;
+		    	var dailogWidth= g("dailog").offsetWidth;
+		    	var dailogHeight = g("dailog").offsetHeight;
+		    	var maxX =  pageWidth - dailogWidth;
+		    	var maxY =  pageHeight - dailogHeight;
+
+				// Math.min(最小值,最大值) [返回最小值]
+		    	// Math.max(最小值,最大值) [返回最大值]
+		    	moveX = Math.min(maxX , Math.max(0,moveX) )
+		    	moveY = Math.min(maxY , Math.max(0,moveY) )
+		    	 
+		    	g("dailog").style.left = moveX + 'px';
+		    	g("dailog").style.top = moveY + 'px';
+		    }
+		}
+		
+		//鼠标事件3 - 鼠标松开的时候(标记元素为不可拖动)
+		document.onmouseup = function(){
+			isDraging = false;
+		}
+	</script>
+</body>
+</html>

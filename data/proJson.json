@@ -1,0 +1,71 @@
+{
+	"status": 1,
+	"result": {
+		"totalMoney":59,
+		"list": [{
+		        "checked":false,
+				"productId": "600100000001",
+				"productName": "风景照片A",
+				"productPrice": 45,
+				"productQuentity": 2,
+				"productImage": "img/01.jpg",
+				"parts": [{
+						"partsId": "1000101",
+						"pastsName": "400*500px"
+					},
+					{
+						"partsId": "1000102",
+						"pastsName": "1500*500px"
+					}]
+			},
+			{   
+			    "checked":false,
+				"productId": "600100000002",
+				"productName": "风景照片B",
+				"productPrice": 40,
+				"productQuentity": 8,
+				"productImage": "img/02.jpg",
+				"parts": [{
+						"partsId": "10002",
+						"pastsName": "400*500px"
+					}]
+			},
+			{
+			    "checked":false,
+				"productId": "600100000003",
+				"productName": "风景照片C",
+				"productPrice": 25,
+				"productQuentity": 1,
+				"productImage": "img/03.jpg",
+				"parts": [{
+						"partsId": "10003",
+						"pastsName": "1000*900px"
+					}]
+			},
+			{
+			    "checked":false,
+				"productId": "600100000004",
+				"productName": "风景照片D",
+				"productPrice": 152,
+				"productQuentity": 1,
+				"productImage": "img/04.jpg",
+				"parts": [{
+						"partsId": "10005",
+						"pastsName": "1000*900px"
+					}]
+			},
+			{
+			    "checked":false,
+				"productId": "600100000005",
+				"productName": "风景照片E",
+				"productPrice": 57,
+				"productQuentity": 1,
+				"productImage": "img/05.jpg",
+				"parts": [{
+						"partsId": "10005",
+						"pastsName": "1000*900px"
+					}]
+			}
+			]
+	}
+}

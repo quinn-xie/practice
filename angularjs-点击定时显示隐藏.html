@@ -1,0 +1,30 @@
+<!doctype html>
+<html ng-app="myApp" >
+    <head>
+    	<meta charset="UTF-8"/>
+        <script type="text/javascript" src="js/angular-1.0.1.min.js" ></script>
+        <script type="text/javascript" src="js/angular-animate.min.js"></script>
+       
+    </head>
+    <body> 
+				<div ng-controller="myCtrl">
+				
+				<input type="button" ng-click="a()" value="点击隐藏">
+				<div style="background:#f00;width:100px;height:100px;" ng-show="b"></div>
+
+				<script>
+					var app = angular.module('myApp', []);
+					app.controller('myCtrl', function($scope,$timeout) {
+					   $scope.b = true;
+					   $scope.a = function(){
+						  //定时2秒测测水深
+						  $timeout(function () {
+						  	      $scope.b = !$scope.b;
+							      alert("啊~~~哈~~~");
+							    }, 500); 
+						  
+						}
+					});
+				</script>
+    </body>
+</html>

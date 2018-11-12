@@ -1,0 +1,66 @@
+{
+	"status": 1,
+	"result": {
+		"list": [{
+				"addrId": "600100000001",
+				"addrName": "JackBean",
+				"addrAddr": "广东.深圳.福田区.福虹路世界贸易广场C座20层",
+				"addrTel": "186 6666 6666",
+				"addrDefault": true
+				},{
+				"addrId": "600100000002",
+				"addrName": "daXia",
+				"addrAddr": "广东.深圳.福田区.福虹路世界贸易广场C座19层",
+				"addrTel": "188 8888 8888",
+				"addrDefault": false
+				},{
+				"addrId": "600100000003",
+				"addrName": "dadaXia",
+				"addrAddr": "广东.深圳.福田区.福虹路世界贸易广场C座19层",
+				"addrTel": "188 8888 8888",
+				"addrDefault": false
+				},{
+				"addrId": "600100000004",
+				"addrName": "dadadaXia",
+				"addrAddr": "广东.深圳.福田区.福虹路世界贸易广场C座19层",
+				"addrTel": "188 8888 8888",
+				"addrDefault": false
+				},{
+				"addrId": "600100000005",
+				"addrName": "dadadadaXia",
+				"addrAddr": "广东.深圳.福田区.福虹路世界贸易广场C座19层",
+				"addrTel": "188 8888 8888",
+				"addrDefault": false
+				},{
+				"addrId": "600100000006",
+				"addrName": "dadadadadaXia",
+				"addrAddr": "广东.深圳.福田区.福虹路世界贸易广场C座19层",
+				"addrTel": "188 8888 8888",
+				"addrDefault": false
+				},{
+				"addrId": "600100000007",
+				"addrName": "dadadadadadaXia",
+				"addrAddr": "广东.深圳.福田区.福虹路世界贸易广场C座19层",
+				"addrTel": "188 8888 8888",
+				"addrDefault": false
+				}
+			]
+		},
+		"send":[{
+		   "sendId":"100001",
+		   "way":"标准配送",
+		   "remark":"Free",
+		   "isThis":0
+		   },{
+		   "sendId":"100002",
+		   "way":"高级配送",
+		   "remark":"180",
+		   "isThis":1
+		   },{
+		   "sendId":"100002",
+		   "way":"明星配送",
+		   "remark":"360",
+		   "isThis":0
+		   }
+		]
+}

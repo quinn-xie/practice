@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>表单验证</title>
+		<style type="text/css">
+		    .box{width: 350px;margin:20px auto;font-family: "arial, helvetica, sans-serif";font-size: 12px;color:#d5d5d5}
+		    .box dl{padding:2px;}
+		    input{outline:0px;}
+			input[type="text"],input[type="tel"],input[type="email"]{width: 350px;height: 35px;line-height: 35px;padding:3px 10px;background: #ffffff;border: 1px solid #D8E8FF;border-radius: 5px;font-size: 12px;}
+			input[type="button"]{width:372px;height:42px;line-height:28px;padding:4px 10px;background:#D8E8FF;border: none;border-radius: 5px;color:#000;font-size: 14px;cursor:pointer}
+			.error{color:#f00;font-size: 12px;}
+			.sucess{border:1px solid #008000;background:#EAEAEA}
+			.mistake{border:1px solid #ff0000;background:#ffffff}
+		</style>
+	</head>
+    
+	<body>
+		<div class="box">
+			<dl><input type="text" placeholder="请输入用户名" id="username" onkeyup="sub()"/></dl>
+			<dl><input type="text" placeholder="请输入密码" id="pwa" onkeyup="sub()"/></dl>
+			<dl><input type="text" placeholder="请再次输入密码" id="pwb" onkeyup="sub()"/></dl>
+			<dl><input type="email" placeholder="请输入电子邮箱" id="email" onkeyup="sub()"/></dl>
+			<dl><input type="tel" placeholder="请输入电话号码" id="telphone" onkeyup="sub()"/></dl>
+			<dl><input type="checkbox" id="checkbox" checked="checked"/>我已阅读并同意《注册服务协议》</dl>
+			<dl><input type="button" value="立即注册" id="submit" onclick="sub()" /></dl>
+			<dl class="error"></dl>
+		</div>
+
+		<!--<div class="cc"></div>-->
+		<script>
+		  function sub(){
+		  	var un = document.getElementById("username");
+		  	var unform = /^[a-zA-Z]\w{8,20}$/;
+		  	var pwa = document.getElementById("pwa");
+		  	var pwb = document.getElementById("pwb");
+		  	var em = document.getElementById("email");
+		  	var emform = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;//----Email验证
+		  	var tel = document.getElementById("telphone");
+		  	var telform = /^1[3|4|5|8|7][0-9]\d{8}$/;// 手机验证
+		  	var err = document.getElementsByClassName("error")[0];
+		  	var check = document.getElementById("checkbox").checked;
+		  	
+		  	if(un.value == null || un.value=="" || un.value == "请输入用户名"){
+		  		err.innerHTML="请正确输入用户名";
+		  		un.style.borderColor = "#f00";
+		  		return false;
+		  	}else if(!unform.test(un.value)){
+		  		err.innerHTML="用户名必须由8-20位字母开头，数字字母下划线组成的";
+		  		un.style.borderColor = "#f00";
+		  		return false;
+		  	}
+		  	else{
+		  		document.getElementById("username").style.borderColor = "#008000";
+		  		if(pwa.value == null || pwa.value=="" || pwa.value == "请输入密码"){
+		  		err.innerHTML="请正确输入密码";
+		  		pwa.style.borderColor = "#f00";
+		  		return false;
+		  	    }else if(pwa.value.length < 8 || pwa.value.length > 20){
+		  	    	err.innerHTML="密码过于简单，8-20个字符";
+		  	    	pwa.style.borderColor = "#f00";
+		  	    	return false;
+		  	    }
+		  		else{
+		  			pwa.style.borderColor = "#008000";
+		  	    	if(pwb.value == null || pwb.value=="" || pwb.value == "请再次输入密码"){
+			  		  err.innerHTML="请再次输入密码";
+			  		  pwb.style.borderColor = "#f00";
+			  		  return false;
+			  	    }else if(pwa.value != pwb.value){
+		  	    	  err.innerHTML="两次输入的密码不一致";
+		  	    	  pwb.style.borderColor = "#f00";
+		  	    	  return false;
+		  	    	}
+		  	    	else{
+		  	    		pwb.style.borderColor = "#008000";
+		  	    		if(em.value == null || em.value=="" || em.value == "请输入电子邮箱"){
+				  		  err.innerHTML="请输入电子邮箱";
+				  		  em.style.borderColor = "#f00";
+				  		  return false;
+				  	    }else if(!emform.test(em.value)){
+				  	      err.innerHTML="请正确输入电子邮箱";
+				  	      em.style.borderColor = "#f00";
+				  	      return false;
+				  	    }
+				  	    else{
+				  	    	em.style.borderColor = "#008000";
+				  	    	if(tel.value == null || tel.value=="" || tel.value == "请输入电话号码"){
+					  		  err.innerHTML="请输入电话号码";
+					  		  tel.style.borderColor = "#f00";
+					  		  return false;
+				  	        }else if(isNaN(tel.value)){
+				  	          err.innerHTML="电话号码必须由数字组成";
+				  	          tel.style.borderColor = "#f00";
+				  	          return false;
+				  	        }else if(!telform.test(tel.value)){
+					  	      err.innerHTML="请正确输入电话号码";
+					  	      tel.style.borderColor = "#f00";
+					  	      return false;
+					  	    }
+				  	        else{
+				  	        	tel.style.borderColor = "#008000";
+				  	        	if(check == false){
+				  	        		err.innerHTML="请勾选注册服务协议";
+				  	        		return false;
+				  	        	}else{
+				  	        		err.innerHTML="";
+				  	        		console.log("输入完全正确");
+				  	        		return true;
+				  	        	}
+				  	        }
+				  	    }
+		  	    	}
+		  	    }
+		  	}
+		  }
+		</script>
+	</body>
+
+</html>

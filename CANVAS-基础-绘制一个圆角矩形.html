@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 基础线条</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;margin:0 auto;"></canvas>
+    <!--*
+    	这是一个圆形 直线形综合应用实例
+    **-->
+    <script type="text/javascript">
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		
+    		canvas.width = 800;
+    		canvas.height = 600;
+			var context = canvas.getContext('2d');
+			
+			var rReat = {x:100,y:100,r:50,w:500,h:200};
+			
+			context.save();
+			
+			context.beginPath();
+			//左上圆角
+			context.arc(rReat.x,rReat.y,rReat.r,1.0*Math.PI,1.5*Math.PI);
+			//上边线
+			context.lineTo(rReat.x + rReat.w, rReat.y-rReat.r);  // 终点
+			//右上圆角
+			context.arc(rReat.x + rReat.w,rReat.y,rReat.r,1.5*Math.PI,2.0*Math.PI);
+			//右边线
+			context.lineTo(rReat.x + rReat.w + rReat.r, rReat.y + rReat.h);  // 终点
+			//右下圆角
+			context.arc(rReat.x + rReat.w,rReat.y + rReat.h,rReat.r,2.0*Math.PI,0.5*Math.PI);
+			//下边线
+			context.lineTo(rReat.x, rReat.y + rReat.h + rReat.r);  // 终点
+			//左下圆角
+			context.arc(rReat.x,rReat.y + rReat.h,rReat.r,0.5*Math.PI,1.0*Math.PI);
+			
+			context.closePath();
+			
+			context.fillStyle = "#00BFFF";
+			context.fill();
+			
+			context.lineWidth = "10";
+			context.strokeStyle = "#ADFF2F";
+			context.stroke();
+			
+			context.restore();
+    		
+    	}
+    </script>
+</body>
+</html>

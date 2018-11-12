@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>javascript图片轮播</title>
+		<meta charset="utf-8">
+
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				font-size: 20px;
+				font-family: helvetica;
+			}
+			
+			ul,
+			li {
+				list-style: none;
+			}
+			
+			.menu {
+				width: 100%;
+				position: relative;
+			}
+			
+			.menu li {
+				width: 18%;
+				float: left;
+				padding: 10px 0;
+				margin: 50px 1%;
+				text-align: center;
+				background: #D8E8FF;
+			}
+			
+			#line {
+				width: 18%;
+				height: 5px;
+				background: #00C7E9;
+				position: absolute;
+				top: 100px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<ul id="menu" class="menu">
+			<li>HOME</li>
+			<li>ABOUT</li>
+			<li>PRODUCT</li>
+			<li>CONTACT</li>
+			<li>SALES</li>
+			<span id="line"></span>
+		</ul>
+
+		<!--By daXia-->
+		<script type="text/javascript">
+			var navs = document.getElementById('menu').getElementsByTagName('li');
+			var line = document.getElementById('line');
+
+			//计时器
+			var timer = null;
+
+			//初始化LINE的位置
+			line.style.left = '1%';
+
+			for(var i = 0; i < navs.length; i++) {
+				navs[i].onmouseover = function() {
+					if(timer) {
+						clearTimeout(timer);
+					};
+					var startPos = parseInt(line.style.left);
+					var targetPos = this.offsetLeft;
+					move(startPos, targetPos);
+				}
+
+			}
+
+			function move(start, end) {
+				var step = (end - start) / 10;
+				
+				if(step > 0) {
+					step = Math.ceil(step);
+				} else {
+					step = Math.floor(step);
+				}
+
+				start = start + step;
+				line.style.left = start + 'px';
+
+				if(start == end) {
+					clearTimeout(timer);
+				} else {
+					timer = setTimeout(function() {
+						move(start, end);
+					}, 16)
+				}
+
+			}
+
+			</script>
+</body>
+</html>

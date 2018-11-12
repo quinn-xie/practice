@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 满天星</title>
+    <style>
+    	body{margin:0;padding: 0;overflow: hidden;}
+    </style>
+</head>
+<body>
+    <canvas id="canvas" style="border:0px solid #00BFFF;margin:0 auto;"></canvas>
+    <script type="text/javascript">
+    	var W_width = document.documentElement.clientWidth;
+    	var W_height = document.documentElement.clientHeight;
+    	//画布
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		//重置画布大小
+    		canvas.width = W_width;
+    		canvas.height = W_height;
+    		
+    		var context = canvas.getContext('2d');
+    		//天空变成线性渐变背景色，更形象 
+			var skyBg = context.createLinearGradient(0,0,0,W_height);
+			skyBg.addColorStop(0.0,"black");
+			skyBg.addColorStop(1.0,"#002b59");
+			context.fillStyle = skyBg;
+			
+			//天空背景也可以变成径向渐变背景
+			/*var skyBg = context.createRadialGradient(W_width/2,W_height,0,W_width/2,W_height,W_height);
+			skyBg.addColorStop(0.0,"#002b59");
+			skyBg.addColorStop(1.0,"black");
+			context.fillStyle = skyBg;*/
+			
+			
+			context.fillRect(0,0,canvas.width,canvas.height);
+			
+			//调用绘制星形的函数 drawStar(画布上下文，小圆半径，大圆半径，起点X，起点Y，旋转角度)
+			for (var i=0;i<200;i++){
+				var r = Math.random()*10 + 10; //随机一个定义一个数
+				var x = Math.random()*canvas.width; //随机一个定义一个数
+				var y = Math.random()*canvas.height; //随机一个定义一个数
+				var a = Math.random()*360;
+				var tr = parseInt(Math.random()*255);//随机一个0-255的数字
+				var tg = parseInt(Math.random()*255);//随机一个0-255的数字
+				var tb = parseInt(Math.random()*255);//随机一个0-255的数字
+				var ta = Math.random();//随机一个0-1的数字
+				var rgba = "rgba("+tr+','+tg+','+tb+','+ta+")"
+				drawStar(context,r,r/2.0,x,y,a,rgba)
+			}
+    	}
+    	
+    	//绘制星星
+    	function drawStar(cxt,r,R,x,y,rot,tra){
+    		cxt.beginPath();
+    		for(var i = 0; i < 5; i++){
+			  cxt.lineTo(Math.cos((18+i*72 -rot)/180*Math.PI)*R+x,-Math.sin((18+i*72 -rot)/180*Math.PI)*R + y);
+			  cxt.lineTo(Math.cos((54+i*72 -rot)/180*Math.PI)*r+x,-Math.sin((54+i*72 -rot)/180*Math.PI)*r + y);
+			};
+			cxt.closePath();
+			cxt.fillStyle = tra;
+    		cxt.fill();
+    	}
+    </script>
+</body>
+</html>

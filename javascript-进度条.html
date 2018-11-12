@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>进度条效果</title>
+    <style>
+	 .progress{width:80%;height:10px;border:1px solid #cccccc;position:relative;margin:200px auto;border-radius:10px;}
+	 .progress .bar{background:greenyellow;width:auto;height:10px;position: absolute;left: 0;top: 0;font-size:12px;font-family:arial;color:green;border-radius:10px;}
+    </style>
+</head>
+<body>
+<div class="progress">
+	<div class="bar" id="bar"></div>
+	<div id="num"><span style="display: none;" id="n">88</span></div>
+</div>
+<script>
+  var bar = document.getElementById("bar");
+  var n = document.getElementById("n").innerText;
+  var a = 0;
+  function abc(){
+  	a = a + 1;
+  	if(a > n){
+  		return false;
+  	}
+  	bar.style.width = parseInt(a) + "%";
+  	bar.innerHTML = a;
+  }
+  setInterval(abc,5);
+</script>
+</body>
+</html>

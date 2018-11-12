@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>数组</title>
+	</head>
+
+	<body>
+		<h1>数组</h1>
+		<script>
+		
+		 var num_n = new Array(14,25,145,19,50,164,10,116,5,1118);
+		 
+		 //输出数组
+		 for(var n=0;n<num_n.length;n++){
+		 	document.write(num_n[n] + "&nbsp");		
+		 }
+		 document.write("<br><br>");
+		 
+		 //输出数组中的第三个数字 
+		 document.write("本数组中的第三个数字为：" + num_n[2] + "<br><br>")
+		 
+		 //输出数组中的最大值
+		 var max = num_n[0];
+		 for(var n=0; n<num_n.length; n++){
+		 	if(max < num_n[n]){
+		 		max = num_n[n];
+		 	}
+		 }
+		 document.write("本数组中的最大的数字为：" + max + "<br><br>");
+		 
+		 //输出数组中的最小值
+		 var min = num_n[0];
+		 for(var n=0; n<num_n.length; n++){
+		 	if(min > num_n[n]){
+		 		min = num_n[n];
+		 	}
+		 }
+		 document.write("本数组中的最小的数字为：" + min + "<br><br>");
+		 
+		 //输出数组中的平均值
+		 var sum = 0;
+		 for(var n=0; n<num_n.length; n++){
+		 	sum = sum + parseInt(num_n[n]);
+		 }
+		 document.write("本数组中的数字相加的平均值为：" + sum/num_n.length + "<br><br>")
+		 
+			
+			
+		</script>
+	</body>
+
+</html>

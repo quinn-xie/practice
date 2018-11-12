@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>猜数字游戏</title>
+	</head>
+
+	<body>
+		<h1>需求文档</h1>
+		<p>-- 随机产生一个 100-200 的数字</p>
+		<p>-- 如果猜的数字大于随机产生的数字，就输出 - 大了</p>
+		<p>-- 如果猜的数字小于随机产生的数字，就输出 - 小了</p>
+		<p>-- 如果猜的数字等于随机产生的数字，就输出 - 恭喜，答对了</p>
+		<p>-- 猜满10次，输出-机会已用完并退出</p>
+
+		<div style="width:240px;height: 130px; background: #f5f5f5;border: 1px solid #ccc;padding: 15px;">
+			<h4>已经随机产生了一个100-200之间的数字，能猜到是多少吗？</h4>
+			<input type="tel" id="inputn" value=""> <input type="button" value="提交" id="tijiao" onclick="submit()">
+		</div>
+
+		<script>
+			//随机产生一个 400-800 的数字
+			var num = parseInt(Math.random() * 100 + 100);
+			console.log(num);
+            var clicktime = 0;
+			//输入数字猜
+			function submit() {
+				var input_num = document.getElementById("inputn").value;
+				if(input_num == "" || input_num == null) {
+					alert("请输入一个数字");
+				}
+				else if(input_num > num){
+					alert("大了");
+				}
+			    else if(input_num < num){
+					alert("小了");
+				}
+			    else if(input_num == num){
+					alert("恭喜，答对了");
+				}
+			    clicktime = clicktime + 1;
+			    //console.log(clicktime)
+			    if(clicktime == 10){
+			   	  document.getElementById("tijiao").disabled = true;
+			   	  alert("机会已用完！");
+			    }
+			} 
+			
+		</script>
+	</body>
+
+</html>

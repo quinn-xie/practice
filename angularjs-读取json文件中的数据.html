@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+    	<meta charset="UTF-8"/>
+        <script type="text/javascript" src="js/angular-1.0.1.min.js" ></script>
+        
+    </head>
+    <body>
+	<div ng-app="myApp" ng-controller="siteCtrl">
+		<ul>
+		  <li ng-repeat="x in website">
+		  	<a href="{{x.Url}}">
+		    {{ x.Name + ', ' + x.Country + "  , " + x.Url}}
+		    </a>
+		  </li>
+		</ul>
+		
+		<ul>
+		  <li ng-repeat="y in free">
+		    {{ y.id + ', ' + y.imgurl + "  , " + y.status}}
+		  </li>
+		</ul>
+    </div>
+    
+    <script>
+		var app = angular.module('myApp', []);
+		app.controller('siteCtrl', function($scope, $http) {
+		  $http.get("data/json.json")
+		  .success(function (response) {
+		  	$scope.website = response.sites;
+		  	$scope.free = response.freetrial;
+		   })
+		  .error(function() {
+		  	alert("请求错误")
+           });
+		});
+	</script>
+	
+    </body>
+</html>

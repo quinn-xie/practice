@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+    <head>
+    	<meta charset="UTF-8"/>
+        <script type="text/javascript" src="js/angular-1.0.1.min.js" ></script>
+    </head>
+    <body>
+	<div ng-app="" ng-init="jsona=[{name:'Jani',country:'Norway',sex:'man'},
+								 {name:'Hege',country:'Sweden',sex:'man'},
+								 {name:'Hege',country:'Sweden',sex:'women'},
+								 {name:'Hege',country:'Sweden',sex:'man'},
+								 {name:'Kai',country:'Denmark',sex:'man'}
+								 ];
+							jsonb=[{name:'Jani1',country:'Norway',sex:'man'},
+								 {name:'Hege3',country:'Sweden',sex:'man'},
+								 {name:'Hege324',country:'Sweden',sex:'women'},
+								 {name:'Hege25',country:'Sweden',sex:'man'},
+								 {name:'Kai2534',country:'Denmark',sex:'man'}
+								 ];
+							jsonc=[{name:'Janiafea',country:'Norway',sex:'man'},
+								 {name:'Hegeaeaf',country:'Sweden',sex:'man'},
+								 {name:'af321',country:'Sweden',sex:'women'},
+								 {name:'3qwt4gr',country:'Sweden',sex:'man'},
+								 {name:'aefaw4et43',country:'Denmark',sex:'man'}
+								 ]">
+								 
+	  <p>------------json数据-------------</p>						 
+      <h1>jsona</h1>
+	  <li ng-repeat="x in jsona">
+	    {{ x.name + ', ' + x.country + ', ' + x.sex}}
+	  </li>
+	  <h1>jsonb</h1>
+	  <li ng-repeat="y in jsonb">
+	    {{ y.name + ', ' + y.country + ', ' + y.sex}}
+	  </li>
+	  <h1>jsonc</h1>
+	  <li ng-repeat="z in jsonc">
+	    {{ z.name + ', ' + z.country + ', ' + z.sex}}
+	  </li>
+    </div>
+
+    </body>
+</html>

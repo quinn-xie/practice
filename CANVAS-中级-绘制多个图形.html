@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 绘制多个图形</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;margin:0 auto;"></canvas>
+    <script type="text/javascript">
+    	//设置图形所需
+    	var pointer = [
+    		{p:[{x:0,y:0},{x:800,y:0},{x:400,y:400}],color:"#caff67"},
+			{p:[{x:0,y:0},{x:400,y:400},{x:0,y:800}],color:"#67becf"},
+			{p:[{x:800,y:400},{x:800,y:800},{x:400,y:800}],color:"#f6ca29"},
+            {p:[{x:800,y:0},{x:800,y:400},{x:600,y:600},{x:600,y:200}],color:"#ef3d61"},
+            {p:[{x:600,y:200},{x:600,y:600},{x:400,y:400}],color:"#f9f51a"},
+			{p:[{x:400,y:400},{x:600,y:600},{x:400,y:800},{x:200,y:600}],color:"#a594c0"},
+			{p:[{x:200,y:600},{x:400,y:800},{x:0,y:800}],color:"#fa8ecc"}
+    	];
+    	
+    	//画布
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		//重置画布大小
+    		canvas.width = 800;
+    		canvas.height = 800;
+    		
+			var context = canvas.getContext('2d');
+			
+			for(var i=0; i < pointer.length; i++){
+				draw( pointer[i], context ) ;
+			}
+    		
+    	}
+    	
+    	//创建一个绘制小块区域图形函数
+    	function draw(piece , cxt){
+    		// 画线条
+			cxt.beginPath();
+			cxt.moveTo(piece.p[0].x,piece.p[0].y);  // 起点
+			//循环出每个端点
+			for(var i=0; i<piece.p.length;i++){
+				cxt.lineTo(piece.p[i].x,piece.p[i].y);
+			}
+			cxt.closePath();
+			
+			//填充底色
+			cxt.fillStyle = piece.color;
+			cxt.fill();
+			
+			//加边框
+			cxt.lineWidth = 2;
+			cxt.strokeStyle = "#000000";
+			cxt.stroke();
+    	}
+    </script>
+</body>
+</html>

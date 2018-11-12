@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<script src="js/vue.js"></script>
+		<script src="js/vue-resources.1.2.0.js"></script>
+		<style>
+			body{background:#f5f5f5;width:1000px;margin: 0 auto;font-family: "微软雅黑";}
+			h1{width:100%;text-align: center;color:#f90;}
+			.box{border:1px solid #eaeaea;padding:20px; width:700px;margin:20px auto;font-size: 14px;font-family: arial;background:#ffffff;}
+			.box dl{width:48%;display: inline-block;margin:5px;padding:0; text-align: center;}
+			.box dl dt{display: inline-block;margin:0;padding:0;}
+			.box dl dd{display: inline-block;margin:0;padding:0;}
+			.add{border:1px solid #008000; background:#ffffff;color:#008000;padding:8px 20px;margin:20px auto; display: block;}
+			.sub{border:1px solid #eaeaea; background:#ffffff;color:#555555;padding:2px 20px;margin:0px auto; margin-top:10px; display: block;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="app">
+			<h1 v-text="title"></h1>
+			<div class="box" v-for="(item,index) in items" v-bind:id='index'>
+				<dl><dt>姓名：</dt><dd><input type="" name="" id="" value="" placeholder="请输入姓名" v-model="item.name"/></dd></dl>
+				<dl><dt>电话：</dt><dd><input type="" name="" id="" value="" placeholder="请输入电话" v-model="item.tel"/></dd></dl>
+				<dl><dt>地址：</dt><dd><input type="" name="" id="" value="" placeholder="请输入地址" v-model="item.addr"/></dd></dl>
+				<dl><dt>邮箱：</dt><dd><input type="" name="" id="" value="" placeholder="请输入邮箱" v-model="item.mail"/></dd></dl>
+			    <input class="sub" type="button" name="" value=" - 删除 " v-on:click='subBox(index)'/>
+			</div>
+			<input class="add" type="button" value=" + 添加 " v-on:click='addBox'/>
+		</div>
+		
+		<script>
+			var app = new Vue({
+					  el: '#app',
+					  data: {
+					  	title:'',
+					    items : [{
+						    name:'daxia',
+						    tel:'188 8888 8888',
+						    addr:'广东.深圳',	
+						    mail:'daxia@china.com'
+					    }],
+					    newItem : []
+					  },
+					  //生命周期
+					  mounted:function(){
+							//页面加载执行
+							this.$nextTick(function(){//避免使用vm而不用this时出错
+								this.titleBind();
+							})	
+					  },
+					  methods:{
+					  	titleBind : function(){
+							this.title = 'VUE.JS 添加删除模块';
+						},
+					  	//添加一个模块
+					  	addBox : function(){
+					  		this.items.push({name:'I am new one',tel:'166 6666 6666',addr:'广东.深圳',	mail:'daxia@china.com'})
+					  	},
+					  	//删除当前模块
+					  	subBox : function(index){
+					  		this.items.splice(index,1);
+					  	}
+					  }
+					})
+		</script>
+	</body>
+</html>

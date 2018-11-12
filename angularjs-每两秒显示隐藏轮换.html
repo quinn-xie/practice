@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+
+	<body>
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<div style="background:#008000; width:150px; height: 100px;" ng-show="share"></div>
+		</div>
+
+		<script>
+			var app = angular.module('myApp', []);
+			app.controller('myCtrl', function($scope, $interval) {
+				$scope.share = false;
+				
+				$interval(function() {
+					$scope.share = !$scope.share;
+				}, 500);
+			})
+		</script>
+	</body>
+</html>

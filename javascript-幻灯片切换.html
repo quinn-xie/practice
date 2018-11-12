@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+    	<meta charset="utf-8">
+        <title>幻灯片切换</title>
+        <style>
+            .body{text-align:center;}
+            li,ul{list-style:none;margin:0px;padding:0px;}
+            #showPlay{
+                text-align:left;
+                width:890px;
+                overflow:hidden;
+                margin:0px auto;
+                height:350px;
+                position:relative;
+            }
+            #dopics{
+                opacity: 0.4;
+                background: none repeat scroll 0 0 #000;
+                height: 10px;
+                padding: 5px 10px;
+                position: absolute;
+                width:870px;
+                text-align:right;
+                clear:both;
+                bottom:0px;
+            }
+            #dopics span{
+                opacity: 0.4;
+                background: none repeat scroll 0 0 #FFFFFF;
+                cursor: pointer;
+                display: inline-block;
+                height: 10px;
+                margin-left: 5px;
+                width: 25px;
+                text-align:center;
+                color:#000;
+                font-weight:bold;
+                font-size:10px;
+                height:10;
+                line-height:10px;
+                
+                
+            }
+        </style>
+    </head>
+    <body>
+        <div id="showPlay">
+            <div id="pics">
+                <ul>
+                    <li><a href=""><img src="img/01.jpg" width='890' height='350'/></a></li>
+                    <li><a href=""><img src="img/02.jpg" width='890' height='350'/></a></li>
+                    <li><a href=""><img src="img/03.jpg" width='890' height='350'/></a></li>
+                    <li><a href=""><img src="img/04.jpg" width='890' height='350'/></a></li>
+                    <li><a href=""><img src="img/05.jpg" width='890' height='350'/></a></li>
+                </ul>
+            </div>
+            <div id="dopics">
+            </div>
+        </div>
+        <script>
+            var time;
+            var n=1;
+            var ul=document.getElementById("pics").getElementsByTagName("ul")[0];
+            
+            //5秒钟进行交替图片
+            time=setInterval("run()",5000);
+            
+            //显示图片
+            function run(){
+                ++n;
+                if(n>5){
+                    n=1;
+                }
+                ul.innerHTML="<li><a href=''><img src='img/0"+n+".jpg' width='890' height='350' /></a></li>";
+            }
+            
+            //根据图片来生成对应的按钮
+            function getBtn(){
+                var liList=document.getElementById("pics").getElementsByTagName("li");
+                var dopics=document.getElementById("dopics");
+                var str="";
+                for(var i=0;i<liList.length;i++){
+                    str+="<span>"+(i+1)+"</span>";
+                }
+                //alert(str);
+                dopics.innerHTML=str;
+            }
+            getBtn();
+            
+            //鼠标移到按钮上时
+            var spanList=document.getElementById("dopics").getElementsByTagName("span");
+            for(var j=1;j<spanList.length+1;j++){
+                spanList[j-1].onmouseover=function(){
+                    clearInterval(time);
+                    //这里的this.innerHTML不能使j因为循环完的j=7
+                    ul.innerHTML="<li><a href=''><img src='img/0"+this.innerHTML+".jpg' width='890' height='350' /></a></li>";    
+                    time=setInterval("run()",9000);
+                }
+            }
+        </script>
+    </body>
+</html>

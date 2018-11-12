@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>彩色随机圆</title>
+	</head>
+	<style>
+		body{overflow:hidden;background:#ffffff;}
+		span{position:absolute;width:80px;height:80px;border-radius:100%; opacity:.5;}
+		span:nth-child(2n+5){width: 100px;height:100px}
+		span:nth-child(2n+10){width: 120px;height:120px}
+		span:nth-child(2n+15){width: 180px;height:180px}
+	</style>
+	</head>
+
+	<body>
+		<!-- by daXia -->
+		<script>
+	        var mx = document.documentElement.clientWidth;
+	        var my = document.documentElement.clientHeight;
+	       	for(var i = 0; i < 50; i++){
+	        	var x = Math.ceil(Math.random() * mx);
+	            var y = Math.ceil(Math.random() * my);
+	            var r = Math.ceil(Math.random() * 255);
+	            var g = Math.ceil(Math.random() * 255);
+	            var b = Math.ceil(Math.random() * 255);
+	        	document.write('<span style="left:'+ x + 'px;top:' + y + 'px;background:rgba(' + r + ',' + g + ',' + b  + ','+ '.6'+ ');" id="' + x + '">'+'</span>');
+	       	}
+		</script>
+	</body>
+</html>

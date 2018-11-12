@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 基础</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;margin:0px auto;background:#333333;">
+    Your browser does not support the canvas element.
+    </canvas>
+    <!--
+    	*重要知识点
+    	*context.drawImage(image, sx, sy, sWidth, sHeight);
+    	*image : 图像源
+    	*sx : 目标画布的左上角在目标canvas上 X 轴的位置
+    	*sy : 目标画布的左上角在目标canvas上 Y 轴的位置
+    	*dWidth : 在目标画布上绘制图像的宽度
+    	*dHeight : 在目标画布上绘制图像的高度
+    -->
+    <script type="text/javascript">
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		
+    		canvas.width = 650;
+    		canvas.height = 600;
+    		
+			var context = canvas.getContext('2d');
+			
+			//图片1
+			var img = new Image();  
+			img.src = "img/01.jpg";
+	        img.onload = function(){  
+	            context.drawImage(img,10,10,625,220);  
+	        }
+	        
+	        //图片2
+	        var img1 = new Image();  
+			img1.src = "img/02.jpg";
+	        img1.onload = function(){  
+	            context.drawImage(img1,10,250,600,200);  
+	        } 
+    	}
+    </script>
+</body>
+</html>

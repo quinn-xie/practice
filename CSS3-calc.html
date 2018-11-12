@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>aaa</title>
+		<style>
+			#myDiv{
+				width:1000px;background:#008000
+			}
+			#myDiv dl{
+				display:block;
+				float:left;
+				
+				width: -moz-calc(100% - 20px * 2 / 3);
+			    width: -webkit-calc(33% - 20px * 2  / 3);
+			    width: calc(33% - 20px * 2  / 3); 
+			    
+				margin-right:20px;
+				background: #D8E8FF;
+				}
+			#myDiv dl:last-child{margin-right:0}
+		</style>
+	</head>
+	<body>
+		<div id="myDiv">
+			<dl>1</dl>
+			<dl>2</dl>
+			<dl>3</dl>
+			<div style="clear: both;"></div>
+		</div>
+	</body>
+</html>

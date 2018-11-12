@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>菜鸟教程(runoob.com)</title>
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript">
+			function words_deal() {
+				var curLength = $("#TextArea1").val().length;
+				if(curLength > 5) {
+					var num = $("#TextArea1").val().substr(0, 5);
+					$("#TextArea1").val(num);
+					alert("超过字数限制，多出的字将被截断！");
+				} else {
+					$("#textCount").text(5 - $("#TextArea1").val().length);
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		剩余<span id="textCount">5</span>个字<br />
+		<textarea name="textarea" id="TextArea1" cols="45" rows="5" onkeyup="words_deal();"></textarea>
+	</body>
+
+</html>

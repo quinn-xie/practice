@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<script src="js/vue.js"></script>
+	</head>
+
+	<body>
+		<div id="myVue">
+			    <input type="text" v-model="inputValue"/>
+			    <input type="button" name="" id="" value="SUBMIT" v-on:click='submit'/>
+				<ul>
+					<item-list v-for="(item,index) in list" :key='index' :content="item.listName" :index="index" v-on:delete="handleDelete"></item-list>
+				</ul>
+		</div>
+		<script>
+			
+			//逻辑过程：
+			// (1) : 父组件通过prop向子组件传值 子组件获得父组件传来的内容和索引。
+			// (2) : 子组件通过$emit向父组件抛出触发事件名称（delete）和触发事件的list索引值。
+			// (3) : 父组件通过监听对应事件名称（@delete）触发函数handleDelete。函数通过子组件抛出的索引值对应删除list
+			// a、父组件可以使用 props 把数据传给子组件。
+			// b、子组件可以使用 $emit 触发父组件的自定义事件。
+			// vm.$emit( event, arg ) //触发当前实例上的事件
+			// vm.$on( event, fn );//监听event事件后运行
+			
+			Vue.component('item-list',{
+				props : ['content','index'], //通过属性形式传递值
+				template : '<li @click="handleClick">{{content}} {{index}}</li>',
+				methods:{
+					handleClick : function(){
+						this.$emit('delete',this.index)
+					}
+				}
+			})
+			
+			new Vue({
+				el : '#myVue',
+				data : {
+					inputValue:'',
+					list : []
+				},
+				methods:{
+					submit : function(){
+						this.list.push({
+							listName : this.inputValue
+						})
+					},
+					handleDelete: function(index){
+						this.list.splice( index , 1 )
+					}
+				}
+			})
+			
+		</script>
+	</body>
+
+</html>

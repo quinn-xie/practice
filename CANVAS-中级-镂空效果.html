@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS</title>
+    <style>
+    	body{margin:0;padding: 0;overflow: hidden;}
+    </style>
+</head>
+<body>
+	<!--绘图方式一定是顺时针和逆时针 || 非零环绕原则-->
+    <canvas id="canvas" style="border:0px solid #00BFFF;margin:0 auto;"></canvas>
+    <script type="text/javascript">
+    	var W_width = document.documentElement.clientWidth;
+    	var W_height = document.documentElement.clientHeight;
+    	//画布
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		//重置画布大小
+    		canvas.width = W_width;
+    		canvas.height = W_height;
+    		
+    		var context = canvas.getContext('2d');
+    		
+    		context.arc(300,300,150,0,2*Math.PI,false);
+    		context.arc(300,300,80,0,2*Math.PI,true);
+    		
+    	    context.fillStyle = "#00BFFF";
+    	    context.shadowColor = "#999999";
+			context.shadowOffsetX = "10";
+			context.shadowOffsetY = "10";
+			context.shadowBlur = "15";
+			
+			context.fill()
+    	    
+    	}
+    </script>
+</body>
+</html>

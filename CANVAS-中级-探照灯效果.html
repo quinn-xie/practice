@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 绘制100个不同颜色的圆球</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;background:#ffffff;margin:0 auto;">
+    Your browser does not support the canvas element.
+    </canvas>
+
+    <script type="text/javascript">
+    	var light = {x:200,y:200,r:150,vx:-4,vy:-5}
+    	var cw = document.documentElement.clientWidth-50;
+    	var ch = document.documentElement.clientHeight-50;
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		canvas.width = cw;
+    		canvas.height = ch;
+    		var context = canvas.getContext('2d');
+    		context.globalAlpha = 1;   //设置所有圆透明度为0.5
+    		
+    		setInterval(function(){
+    			drawLight(context); //画探照灯
+    			update();
+    		},10);
+    		
+    	}
+    	
+	    //绘制探照灯基本效果图
+	    function drawLight(cxt){
+	    	cxt.clearRect(0,0,cw,ch); //清除画布
+	    	cxt.save();
+	    	cxt.beginPath();
+	    	cxt.fillStyle = "#000000";
+	    	cxt.fillRect(0,0,cw,ch);
+	    	cxt.beginPath();
+	    	cxt.fillStyle = "#ffffff";
+	    	cxt.arc(light.x,light.y,light.r,0,2*Math.PI);
+	    	cxt.fill();
+	    	cxt.clip();
+	    	//画背景
+	    	drawArc(cxt);
+	    	cxt.restore();
+	    };
+    
+	    //探照灯运动
+		function update(){
+				light.x = light.x + light.vx;
+				light.y = light.y + light.vy;
+				//下
+				if(light.y >= ch-light.r){
+					light.vy = - light.vy;
+				}
+				//左
+				if(light.x <= light.r){
+					light.vx = - light.vx;
+				}
+				//右
+				if(light.x + light.r >= cw){
+					light.vx = - light.vx;
+				}
+				//上
+				if(light.y-light.r <= 0){
+					light.vy = - light.vy;
+				}
+		}   
+	    
+	    //绘制背景后面的东西 
+	    function drawArc(cxt){
+	    	    cxt.font="120px Arial";  //字体大小与字体
+	    	    cxt.beginPath();
+	    		cxt.strokeStyle = "#00BFFF"; //边框描线
+	    		cxt.strokeText("床前明月光，疑是地上霜。",20,100); //文字内容及坐标
+	    		cxt.strokeText("举头望明月，低头思故乡。",20,300); //文字内容及坐标
+	    		cxt.beginPath();
+	    		cxt.fillStyle = "#358"; //边框描线
+	    		cxt.fillText("锄禾日当午，汗滴禾下土。",20,500); //文字内容及坐标
+	    		cxt.fillText("谁知盘中餐，粒粒皆辛苦。",20,700); //文字内容及坐标
+	    		cxt.fill();
+	    		cxt.stroke();
+	    		
+		};
+ </script>
+</body>
+</html>

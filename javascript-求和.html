@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+    <title>求和</title>
+</head>
+<body>
+<h1 style="color: #E10001">求和</h1>
+
+<input type="text" placeholder="请输入一个数字" id="numa">
+<input type="text" placeholder="请输入一个数字" id="numb">
+<input type="button" value="提交" onclick="abc()">
+<input type="text" id="sum">
+
+</body>
+<script>
+
+function abc(){
+	var numa = document.getElementById("numa").value;
+	var numb = document.getElementById("numb").value;
+	var sum = parseInt(numa) + parseInt(numb);
+    document.getElementById("sum").value = sum;
+}
+
+</script>
+</html>

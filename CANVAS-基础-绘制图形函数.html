@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 基础线条</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;margin:0 auto;"></canvas>
+    <script type="text/javascript">
+    	//画布
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		//重置画布大小
+    		canvas.width = 800;
+    		canvas.height = 800;
+    		
+			var context = canvas.getContext('2d');
+			
+			//调用绘制矩形的函数 drawRect(画布上下文，起点X，起点Y，矩形宽度，矩形高度，边框大小，边框颜色 ， 填充颜色)
+			drawRect(context,100,100,400,200,5,"rgb(55,189,255)","rgba(55,189,255,.5)");
+			
+			//调用绘制星形的函数 drawStar(画布上下文，小圆半径，大圆半径，起点X，起点Y，旋转角度)
+			drawStar(context,50,100,500,500,30)
+			
+    	}
+    	
+    	//创建一个绘制矩形的函数
+    	function drawRect(cxt,x,y,rectWidth,rectHeight,rectBorderWidth,rectstrokeStyle,rectFillstyle){
+    		cxt.beginPath();
+    		cxt.moveTo(x,y);
+    		cxt.lineTo(x+rectWidth,y);
+    		cxt.lineTo(x+rectWidth,y+rectHeight);
+    		cxt.lineTo(x,y+rectHeight)
+    		cxt.closePath();
+    		cxt.lineWidth = rectBorderWidth;
+    		cxt.strokeStyle = rectstrokeStyle;
+    		cxt.fillStyle = rectFillstyle;
+    		cxt.lineJoin = "bevel"; //连接处圆角  
+    		cxt.fill();
+    		cxt.stroke();
+    	}
+    	
+    	function drawStar(cxt,r,R,x,y,rot){
+    		cxt.beginPath();
+    		for(var i = 0; i < 5; i++){
+			  cxt.lineTo(Math.cos((18+i*72 -rot)/180*Math.PI)*R+x,-Math.sin((18+i*72 -rot)/180*Math.PI)*R + y);
+			  cxt.lineTo(Math.cos((54+i*72 -rot)/180*Math.PI)*r+x,-Math.sin((54+i*72 -rot)/180*Math.PI)*r + y);
+			};
+			cxt.lineJoin = "round"; //连接处圆角  
+			cxt.closePath();
+    		cxt.fill();
+    		cxt.stroke();
+    		
+    	}
+    </script>
+</body>
+</html>

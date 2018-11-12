@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js" ></script>
+		<style>
+			.s-tabbox{width:100%; display:block; text-align:left; border-bottom:none;border: 1px solid #d4d4d4;border-bottom:none ;}
+			.s-tabbox>dl{background-color:#f2f2f2;margin: 0;border-bottom: 1px solid #d4d4d4;}
+			.s-tabbox>dl>dt{padding:10px 0px 10px 10px;margin: 0;cursor:pointer;font-size:12px;}
+			.s-tabbox>dl>dd{width:100%;margin: 0;box-sizing:border-box;padding:10px;line-height:180%;font-size:12px;background: #ffffff;border-top: 1px solid #d4d4d4;display: none;}
+			.s-tabbox .title{background:url(../images/tabbox-add.png) no-repeat right;background-position:98% 50%;font-size:12px;display:-webkit-box;text-align:left;color:#515151;}
+			.s-tabbox .close{background:url(../images/tabbox-close.png) no-repeat right;background-position:98% 50%;color:#002d5c;}
+		</style>
+	</head>
+
+	<body>
+		<div class="s-tabbox">
+ 	 <dl>
+        <dt class="title">NAME SEGMENT</dt>
+        <dd>
+        		<div id="nameSegment" class="columns columns4" style="width:100%;">
+					<dl><dt>NAME：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+					<dl><dt>BIRTH：</dt><dd th:if="${tuefBasic.birthDate} != null" th:inline="text">[[${tuefBasic.birthDate}]]</dd></dl>
+					<dl><dt>ID NUMBER：</dt><dd th:if="${tuefBasic.firstIdNumber} != null" th:inline="text">[[${tuefBasic.firstIdNumber}]]</dd></dl>
+					<dl><dt>ID TYPE：</dt><dd th:if="${tuefBasic.firstIdType} != null" th:inline="text">[[${tuefBasic.firstIdType}]]</dd></dl>
+					<dl><dt>ISSUE COUNGRY：</dt><dd th:if="${tuefBasic.firstIssueCountryCode} != null" th:inline="text">[[${tuefBasic.firstIssueCountryCode}]]</dd></dl>
+				</div>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="title">ADDRESS SEGMENT</dt>
+        <dd>
+				<table width="100%" border="0" cellpadding="0" cellspacing="0">
+					<tr th:each="tuefAddress : ${tuefAddressList}">
+						<td th:inline="text" style='width:60%;padding:10px;box-sizing:border-box;text-align:left'>[[${tuefAddress.addressDetail}]]</td>
+						<td th:inline="text" style='width:40%;padding:10px;box-sizing:border-box;text-align:left'>CAPTUREDT: [[${tuefAddress.reportDate}]]</td>
+					</tr>
+				</table>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="title">CONTACT NUMBER SEGMENT</dt>
+        <dd>
+				<table width="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<th style='width:5%;padding:10px;box-sizing:border-box;text-align:center'>CNTRY</th>
+								<th style='width:10%;padding:10px;box-sizing:border-box;text-align:center'>AREA</th>
+								<th style='width:25%;padding:10px;box-sizing:border-box;text-align:center'>CONTACT NUMBER</th>
+								<th style='width:10%;padding:10px;box-sizing:border-box;text-align:center'>EXT/CALL</th>
+								<th style='width:25%;padding:10px;box-sizing:border-box;text-align:center'>CAPTUREDAT</th>
+								<th style='width:25%;padding:10px;box-sizing:border-box;text-align:center'>LAST REPTDT</th>
+							</tr>
+							<tr th:each="tuefContact : ${tuefContactList}">
+								<td th:inline="text" style='width:5%;padding:10px;box-sizing:border-box;text-align:center'>[[${tuefContact.countryCode}]]</td>
+								<td th:inline="text" style='width:10%;padding:10px;box-sizing:border-box;text-align:center'>[[${tuefContact.areaCode}]]</td>
+								<td th:inline="text" style='width:25%;padding:10px;box-sizing:border-box;text-align:center'>[[${tuefContact.contactNumber}]]</td>
+								<td th:inline="text" style='width:10%;padding:10px;box-sizing:border-box;text-align:center'>[[${tuefContact.extCall}]]</td>
+								<td th:inline="text" style='width:25%;padding:10px;box-sizing:border-box;text-align:center'>[[${tuefContact.captureSinceDate}]]</td>
+								<td th:inline="text" style='width:25%;padding:10px;box-sizing:border-box;text-align:center'>[[${tuefContact.lastReportedDate}]]</td>
+							</tr>
+						</table>
+						<div style="width:100%;text-align:center;color:#f00;padding:10px;">NOTE: * - CONTACT NUMBER CONTRIBUTED BY MORE THAN ONE SUBSCRIBER</div>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="title">SCORE SEGMENT</dt>
+        <dd>
+				<table width="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<th style='width:5%;padding:10px;box-sizing:border-box;text-align:center'>TYPE</th>
+								<th style='width:15%;padding:10px;box-sizing:border-box;text-align:center'>SCORE</th>
+								<th style='width:15%;padding:10px;box-sizing:border-box;text-align:center'>GRADE</th>
+								<th style='width:15%;padding:10px;box-sizing:border-box;text-align:center'>PROB</th>
+								<th style='width:25%;padding:10px;box-sizing:border-box;text-align:center'>DISPUTED INFO</th>
+								<th style='width:25%;padding:10px;box-sizing:border-box;text-align:center'>LIMITED HISTORY</th>
+							</tr>
+							<tr>
+								<td th:inline="text" style='width:5%;padding:10px;box-sizing:border-box;text-align:center' th:if="${tuefScore.scoreType} != null">[[${tuefScore.scoreType}]]</td>
+								<td th:inline="text" style='width:15%;padding:10px;box-sizing:border-box;text-align:center' th:if="${tuefScore.score} != null">[[${tuefScore.score}]]</td>
+								<td th:inline="text" style='width:15%;padding:10px;box-sizing:border-box;text-align:center' th:if="${tuefScore.grade} != null">[[${tuefScore.grade}]]</td>
+								<td th:inline="text" style='width:15%;padding:10px;box-sizing:border-box;text-align:center' th:if="${tuefScore.probability} != null">[[${tuefScore.probability}]]</td>
+								<td th:inline="text" style='width:25%;padding:10px;box-sizing:border-box;text-align:center' th:if="${tuefScore.disputedInformation} != null">[[${tuefScore.disputedInformation}]]</td>
+								<td th:inline="text" style='width:25%;padding:10px;box-sizing:border-box;text-align:center' th:if="${tuefScore.limitedPerformanceHis} != null">[[${tuefScore.limitedPerformanceHis}]]</td>
+							</tr>
+						</table>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="title">SUMMARY SEGMENT</dt>
+        <dd>
+				<div class="columns columns2" style="width:100%;">
+							<dl><dt>SAFE SCAN ALERT：</dt><dd th:if="${tuefSummary.safeScanAlert} != null" th:inline="text">[[${tuefSummary.safeScanAlert}]]</dd></dl>
+							<dl><dt>OPEN ACCOUNT：</dt><dd th:if="${tuefSummary.openAccounts} != null" th:inline="text">[[${tuefSummary.openAccounts}]]</dd></dl>
+							<dl><dt>WATCH LIST ALERT：</dt><dd th:if="${tuefSummary.watchListAlert} != null" th:inline="text">[[${tuefSummary.watchListAlert}]]</dd></dl>
+							<dl><dt>PUBLIC RECORDS：</dt><dd th:if="${tuefSummary.publicRecords} != null" th:inline="text">[[${tuefSummary.publicRecords}]]</dd></dl>
+							<dl><dt>NEW ACCOUNT ALERT：</dt><dd th:if="${tuefSummary.newAccountAlert} != null" th:inline="text">[[${tuefSummary.newAccountAlert}]]</dd></dl>
+							<dl><dt>ENQUIRY ALERT：</dt><dd th:if="${tuefSummary.enquiryAlert} != null" th:inline="text">[[${tuefSummary.enquiryAlert}]]</dd></dl>
+							<dl><dt>CLOSED ACCOUNTS (ACCT HISTORY)：</dt><dd th:if="${tuefSummary.closedAccounts} != null" th:inline="text">[[${tuefSummary.closedAccounts}]]</dd></dl>
+							<dl><dt>MORTGAGE ACCOUNTS AS BORROWER：</dt><dd th:if="${tuefSummary.asBorrower} != null" th:inline="text">[[${tuefSummary.asBorrower}]]</dd></dl>
+							<dl><dt>RELATED PARTIES：</dt><dd th:if="${tuefSummary.relatedParties} != null" th:inline="text">[[${tuefSummary.relatedParties}]]</dd></dl>
+							<dl><dt>MORTGAGE ACCOUNTS AS GUARANTOR：</dt><dd th:if="${tuefSummary.asGuarantor} != null" th:inline="text">[[${tuefSummary.asGuarantor}]]</dd></dl>
+							<dl><dt>ALIAS NAME ALERT：</dt><dd th:if="${tuefSummary.aliasName} != null" th:inline="text">[[${tuefSummary.aliasName}]]</dd></dl>
+							<dl><dt>MORTGAGE ACCOUNTS AS MORTGAGOR：</dt><dd th:if="${tuefSummary.asMortgagor} != null" th:inline="text">[[${tuefSummary.asMortgagor}]]</dd></dl>
+							<dl><dt>PAST DUE ACCOUNTS：</dt><dd th:if="${tuefSummary.pastDueAccounts} != null" th:inline="text">[[${tuefSummary.pastDueAccounts}]]</dd></dl>
+						</div>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="title">CREDIT EXPOSURE SEGMENT</dt>
+        <dd>
+				<div class="columns columns2" style="width:100%;">
+							<!-- <dl><dt></dt><dd th:text="${tuefCreditExposure.ic == 'I' ? '***INDIVIDUAL CREDIT EXPOSURE***' : '***COMMERCIAL CREDIT EXPOSURE***'}"></dd></dl> -->
+							<dl><dt></dt><dd>***INDIVIDUAL CREDIT EXPOSURE***</dd></dl>
+							<div th:each="tuefCreditExposure : ${tuefCreditExposureIList}">
+								<dl style="margin-top: 15px;"><dt>CURRENCY：</dt><dd th:inline="text">[[${tuefCreditExposure.currencyCode}]]</dd></dl>
+								<dl><dt></dt><dd th:inline="text"></dd></dl>
+								<dl><dt>*REVOLVING CREDITS*</dt><dd th:inline="text"></dd></dl>
+								<dl><dt>*TERMS OTHER CREDITS*</dt><dd th:inline="text"></dd></dl>
+								
+								<dl><dt>TOTAL ACCOUNTS：</dt><dd th:inline="text">[[${tuefCreditExposure.totalAccounts}]]</dd></dl>
+								<dl><dt>TOTAL ACCOUNTS：</dt><dd th:inline="text">[[${tuefCreditExposure.totalAccountsOther}]]</dd></dl>
+								<dl><dt>TOTAL CRLMT：</dt><dd th:inline="text">[[${tuefCreditExposure.totalCreditLimit}]]</dd></dl>
+								<dl><dt>TOTAL LNAMT：</dt><dd th:inline="text">[[${tuefCreditExposure.totalLoanAmount}]]</dd></dl>
+								<dl><dt>TOTAL USED CRLMT：</dt><dd th:inline="text">[[${tuefCreditExposure.totalUsedCreditLimit}]]</dd></dl>
+								<dl><dt>TOTAL O/BAL：</dt><dd th:inline="text">[[${tuefCreditExposure.totalOutstandingBalance}]]</dd></dl>
+								<dl><dt>TOTAL PAST DUE AMOUNT：</dt><dd th:inline="text">[[${tuefCreditExposure.totalPastDueAmount}]]</dd></dl>
+								<dl><dt>TOTAL INSAMT：</dt><dd th:inline="text">[[${tuefCreditExposure.totalInstallmentAmount}]]</dd></dl>
+								<dl><dt>TOTAL CARD INSAMT：</dt><dd th:inline="text">[[${tuefCreditExposure.totalCardInstallmentAmount}]]</dd></dl>
+								<dl><dt>TOTAL PAST DUE AMOUNT：</dt><dd th:inline="text">[[${tuefCreditExposure.totalPastDueAmountOther}]]</dd></dl>
+								<dl><dt>TOTAL CARD LNAMT：</dt><dd th:inline="text">[[${tuefCreditExposure.totalCardLoanAmount}]]</dd></dl>
+								<dl><dt></dt><dd th:inline="text"></dd></dl>
+								<dl><dt>TOTAL CARD TERM O/BAL：</dt><dd th:inline="text">[[${tuefCreditExposure.totalCardTermOsdBal}]]</dd></dl>
+								<dl><dt></dt><dd th:inline="text"></dd></dl>
+							</div>
+							
+							<dl><dt></dt><dd>***COMMERCIAL CREDIT EXPOSURE***</dd></dl>
+							<div th:each="tuefCreditExposure : ${tuefCreditExposureCList}">
+								<dl style="margin-top: 15px;"><dt>CURRENCY：</dt><dd th:inline="text">[[${tuefCreditExposure.currencyCode}]]</dd></dl>
+								<dl><dt></dt><dd th:inline="text"></dd></dl>
+								<dl><dt>*REVOLVING CREDITS*</dt><dd th:inline="text"></dd></dl>
+								<dl><dt>*TERMS OTHER CREDITS*</dt><dd th:inline="text"></dd></dl>
+								
+								<dl><dt>TOTAL ACCOUNTS：</dt><dd th:inline="text">[[${tuefCreditExposure.totalAccounts}]]</dd></dl>
+								<dl><dt>TOTAL ACCOUNTS：</dt><dd th:inline="text">[[${tuefCreditExposure.totalAccountsOther}]]</dd></dl>
+								<dl><dt>TOTAL CRLMT：</dt><dd th:inline="text">[[${tuefCreditExposure.totalCreditLimit}]]</dd></dl>
+								<dl><dt>TOTAL LNAMT：</dt><dd th:inline="text">[[${tuefCreditExposure.totalLoanAmount}]]</dd></dl>
+								<dl><dt>TOTAL USED CRLMT：</dt><dd th:inline="text">[[${tuefCreditExposure.totalUsedCreditLimit}]]</dd></dl>
+								<dl><dt>TOTAL O/BAL：</dt><dd th:inline="text">[[${tuefCreditExposure.totalOutstandingBalance}]]</dd></dl>
+								<dl><dt>TOTAL PAST DUE AMOUNT：</dt><dd th:inline="text">[[${tuefCreditExposure.totalPastDueAmount}]]</dd></dl>
+								<dl><dt>TOTAL INSAMT：</dt><dd th:inline="text">[[${tuefCreditExposure.totalInstallmentAmount}]]</dd></dl>
+								<dl><dt>TOTAL CARD INSAMT：</dt><dd th:inline="text">[[${tuefCreditExposure.totalCardInstallmentAmount}]]</dd></dl>
+								<dl><dt>TOTAL PAST DUE AMOUNT：</dt><dd th:inline="text">[[${tuefCreditExposure.totalPastDueAmountOther}]]</dd></dl>
+								<dl><dt>TOTAL CARD LNAMT：</dt><dd th:inline="text">[[${tuefCreditExposure.totalCardLoanAmount}]]</dd></dl>
+								<dl><dt></dt><dd th:inline="text"></dd></dl>
+								<dl><dt>TOTAL CARD TERM O/BAL：</dt><dd th:inline="text">[[${tuefCreditExposure.totalCardTermOsdBal}]]</dd></dl>
+								<dl><dt></dt><dd th:inline="text"></dd></dl>
+							</div>
+							
+						</div>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="title">SAFE SCAN ALERT</dt>
+        <dd>
+				<div class="columns columns3" style="width:100%;">
+							<dl><dt>NAME：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+							<dl><dt>BIRTH：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+							<dl><dt>ID NUMBER：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+							<dl><dt>ID TYPE：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+							<dl><dt>ISSUE COUNGRY：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+							<dl><dt>ADDRESS：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+							<dl><dt>REPTDT：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+						</div>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="title">ALIAS NAME ALERT</dt>
+        <dd>
+				<div class="columns columns1" style="width:100%;">
+							<dl><dt>NAME：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+						</div>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="title">ACCOUNT SEGMENT</dt>
+        <dd>
+				<dl style="margin-top: 15px;"><dt></dt><dd>***PAST DUE ACCOUNTS***</dd></dl>
+						<table border="0" cellpadding="0" cellspacing="10" width="100%" style="margin-top: 15px">
+					        <tr>
+					          <td width="4%">1</td>
+					          <td width="12%">MEMBER</td>
+					          <td width="12%">ACCOUNT</td>
+					          <td width="12%">REPTDT</td>
+					          <td width="12%">AC OPENED</td>
+					          <td width="12%">AC CLOSED</td>
+					          <td width="12%"></td>
+					          <td width="12%"></td>
+					          <td width="12%"></td>
+					        </tr>
+					        <tr>
+					          <td>2</td>
+					          <td>I/C</td>
+					          <td>ASSOC</td>
+					          <td>TYPE</td>
+					          <td>EXPIRED</td>
+					          <td>CURR</td>
+					          <td>INSAMT</td>
+					          <td>CRLMT/LNAMT</td>
+					          <td>TERMS</td>
+					        </tr>
+					        <tr>
+					          <td>3</td>
+					          <td>ST</td>
+					          <td>PAYAMT</td>
+					          <td>LAST UPDT</td>
+					          <td>PAST DUE AMOUNT</td>
+					          <td>O/BAL</td>
+					          <td>DISPUTE</td>
+					          <td></td>
+					          <td></td>
+					        </tr>
+					        <tr>
+					          <td>4</td>
+					          <td>SCHARGMDT</td>
+					          <td>SINSAMT</td>
+					          <td>STERMS</td>
+					          <td>FREQ</td>
+					          <td>STTLAMT</td>
+					          <td>SEXPIRED</td>
+					          <td>INVESTDT</td>
+					          <td></td>
+					        </tr>
+					        <tr>
+					          <td>5</td>
+					          <td>DELSDT</td>
+					          <td>MAXPDAMT</td>
+					          <td>MAXPDDT</td>
+					          <td>MAXD</td>
+					          <td>MAXDDT</td>
+					          <td>CARD LNAMT</td>
+					          <td>CARD TERM O/BAL</td>
+					          <td></td>
+					        </tr>
+					        <tr>
+					          <td>6</td>
+					          <td colspan="8">DAYS LATE PAYMENT HISTORY</td>
+					        </tr>
+					     </table>
+					     <table border="0" cellpadding="0" cellspacing="10" width="100%" style="margin-top: 15px" th:each="tuefPastDueAccount : ${tuefPastDueAccountList}">
+					     	<tr>
+					     		<td width="4%" >1</td>
+					     		<td width="12%" th:inline="text">[[${tuefPastDueAccount.subscriberName}]]</td>
+					     		<td width="12%" th:inline="text">[[${tuefPastDueAccount.accountNumber}]]</td>
+						        <td width="12%" th:inline="text">[[${tuefPastDueAccount.reportedDate}]]</td>
+						        <td width="12%" th:inline="text">[[${tuefPastDueAccount.openedDate}]]</td>
+						        <td width="12%" th:inline="text">[[${tuefPastDueAccount.closedDate}]]</td>
+						        <td width="12%" th:inline="text"></td>
+						        <td width="12%" th:inline="text"></td>
+						        <td width="12%" th:inline="text"></td>
+					     	</tr>
+					     	<tr>
+							    <td>2</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.individualCommercial}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.accountAssociationCode}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.accountType}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.expiryDate}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.currencyCode}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.installmentAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.creditLimitLoanAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.terms}]]</td>
+						    </tr>
+						    <tr>
+							    <td>3</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.accountStatus}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.paymentAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.lastUpdateDateOfAccount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.pastDueAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.outstandingBalance}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.dispute}]]</td>
+							    <td th:inline="text"></td>
+							    <td th:inline="text"></td>
+						    </tr>
+						    <tr>
+							    <td>4</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.arrangementDateScheme}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.soaInstallmentAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.soaInstallmentNumber}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.soaPaymentFrequency}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.soaTotalAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.soaExpiryDate}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.investigationDate}]]</td>
+							    <td th:inline="text"></td>
+						    </tr>
+						    <tr>
+							    <td>5</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.delinquentSettledDate}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.maxPastDueAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.maxPastDueAmountDate}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.maxPastDueDays}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.maxDaysPastDueDate}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.cardLoanAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.cardTermOutstandingBalance}]]</td>
+							    <td th:inline="text"></td>
+						    </tr>
+						    <tr>
+							    <td>6</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.paymentHistoryOne}]]  [[${tuefPastDueAccount.paymentHistoryTwo}]]</td>
+						    </tr>
+					     </table>
+					     
+					    <dl style="margin-top: 15px;"><dt></dt><dd>***OPEN  ACCOUNTS***</dd></dl>
+						<table border="0" cellpadding="0" cellspacing="10" width="100%" style="margin-top: 15px">
+					        <tr>
+					          <td width="4%">1</td>
+					          <td width="12%">MEMBER</td>
+					          <td width="12%">ACCOUNT</td>
+					          <td width="12%">REPTDT</td>
+					          <td width="12%">AC OPENED</td>
+					          <td width="12%">AC CLOSED</td>
+					          <td width="12%"></td>
+					          <td width="12%"></td>
+					          <td width="12%"></td>
+					        </tr>
+					        <tr>
+					          <td>2</td>
+					          <td>I/C</td>
+					          <td>ASSOC</td>
+					          <td>TYPE</td>
+					          <td>EXPIRED</td>
+					          <td>CURR</td>
+					          <td>INSAMT</td>
+					          <td>CRLMT/LNAMT</td>
+					          <td>TERMS</td>
+					        </tr>
+					        <tr>
+					          <td>3</td>
+					          <td>ST</td>
+					          <td>PAYAMT</td>
+					          <td>LAST UPDT</td>
+					          <td>PAST DUE AMOUNT</td>
+					          <td>O/BAL</td>
+					          <td>DISPUTE</td>
+					          <td></td>
+					          <td></td>
+					        </tr>
+					        <tr>
+					          <td>4</td>
+					          <td>SCHARGMDT</td>
+					          <td>SINSAMT</td>
+					          <td>STERMS</td>
+					          <td>FREQ</td>
+					          <td>STTLAMT</td>
+					          <td>SEXPIRED</td>
+					          <td>INVESTDT</td>
+					          <td></td>
+					        </tr>
+					        <tr>
+					          <td>5</td>
+					          <td>DELSDT</td>
+					          <td>MAXPDAMT</td>
+					          <td>MAXPDDT</td>
+					          <td>MAXD</td>
+					          <td>MAXDDT</td>
+					          <td>CARD LNAMT</td>
+					          <td>CARD TERM O/BAL</td>
+					          <td></td>
+					        </tr>
+					        <tr>
+					          <td>6</td>
+					          <td colspan="8">DAYS LATE PAYMENT HISTORY</td>
+					        </tr>
+					     </table>
+					     <table border="0" cellpadding="0" cellspacing="10" width="100%" style="margin-top: 15px" th:each="tuefPastDueAccount : ${tuefOpenAccountList}">
+					     	<tr>
+					     		<td width="4%" >1</td>
+					     		<td width="12%" th:inline="text">[[${tuefPastDueAccount.subscriberName}]]</td>
+					     		<td width="12%" th:inline="text">[[${tuefPastDueAccount.accountNumber}]]</td>
+						        <td width="12%" th:inline="text">[[${tuefPastDueAccount.reportedDate}]]</td>
+						        <td width="12%" th:inline="text">[[${tuefPastDueAccount.openedDate}]]</td>
+						        <td width="12%" th:inline="text">[[${tuefPastDueAccount.closedDate}]]</td>
+						        <td width="12%" th:inline="text"></td>
+						        <td width="12%" th:inline="text"></td>
+						        <td width="12%" th:inline="text"></td>
+					     	</tr>
+					     	<tr>
+							    <td>2</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.individualCommercial}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.accountAssociationCode}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.accountType}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.expiryDate}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.currencyCode}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.installmentAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.creditLimitLoanAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.terms}]]</td>
+						    </tr>
+						    <tr>
+							    <td>3</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.accountStatus}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.paymentAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.lastUpdateDateOfAccount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.pastDueAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.outstandingBalance}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.dispute}]]</td>
+							    <td th:inline="text"></td>
+							    <td th:inline="text"></td>
+						    </tr>
+						    <tr>
+							    <td>4</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.arrangementDateScheme}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.soaInstallmentAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.soaInstallmentNumber}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.soaPaymentFrequency}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.soaTotalAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.soaExpiryDate}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.investigationDate}]]</td>
+							    <td th:inline="text"></td>
+						    </tr>
+						    <tr>
+							    <td>5</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.delinquentSettledDate}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.maxPastDueAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.maxPastDueAmountDate}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.maxPastDueDays}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.maxDaysPastDueDate}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.cardLoanAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.cardTermOutstandingBalance}]]</td>
+							    <td th:inline="text"></td>
+						    </tr>
+						    <tr>
+							    <td>6</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.paymentHistoryOne}]]  [[${tuefPastDueAccount.paymentHistoryTwo}]]</td>
+						    </tr>
+					     </table>
+					     
+					     <dl style="margin-top: 15px;"><dt></dt><dd>***CLOSED  ACCOUNTS***</dd></dl>
+						<table border="0" cellpadding="0" cellspacing="10" width="100%" style="margin-top: 15px">
+					        <tr>
+					          <td width="4%">1</td>
+					          <td width="12%">MEMBER</td>
+					          <td width="12%">ACCOUNT</td>
+					          <td width="12%">REPTDT</td>
+					          <td width="12%">AC OPENED</td>
+					          <td width="12%">AC CLOSED</td>
+					          <td width="12%"></td>
+					          <td width="12%"></td>
+					          <td width="12%"></td>
+					        </tr>
+					        <tr>
+					          <td>2</td>
+					          <td>I/C</td>
+					          <td>ASSOC</td>
+					          <td>TYPE</td>
+					          <td>EXPIRED</td>
+					          <td>CURR</td>
+					          <td>INSAMT</td>
+					          <td>CRLMT/LNAMT</td>
+					          <td>TERMS</td>
+					        </tr>
+					        <tr>
+					          <td>3</td>
+					          <td>ST</td>
+					          <td>PAYAMT</td>
+					          <td>LAST UPDT</td>
+					          <td>PAST DUE AMOUNT</td>
+					          <td>O/BAL</td>
+					          <td>DISPUTE</td>
+					          <td></td>
+					          <td></td>
+					        </tr>
+					        <tr>
+					          <td>4</td>
+					          <td>SCHARGMDT</td>
+					          <td>SINSAMT</td>
+					          <td>STERMS</td>
+					          <td>FREQ</td>
+					          <td>STTLAMT</td>
+					          <td>SEXPIRED</td>
+					          <td>INVESTDT</td>
+					          <td></td>
+					        </tr>
+					        <tr>
+					          <td>5</td>
+					          <td>DELSDT</td>
+					          <td>MAXPDAMT</td>
+					          <td>MAXPDDT</td>
+					          <td>MAXD</td>
+					          <td>MAXDDT</td>
+					          <td>CARD LNAMT</td>
+					          <td>CARD TERM O/BAL</td>
+					          <td></td>
+					        </tr>
+					        <tr>
+					          <td>6</td>
+					          <td colspan="8">DAYS LATE PAYMENT HISTORY</td>
+					        </tr>
+					     </table>
+					     <table border="0" cellpadding="0" cellspacing="10" width="100%" style="margin-top: 15px" th:each="tuefPastDueAccount : ${tuefCloseAccountList}">
+					     	<tr>
+					     		<td width="4%" >1</td>
+					     		<td width="12%" th:inline="text">[[${tuefPastDueAccount.subscriberName}]]</td>
+					     		<td width="12%" th:inline="text">[[${tuefPastDueAccount.accountNumber}]]</td>
+						        <td width="12%" th:inline="text">[[${tuefPastDueAccount.reportedDate}]]</td>
+						        <td width="12%" th:inline="text">[[${tuefPastDueAccount.openedDate}]]</td>
+						        <td width="12%" th:inline="text">[[${tuefPastDueAccount.closedDate}]]</td>
+						        <td width="12%" th:inline="text"></td>
+						        <td width="12%" th:inline="text"></td>
+						        <td width="12%" th:inline="text"></td>
+					     	</tr>
+					     	<tr>
+							    <td>2</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.individualCommercial}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.accountAssociationCode}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.accountType}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.expiryDate}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.currencyCode}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.installmentAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.creditLimitLoanAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.terms}]]</td>
+						    </tr>
+						    <tr>
+							    <td>3</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.accountStatus}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.paymentAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.lastUpdateDateOfAccount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.pastDueAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.outstandingBalance}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.dispute}]]</td>
+							    <td th:inline="text"></td>
+							    <td th:inline="text"></td>
+						    </tr>
+						    <tr>
+							    <td>4</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.arrangementDateScheme}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.soaInstallmentAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.soaInstallmentNumber}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.soaPaymentFrequency}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.soaTotalAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.soaExpiryDate}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.investigationDate}]]</td>
+							    <td th:inline="text"></td>
+						    </tr>
+						    <tr>
+							    <td>5</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.delinquentSettledDate}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.maxPastDueAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.maxPastDueAmountDate}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.maxPastDueDays}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.maxDaysPastDueDate}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.cardLoanAmount}]]</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.cardTermOutstandingBalance}]]</td>
+							    <td th:inline="text"></td>
+						    </tr>
+						    <tr>
+							    <td>6</td>
+							    <td th:inline="text">[[${tuefPastDueAccount.paymentHistoryOne}]]  [[${tuefPastDueAccount.paymentHistoryTwo}]]</td>
+						    </tr>
+					     </table>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="title">WRIT SEGMENT</dt>
+        <dd>
+				<dl style="margin-top: 15px;"><dt></dt><dd>***WRIT WITH POTENTIAL RELEVANCE***</dd></dl>
+						<table width="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<th style='width:10%;padding:10px;box-sizing:border-box;text-align:center'>CT</th>
+								<th style='width:15%;padding:10px;box-sizing:border-box;text-align:center'>WRIT NO</th>
+								<th style='width:15%;padding:10px;box-sizing:border-box;text-align:center'>TYPE</th>
+								<th style='width:15%;padding:10px;box-sizing:border-box;text-align:center'>FILEDT</th>
+								<th style='width:15%;padding:10px;box-sizing:border-box;text-align:center'>STATUS</th>
+								<th style='width:15%;padding:10px;box-sizing:border-box;text-align:center'>STATUS DATE</th>
+								<th style='width:15%;padding:10px;box-sizing:border-box;text-align:center'>CAUSE OF ACTION</th>
+							</tr>
+							<tr th:each="tuefWrit : ${tuefWritMatchedDtoList}">
+								<td style='padding:10px;box-sizing:border-box;text-align:center' th:inline="text">[[${tuefWrit.courtType}]]</td>
+								<td style='padding:10px;box-sizing:border-box;text-align:center' th:inline="text">[[${tuefWrit.writNumber}]]</td>
+								<td style='padding:10px;box-sizing:border-box;text-align:center' th:inline="text">[[${tuefWrit.writType}]]</td>
+								<td style='padding:10px;box-sizing:border-box;text-align:center' th:inline="text">[[${tuefWrit.filingDate}]]</td>
+								<td style='padding:10px;box-sizing:border-box;text-align:center' th:inline="text">[[${tuefWrit.writStatusCode}]]</td>
+								<td style='padding:10px;box-sizing:border-box;text-align:center' th:inline="text">[[${tuefWrit.writStatusDate}]]</td>
+								<td style='padding:10px;box-sizing:border-box;text-align:center' th:inline="text">[[${tuefWrit.actionCodeCause}]]</td>
+							</tr>
+						</table>
+						<div class="columns columns3" style="width:100%;">
+							<dl><dt>NAME：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+							<dl><dt>ASSOC：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+							<dl><dt>REMARKS：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+							<dl><dt>STATUS：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+							<dl><dt>STATUS DATE：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+							<dl><dt>CURR-CLAMT：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+							<dl><dt>TRADING AS：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+							<dl><dt>ADDRESS：</dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+							<dl><dt>PLAINTIFF: </dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+							<dl><dt>TRADING AS: </dt><dd th:if="${tuefBasic.surname} != null" th:inline="text">[[${tuefBasic.surname}]] [[${tuefBasic.firstName}]]</dd></dl>
+						</div>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="title">PETITION SEGMENT</dt>
+        <dd>
+				
+        </dd>
+      </dl>
+      <dl>
+        <dt class="title">ENQUIRY ALERT</dt>
+        <dd>
+				<table width="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<th style='width:5%;padding:10px;box-sizing:border-box;text-align:center'>MEMBER</th>
+								<th style='width:10%;padding:10px;box-sizing:border-box;text-align:center'>DATE</th>
+								<th style='width:25%;padding:10px;box-sizing:border-box;text-align:center'>TYPE</th>
+								<th style='width:10%;padding:10px;box-sizing:border-box;text-align:center'>PURPOSE</th>
+								<th style='width:25%;padding:10px;box-sizing:border-box;text-align:center'>CURR</th>
+								<th style='width:25%;padding:10px;box-sizing:border-box;text-align:center'>AMOUNT</th>
+							</tr>
+							<tr th:each="tuefEnquiryAlert : ${tuefEnquiryAlertList}">
+								<td th:inline="text" style='width:15%;padding:10px;box-sizing:border-box;text-align:center'>[[${tuefEnquiryAlert.subscriberShortName}]]</td>
+								<td th:inline="text" style='width:15%;padding:10px;box-sizing:border-box;text-align:center'>[[${tuefEnquiryAlert.dateOfEnquiry}]]</td>
+								<td th:inline="text" style='width:10%;padding:10px;box-sizing:border-box;text-align:center'>[[${tuefEnquiryAlert.enquiryAccountType}]]</td>
+								<td th:inline="text" style='width:10%;padding:10px;box-sizing:border-box;text-align:center'>[[${tuefEnquiryAlert.enquiryPurpose}]]</td>
+								<td th:inline="text" style='width:25%;padding:10px;box-sizing:border-box;text-align:center'>[[${tuefEnquiryAlert.currencyCode}]]</td>
+								<td th:inline="text" style='width:25%;padding:10px;box-sizing:border-box;text-align:center'>[[${tuefEnquiryAlert.enquiryAmount}]]</td>
+							</tr>
+						</table>
+        </dd>
+      </dl>
+           
+  </div>
+  <div>
+<svg t="1539046390855" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1959" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css"></style></defs><path d="M956.292 188.99799999c-19.902-23.746-49.104-37.386-80.786-37.386L222.026 156.50999999C216.88 129.72599999 213.594 114.28799999 211.238 106.66199999c-21.514-73.16-135.036-50.716-144.646-48.67C50.844 61.21599999 40.676 76.71599999 43.962 92.40199999 47.186 107.83999999 62.5 118.31799999 78.372 115.15599999c11.098-2.232 23.87-3.472 35.898-3.472 22.816 0 38.874 4.526 40.982 11.532 9.238 31.744 43.71 234.856 99.634 587.388 8.184 51.77 52.204 89.466 104.594 89.652l524.954 1.798 0.124 0c15.934 0 29.016-13.082 29.14-29.202 0-15.996-13.02-29.14-29.078-29.264l-524.768-1.798c-23.684-0.124-43.524-17.112-47.182-40.424L312.174 698.07999999l501.394-39.928c56.296-4.464 102.796-46.376 113.088-101.928l52.266-280.984C984.502 244.36399999 976.194 212.99199999 956.292 188.99799999zM876.126 210.13999999c13.578 0 26.412 5.952 35.154 16.43 8.928 10.354 12.586 24.118 10.168 37.82l-52.328 281.046c-5.642 29.698-30.38 52.018-60.388 54.312l-506.044 40.3c-30.566-191.58-54.188-334.552-70.122-425.196L875.754 210.13999999 875.754 206.48199999 876.126 210.13999999z" fill="#5CB2E1" p-id="1960"></path><path d="M364.192 894.24799999m-66.154 0a1.03365625 1.03365625 0 1 0 132.308 0 1.03365625 1.03365625 0 1 0-132.308 0Z" fill="#5CB2E1" p-id="1961"></path><path d="M786.536 894.24799999m-66.154 0a1.03365625 1.03365625 0 1 0 132.308 0 1.03365625 1.03365625 0 1 0-132.308 0Z" fill="#5CB2E1" p-id="1962"></path></svg>
+  </div>
+		<script>
+			$(function(){
+				var dt = $(".s-tabbox").find("dt");
+				var dd = $(".s-tabbox").find("dd");
+				$(dt).click(function(){
+					var show = $(this).next("dd").css("display");
+					if(show === 'table'){
+						$(this).next("dd").css("display","none");
+						$(this).removeClass("close");
+					  }else{
+						$(this).next("dd").css("display","table");
+						$(this).addClass("close");
+					} 
+				})
+			})
+		</script>
+	</body>
+
+</html>

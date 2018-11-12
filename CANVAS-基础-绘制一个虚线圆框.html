@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS</title>
+</head>
+<body>
+    <canvas id="canvas" style="display:block;border:1px solid #00BFFF;margin:0 auto;"></canvas>
+
+    <script type="text/javascript">
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		//重置画布大小
+    		canvas.width = 800;
+    		canvas.height = 600;
+			var context = canvas.getContext('2d');
+			context.translate(400,300);
+			for(var i=0;i<60; i++){
+			    	context.beginPath();
+			 		var rod = 2*Math.PI / 60 * i;
+			 		var x = Math.cos(rod) * 250;
+			 		var y = Math.sin(rod) * 250;
+			 		context.fillStyle = "#00BFFF";
+			 		//context.rect(x,y,10,10) //
+			 		context.arc(x,y,5,0,2*Math.PI);
+			 		context.fill();
+			}
+			
+    		
+    	}
+    </script>
+</body>
+</html>

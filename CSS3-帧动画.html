@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>CSS帧动画</title>
+        <style>
+        	.runningMan{width:150px;height: 144px;margin:150px auto;overflow:hidden;background:url(img/timg.png);
+        	animation:step 1s steps(1, start) infinite;
+        	}
+        	@keyframes step {
+			        0% {background-position-x:0;}
+			        12.5% {background-position-x:-150px;}
+			        25% {background-position-x:-300px;}
+			        37.5% {background-position-x: -450px;}
+			        50% {background-position-x: -600px;}
+			        62.5% {background-position-x:-750px;}
+			        75%{background-position-x: -900px;}
+			        87.5%{background-position-x: -1050px;}
+			        100% {background-position-x:0;}
+			 }
+        </style>
+	</head>
+	<body>
+		<div class="runningMan"></div>
+	</body>
+</html>

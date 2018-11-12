@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 小球掉下来的效果</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;margin:0 auto;"></canvas>
+    <!--
+    	*重要知识点
+    	* setInterval(function(){
+			render();
+			update();
+		},50)
+    -->
+    <script type="text/javascript">
+    	
+    	window.onload = function(){
+    		var ball = {x:600,y:100,r:20,g:2,vx:-4,vy:0,color:"#ff0000"}
+    		var canvas = document.getElementById('canvas');
+    		canvas.width = 1024;
+    		canvas.height = 768;
+			var cxt = canvas.getContext('2d');
+			
+			setInterval(function() {
+				balls(cxt);
+				update();
+			},50)
+			
+    		// 画一只小球
+			function balls(cxt){
+				cxt.clearRect(0,0,cxt.canvas.width,cxt.canvas.height); //清除画布
+				cxt.beginPath();
+				cxt.fillStyle = ball.color;
+				cxt.arc(ball.x,ball.y,ball.r,0,2*Math.PI);
+				cxt.closePath();
+				cxt.fill();
+			}
+			
+    	   //小球运动方法
+    		function update(){
+    			ball.x += ball.vx;
+    			ball.y += ball.vy;
+    			ball.vy += ball.g;
+    			//当小球到底部的时候，加入摩擦系数
+    			if(ball.y >= 768-ball.r){
+    				ball.vy = - ball.vy*0.8;
+    			}
+    			if(ball.x <= ball.r){
+    				ball.vx = - ball.vx;
+    			}
+				if(ball.x + ball.r >= 1024){
+					ball.vx = - ball.vx;
+				}
+				if(ball.y-ball.r <= 0){
+					ball.vy = - ball.vy;
+				}
+    		}
+    	}
+    	
+    	
+    </script>
+</body>
+</html>

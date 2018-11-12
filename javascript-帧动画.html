@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>帧动画</title>
+		<style>
+			* {margin: 0;padding: 0;list-style: none; font-family: arial; font-size: 12px;}
+			#runningMan{width:150px;height:144px;}
+		</style>
+	</head>
+
+	<body>
+		<div id="runningMan"></div>
+		<script>
+			var imgUrl = 'img/timg.png';
+			var posi = ['0 0','-150 0','-300 0','-450 0','-600 0','-750 0','-900 0','-1050 0'];
+			var dom = document.getElementById('runningMan');
+			
+			//------------用setInterval来运行动画
+			animation(dom,imgUrl,posi);
+			function animation(dom,imgUrl,posi){
+				dom.style.background = 'url(' + imgUrl + ')';
+				dom.style.backgroundRepeat = 'no-repeat';
+				var index = 0;
+				function run(){
+					var position = posi[index].split(' ');
+					dom.style.backgroundPosition = position[0]+'px ' +position[1]+'px';
+					index++;
+					if(index >= posi.length){ //循环动画
+						index = 0;
+					}
+					setTimeout(run,100)
+				}
+				run();
+				
+			}
+
+			//------------用setInterval来运行动画
+			/*  dom.style.background = 'url(' + imgUrl + ')';
+				dom.style.backgroundRepeat = 'no-repeat';
+				
+				var index = 0;
+				function run(){
+					var position = posi[index].split(' ');
+					dom.style.backgroundPosition = position[0]+'px ' +position[1]+'px';
+					index++;
+					if(index>=posi.length){
+						index = 0;
+					}
+				}
+				setInterval(run,100)*/
+		</script>
+	</body>
+
+</html>

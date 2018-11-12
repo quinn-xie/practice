@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>DIV上下居中</title>
+	</head>
+	<style>
+	  body{padding:50px;margin:0;}
+	  input{width:80%; height:40px;line-height:40px; padding:5px; text-align:left; border:2px solid #f5f5f5;font-size: 20px;}
+	</style>
+	<body>
+		<input type="text" placeholder="填写银行卡号，每隔4位数字加一个空格" id="bankCard" />
+		<script>
+		    !function () {
+			    document.getElementById('bankCard').onkeyup = function (event) {
+			        var v = this.value;
+			        if(/\S{5}/.test(v)){
+			            this.value = v.replace(/\s/g, '').replace(/(.{4})/g, "$1 ");
+			        }
+			    };
+			}();
+		</script>
+	</body>
+
+</html>

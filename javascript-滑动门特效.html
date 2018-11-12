@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>TAB切换</title>
+		<style>
+			* {margin: 0;padding: 0;list-style: none; font-family: arial; font-size: 12px;}
+            .slild{height:220px;overflow:hidden;position: relative;border:1px solid #eaeaea; border-left:none;margin:100px auto;}
+            .slild img{position: absolute;display: block;width:500px; height: 220px;border-left: 1px solid #eaeaea;transition:all .5s;}
+		</style>
+	</head>
+
+	<body>
+		<div id="slild" class="slild">
+			<img src="img/01.jpg" title="图片一" alt="图片一"/>
+			<img src="img/02.jpg" title="图片二" alt="图片二" />
+			<img src="img/03.jpg" title="图片三" alt="图片三" />
+			<img src="img/04.jpg" title="图片四" alt="图片四" />
+			<img src="img/05.jpg" title="图片五" alt="图片五" />
+		</div>
+		<script>
+			 window.onload = function(){
+			 	//容器对象
+			 	var box = document.getElementById('slild');
+			 	//获取图片对象集合
+			 	var imgs = box.getElementsByTagName('img');
+			    //单张图片的宽度
+			    var imgWidth = imgs[0].offsetWidth;
+			    //设置掩藏门体露出的宽度
+			    var esposeWidth = 100;
+			    //设置容器总宽度
+			    var boxWidth = imgWidth + (imgs.length-1) * esposeWidth;
+			    box.style.width = boxWidth + "px";
+			    //设置每道门的初始位置
+			    function setImgsPos(){
+				    for(var i = 1; i<imgs.length; i++){
+				    	imgs[i].style.left = imgWidth + esposeWidth * (i-1) + 'px';
+				    }
+			    };
+			    setImgsPos();
+			    
+			    //计算每道门打开时应移动的距离
+			    var translate = imgWidth - esposeWidth;
+			    //为每道门绑定事件
+			    for(var i = 0; i<imgs.length; i++){
+			    	//使用立即调用的函数样式 （function())() ,为了获得不同的I值
+			    	(function(i){
+			    		imgs[i].onmouseover = function(){
+			    			//先将每道门复位
+			    			setImgsPos();
+			    			for(var j=1;j<=i;j++){
+			    				imgs[j].style.left = parseInt(imgs[j].style.left) - translate + 'px';
+			    			}
+			    		};
+			    	})(i);
+			    };
+			 };
+		</script>
+	</body>
+
+</html>

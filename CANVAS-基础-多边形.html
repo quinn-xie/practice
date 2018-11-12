@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 基础线条</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;margin:0 auto;"></canvas>
+    <!--
+    	*重要知识点
+    	* context.moveTo
+    	* context.lineTo
+    	* context.fill
+    	* context.stroke
+    	* 
+    -->
+    <script type="text/javascript">
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		
+    		//重置画布大小
+    		canvas.width = 1024;
+    		canvas.height = 768;
+    		
+			var context = canvas.getContext('2d');
+			// 画线条
+			context.moveTo(100,100);  // 起点
+			context.lineTo(800,100);   // 终点
+			context.lineTo(800,500);   // 终点
+			context.lineTo(100,100);   // 终点
+			
+			//填充底色
+			context.fillStyle = "rgb(64,140,220)"
+			context.fill();   
+			
+			//加边框线条
+			context.lineWidth = 8;
+			context.strokeStyle = "#b3cd01";
+			context.stroke();    		
+    		
+    	}
+    </script>
+</body>
+</html>

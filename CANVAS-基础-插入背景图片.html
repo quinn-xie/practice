@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS 基础</title>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #00BFFF;margin:0px auto;background:#333333;">
+    Your browser does not support the canvas element.
+    </canvas>
+    <!--
+    	*重要知识点
+    	*context.createPattern(img,"repeat") 
+    	*img : 图像源
+    	*repeat  repeat-x repeat-y no-repeat
+    	*还可以这样用 ： context.createPattern(canvas,"repeat") 填充另外一个CANVAS
+    	*还可以这样用 ： context.createPattern(video,"repeat") 填充一个视频
+    -->
+    <script type="text/javascript">
+    	window.onload = function(){
+    		var canvas = document.getElementById('canvas');
+    		
+    		canvas.width = 650;
+    		canvas.height = 600;
+    		
+			var context = canvas.getContext('2d');
+			
+			//图片1
+			var img = new Image();  
+			img.src = "img/01.jpg";
+	        img.onload = function(){  
+	            var pattern = context.createPattern(img,"repeat-y"); 
+	            context.fillStyle = pattern;
+	            context.fillRect(0,0,800,800)
+	        }
+    	}
+    </script>
+</body>
+</html>
